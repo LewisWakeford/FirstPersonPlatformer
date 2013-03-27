@@ -1,0 +1,56 @@
+RENDER BRAINSTORM
+
+Each Mesh needs a VAO that contains the information to draw an untransformed instance of the mesh. It also needs a shader program ID, a material index and such.
+Each object that is visually represented by a Mesh needs a reference to the mesh and a matrix to transform it by.
+To render a non-unique mesh simply call mesh.render(matrix)
+
+Class Mesh:
+ > VBO
+ > Shader Program ID
+ > Material Index
+
+Blocks generate a mesh on initialization. They generate themselves as a cuboid with dimensions that are each a multiple of the panel size. Each vertex is given a face attribute (1-4) and a local xy coord pair and the face arrays are pushed into the shader as arrays.
+
+Class Block:
+ > VBO
+ > Shader Program ID
+ > Material Index
+
+Actually, Block can just be a mesh with a different shader program than the default.
+
+We will need a VAO class and a Buffer Class.
+
+Buffer Class:
+ > Arrays
+ > BufferID
+ > Method to bind arrays and such
+
+VAO:
+ > VAO ID
+ > Methods to associate arrays in the buffer class with vertex attrib arrays
+
+All OpenGL "objects" must be created via the ResourceManager, the ResourceManager deletes them all when it is deleted.
+Each OpenGL object wrapper class contains the cleanup code in its destructor. Ask JS how much is necessary.
+
+List of all OpenGL object wrapper classes:
+ > Shader
+ > Shader Program
+ > Buffer
+ > VertexBuffer (and interal class VertexArray)
+ > VertexArrayObject
+ > Texture
+ > Material
+ > 
+
+
+When rendering, each pixel can find:
+	-It's posistion in the face's coord system by interpolating the vertices' 2d coords.
+	-Which part of the texture to sample from based on the the face arrays.
+
+There is only one texture for the block and it is a tileset. 
+
+If the fragment is in a square that is climbamble, then it renders as brick.
+If the fragment is in a square that is not climbamble, then it renders as steel.
+If the fragment is in a square that is not climbamble, and within a certain distance of a border with a non-climamble square, then it renders as the border texture.
+
+The renderer now only stores the matrix stack and the current camera. In terms of MVP, the camera provides V and P, while the matrix stack provides M. SceneNodes call pushMatrix(their transform) before rendering them and their children and popMatrix() afterwards. When asked for the current MVP matrix the renderer multiplies the camera matrix by the matrix on the top of the stack.

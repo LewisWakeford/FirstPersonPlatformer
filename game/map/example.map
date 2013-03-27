@@ -1,0 +1,178 @@
+#
+Level Editor File Format
+-------------------------------
+The hash symbol starts and ends a comment block and everything within is ignored by the parser.
+New lines and tabs are counted as whitespace, all whitespace has the same meaning.
+Consecutive white space is condensed into a single whitepspace character.
+
+<T> <- Tag begin
+</T> <- Tag end
+
+"string" <- Strings are contained within "", some tags expect a string
+Some tags expect multiple values, these values are seperated by ','.
+Some tags expect vectors, vectors are inside {}
+
+#
+
+#
+Level Header Starts with the <H> Tag
+This contains data about the actual map.
+#
+<H>
+	# The internal name of the level, as refered to by campaign files. #
+	<name> "tutorial_1" </name>
+
+	# The display name of the level, as shown to the user. #
+	<display_name> "Baby Steps" </display_name>
+
+	# Number of beacons required to complete level. #
+	<min_beacons> 1 </min_beacons>
+
+</H>
+
+#
+Blocks are specified with the <bl> tag.
+#
+<bl>
+	#
+	The origin of the block as a 3d coordinate x, y, z.
+	Measuered in metres, can be float and negative.
+	#
+	<origin> {0.0, -10.0, 2.5} </origin>
+
+	#
+	The begining and end of the block in the x axis, respectively.
+	Measured in metres, must be integer and positive.
+	Optional, if ommitted each defaults to 0.
+	#
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+
+	# List of Climable Panels.
+	The face pointing towards the posistive x before rotation is considered the east face.
+	The face pointing towards the posistive y before roation is considered the north face.
+	#
+	<north>
+		{0,0, 0,1}
+	</north>
+	<east>
+		{0,0}
+	</east>
+	# Any omitted faces are assumed to have no climbable surfaces. #
+
+
+	#
+	Rotation of the block around it's origin, in degrees.
+	Optional, defaults to 0.
+	#
+	<rot> 45 </rot>
+</bl>
+
+<bl>
+	#
+	The origin of the block as a 3d coordinate x, y, z.
+	Measuered in metres, can be float and negative.
+	#
+	<origin> {0.0, -8.0, 0.0} </origin>
+
+	#
+	The begining and end of the block in the x axis, respectively.
+	Measured in metres, must be integer and positive.
+	Optional, if ommitted each defaults to 0.
+	#
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 0 </n_y>
+	<p_y> 7 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+
+	# List of Climable Panels.
+	The face pointing towards the posistive x before rotation is considered the east face.
+	The face pointing towards the posistive y before roation is considered the north face.
+	#
+	<north>
+		{0,0, 1,2, 2,4, 1,6}
+	</north>
+	<east>
+		{0,0}
+	</east>
+	# Any omitted faces are assumed to have no climbable surfaces. #
+
+
+	#
+	Rotation of the block around it's origin, in degrees.
+	Optional, defaults to 0.
+	#
+	<rot> 45 </rot>
+</bl>
+
+#
+Player spawn is specificed with the <sp> tag.
+#
+<sp>
+	<origin> {0.0, 0.0, 0.0} </origin>
+</sp>
+
+#
+Beacons are specified with the <wp> tag (for waypoint)
+#
+<wp>
+	#
+	The origin of the beacon as a 3d coordinate x, y, z.
+	Measuered in metres, can be float.
+	#
+	<origin> {10.0, 0.0, 10.0} </origin>
+</wp>
+
+<bl>
+	#
+	The origin of the block as a 3d coordinate x, y, z.
+	Measuered in metres, can be float and negative.
+	#
+	<origin> {10.0, 0.0, 10.0} </origin>
+
+	#
+	The begining and end of the block in the x axis, respectively.
+	Measured in metres, must be integer and positive.
+	Optional, if ommitted each defaults to 0.
+	#
+	<n_x> 0 </n_x>
+	<p_x> 0 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+
+	# List of Climable Panels.
+	The face pointing towards the posistive x before rotation is considered the east face.
+	The face pointing towards the posistive y before roation is considered the north face.
+	#
+	<north>
+		{0,0, 0,1}
+	</north>
+	<east>
+		{0,0}
+	</east>
+	# Any omitted faces are assumed to have no climbable surfaces. #
+
+
+	#
+	Rotation of the block around it's origin, in degrees.
+	Optional, defaults to 0.
+	#
+	<rot> 45 </rot>
+</bl>
