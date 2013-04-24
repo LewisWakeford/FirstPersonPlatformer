@@ -4,6 +4,7 @@
 #include "I_Controllable.h"
 #include "Collider.h"
 #include "Orientation.h"
+#include "RayShape.h"
 
 class App;
 class OrientationCamera;
@@ -80,6 +81,11 @@ class Jumpman : public I_Controllable, public SceneNode
         unsigned int mLeftNumber;
         unsigned int mRightNumber;
         unsigned int mTopNumber;
+        unsigned int mRayNumber;
+
+        RayShape* mCrosshairRay;
+
+        static float sGrabRange;
 
     private:
 };

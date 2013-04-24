@@ -32,19 +32,19 @@
 		<Compiler>
 			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
-			<Add directory="../Libs/boost_1_53_0" />
-			<Add directory="../Libs/GLFW276/include" />
-			<Add directory="../Libs/glew-1.9.0/include" />
+			<Add directory="../../Libs/boost_1_53_0" />
+			<Add directory="../../Libs/GLFW276/include" />
+			<Add directory="../../Libs/glew-1.9.0/include" />
 			<Add directory="../game" />
 			<Add directory="include" />
-			<Add directory="../advancedGraphics/gltut/glsdk/glm" />
+			<Add directory="../../advancedGraphics/gltut/glsdk/glm" />
 		</Compiler>
 		<Linker>
 			<Add library="GLEW" />
 			<Add library="glfw" />
-			<Add directory="../Libs/GLFW276/lib/x11" />
-			<Add directory="../Libs/glew-1.9.0/lib" />
-			<Add directory="../Libs/boost_1_52_0" />
+			<Add directory="../../Libs/GLFW276/lib/x11" />
+			<Add directory="../../Libs/glew-1.9.0/lib" />
+			<Add directory="../../Libs/boost_1_52_0" />
 		</Linker>
 		<Unit filename="example.map">
 			<Option virtualFolder="MapFiles/" />
@@ -76,6 +76,7 @@
 		<Unit filename="include/CollisionSystem.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="include/Crosshair.h" />
 		<Unit filename="include/CuboidShape.h" />
 		<Unit filename="include/DataType.h">
 			<Option virtualFolder="Map/" />
@@ -122,6 +123,7 @@
 		<Unit filename="include/PlayerSpawnNode.h">
 			<Option virtualFolder="SceneGraph/Map/" />
 		</Unit>
+		<Unit filename="include/RayShape.h" />
 		<Unit filename="include/Renderer.h">
 			<Option virtualFolder="Core/" />
 		</Unit>
@@ -185,6 +187,7 @@
 		<Unit filename="src/CollisionSystem.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>
+		<Unit filename="src/Crosshair.cpp" />
 		<Unit filename="src/CuboidShape.cpp" />
 		<Unit filename="src/DataType.cpp">
 			<Option virtualFolder="Map/" />
@@ -231,6 +234,7 @@
 		<Unit filename="src/PlayerSpawnNode.cpp">
 			<Option virtualFolder="SceneGraph/Map/" />
 		</Unit>
+		<Unit filename="src/RayShape.cpp" />
 		<Unit filename="src/Renderer.cpp">
 			<Option virtualFolder="Core/" />
 		</Unit>

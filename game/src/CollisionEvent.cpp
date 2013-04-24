@@ -3,7 +3,7 @@
 CollisionEvent::CollisionEvent(Collider* collider, Collider* collidedWith, std::vector<glm::vec3> contactPoints, double time)
 {
     mCollider = collider;
-    mCollidedWith = collider;
+    mCollidedWith = collidedWith;
     mContactPoints = contactPoints;
     mCollisionTime = time;
 }
@@ -26,4 +26,9 @@ Collider* CollisionEvent::myCollider()
 double CollisionEvent::getCollisionTime()
 {
     return mCollisionTime;
+}
+
+const std::vector<glm::vec3>& CollisionEvent::getContactPoints()
+{
+    return mContactPoints;
 }

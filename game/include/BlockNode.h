@@ -37,6 +37,7 @@ class BlockNode : public PersistantNode
         std::vector<int> getWestFace();
 
         bool isClimable(unsigned int face, unsigned int u, unsigned int v);
+        bool isClimable(glm::vec3 point);
 
         float getRotation();
 

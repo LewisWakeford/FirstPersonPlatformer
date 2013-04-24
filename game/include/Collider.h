@@ -45,6 +45,8 @@ class Collider
 
         unsigned int getRefNumber();
 
+        I_CollisionReciever* getMaster();
+
     protected:
 
         bool mInitialized;

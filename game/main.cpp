@@ -115,7 +115,7 @@ int main()
         glEnable(GL_CULL_FACE);checkError();
 
         //I basically messed up and had all my matrixes inverted, so all my geometry is wound the wrong way now...
-        glfwDisable(GLFW_MOUSE_CURSOR);
+        //glfwDisable(GLFW_MOUSE_CURSOR);
         glFrontFace(GL_CCW);checkError();
         glCullFace(GL_BACK);checkError();
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);checkError();

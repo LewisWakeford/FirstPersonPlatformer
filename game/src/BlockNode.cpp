@@ -11,6 +11,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_inverse.hpp>
 
 unsigned int BlockNode::gBlockId = 0;
 
@@ -424,4 +425,67 @@ bool BlockNode::isClimable(unsigned int face, unsigned int u, unsigned int v)
     }
 
     return false;
+}
+
+bool BlockNode::isClimable(glm::vec3 point)
+{
+    float panelSize = 1.0f;
+    float halfPanel = panelSize * 0.5;
+    glm::vec3 localPoint = glm::vec3(glm::inverse(mAbsoluteTransform) * glm::vec4(point,1.0f));
+
+    //Find Face
+
+    //Find most significant component.
+    float absX = glm::abs(point.x);
+    float absZ = glm::abs(point.z);
+
+    unsigned int face;
+    float fU;
+    float fV;
+
+    fV = float(localPoint.y) + float(mNegY) + halfPanel;
+
+    //Gradients
+    float northEastCorner = ((mPosZ*panelSize)+halfPanel)/((mPosX*panelSize)+halfPanel);
+    float southEastCorner = -((mNegZ*panelSize)+halfPanel)/((mPosX*panelSize)+halfPanel);
+    float northWestCorner = ((mPosZ*panelSize)+halfPanel)/-((mNegX*panelSize)+halfPanel);
+    float southWestCorner = -((mNegZ*panelSize)+halfPanel)/-((mNegX*panelSize)+halfPanel);
+
+        if(localPoint.x > 0)
+        {
+            float gradient = localPoint.z/localPoint.x;
+            if(gradient >= northEastCorner) face = BLOCK_FACE_NORTH;
+            else if(gradient >= southEastCorner) face = BLOCK_FACE_EAST;
+            else face = BLOCK_FACE_SOUTH;
+        }
+        else if(localPoint.x < 0)
+        {
+            float gradient = localPoint.z/localPoint.x;
+            if(gradient >= southWestCorner) face = BLOCK_FACE_SOUTH;
+            else if(gradient >= northWestCorner) face = BLOCK_FACE_WEST;
+            else face = BLOCK_FACE_NORTH;
+        }
+        else
+        {
+            if(localPoint.z >= 0)
+            {
+                face = BLOCK_FACE_NORTH;
+            }
+            else
+            {
+                face = BLOCK_FACE_SOUTH;
+            }
+        }
+
+
+    if(face == BLOCK_FACE_EAST) fU = -(localPoint.z/panelSize) + mNegZ + 0.5f;
+    if(face == BLOCK_FACE_WEST) fU = ((localPoint.z/panelSize) + mNegZ + 0.5f);
+    if(face == BLOCK_FACE_NORTH)  fU = -(localPoint.x/panelSize)  + mNegX + 0.5f;
+    if(face == BLOCK_FACE_SOUTH) fU = ((localPoint.x/panelSize)  + mNegX + 0.5f);
+    unsigned int iU = glm::floor(fU);
+    unsigned int iV = glm::floor(fV);
+
+    std::cout << face << ": " << iU << ", " << iV;
+
+    return isClimable(face, iU, iV);
 }

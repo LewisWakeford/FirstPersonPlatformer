@@ -28,8 +28,7 @@ glm::mat4 OrientationCamera::getViewMatrix() const
 
 glm::mat4 OrientationCamera::getTransform() const
 {
-    glm::mat4 temp = mOrientation.getOrientationMatrix();
-    return temp;
+    return mOrientation.getOrientationMatrix();
 }
 
 void OrientationCamera::lookAt(SceneNode* sceneNode)

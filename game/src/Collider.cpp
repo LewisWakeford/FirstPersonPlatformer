@@ -21,6 +21,11 @@ Collider::~Collider()
     }
 }
 
+I_CollisionReciever* Collider::getMaster()
+{
+    return mMaster;
+}
+
 GLuint Collider::getGroup()
 {
     return mCollisionGroup;

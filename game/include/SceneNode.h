@@ -35,6 +35,7 @@ class SceneNode : public I_CollisionReciever
 
         void setTransform(glm::mat4 transform);
         virtual glm::mat4 getTransform() const;
+        void setAbsoluteTransform(glm::mat4 transform);
 
         void addChild(SceneNodePtr child);
         void addCollider(Collider* collider);
@@ -49,7 +50,8 @@ class SceneNode : public I_CollisionReciever
     protected:
         GLenum mRenderPass;                     //The render pass to draw this node in.
 
-        glm::mat4 mTransform;                    //The 4x4 Matrix representing the transform of this node.
+        glm::mat4 mTransform;           //The 4x4 Matrix representing the transform of this node.
+        glm::mat4 mAbsoluteTransform;           //The 4x4 Matrix representing the absolute transform of this node.
         SceneNodePtr mParent;                   //Pointer to the parent of this node.
         std::vector<SceneNodePtr> mChildList;   //A list of the children of this node.
         std::vector<Collider*> mColliderList;

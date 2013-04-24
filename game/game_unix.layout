@@ -4,8 +4,8 @@
 	<File name="example.map" open="0" top="0" tabpos="0">
 		<Cursor position="1218" topLine="30" />
 	</File>
-	<File name="game.h" open="0" top="0" tabpos="0">
-		<Cursor position="1087" topLine="33" />
+	<File name="game.h" open="0" top="0" tabpos="9">
+		<Cursor position="1764" topLine="63" />
 	</File>
 	<File name="include/ActionSet.h" open="0" top="0" tabpos="0">
 		<Cursor position="61" topLine="0" />
@@ -17,7 +17,7 @@
 		<Cursor position="357" topLine="0" />
 	</File>
 	<File name="include/BlockNode.h" open="0" top="0" tabpos="6">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="1080" topLine="21" />
 	</File>
 	<File name="include/Buffer.h" open="0" top="0" tabpos="8">
 		<Cursor position="272" topLine="5" />
@@ -29,19 +29,19 @@
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="include/Collider.h" open="0" top="0" tabpos="0">
-		<Cursor position="1067" topLine="24" />
+		<Cursor position="1562" topLine="26" />
 	</File>
-	<File name="include/CollisionEvent.h" open="0" top="0" tabpos="0">
-		<Cursor position="287" topLine="0" />
+	<File name="include/CollisionEvent.h" open="0" top="0" tabpos="13">
+		<Cursor position="893" topLine="0" />
 	</File>
 	<File name="include/CollisionShape.h" open="0" top="0" tabpos="0">
-		<Cursor position="690" topLine="9" />
+		<Cursor position="423" topLine="0" />
 	</File>
-	<File name="include/CollisionSystem.h" open="1" top="0" tabpos="6">
-		<Cursor position="392" topLine="0" />
+	<File name="include/CollisionSystem.h" open="0" top="0" tabpos="4">
+		<Cursor position="256" topLine="0" />
 	</File>
 	<File name="include/CuboidShape.h" open="0" top="0" tabpos="0">
-		<Cursor position="243" topLine="0" />
+		<Cursor position="544" topLine="0" />
 	</File>
 	<File name="include/FloatingCamera.h" open="0" top="0" tabpos="0">
 		<Cursor position="667" topLine="0" />
@@ -49,8 +49,8 @@
 	<File name="include/I_CollisionReciever.h" open="0" top="0" tabpos="0">
 		<Cursor position="153" topLine="0" />
 	</File>
-	<File name="include/Jumpman.h" open="1" top="0" tabpos="3">
-		<Cursor position="3075" topLine="0" />
+	<File name="include/Jumpman.h" open="0" top="0" tabpos="8">
+		<Cursor position="3512" topLine="3" />
 	</File>
 	<File name="include/Material.h" open="0" top="0" tabpos="0">
 		<Cursor position="466" topLine="0" />
@@ -62,13 +62,16 @@
 		<Cursor position="1221" topLine="24" />
 	</File>
 	<File name="include/OrientationCamera.h" open="0" top="0" tabpos="7">
-		<Cursor position="1107" topLine="4" />
+		<Cursor position="962" topLine="5" />
+	</File>
+	<File name="include/RayShape.h" open="0" top="0" tabpos="5">
+		<Cursor position="378" topLine="0" />
 	</File>
 	<File name="include/ResourceManager.h" open="0" top="0" tabpos="4">
 		<Cursor position="2244" topLine="35" />
 	</File>
 	<File name="include/SceneNode.h" open="0" top="0" tabpos="8">
-		<Cursor position="1258" topLine="18" />
+		<Cursor position="1252" topLine="18" />
 	</File>
 	<File name="include/Texture.h" open="0" top="0" tabpos="0">
 		<Cursor position="76" topLine="0" />
@@ -82,10 +85,10 @@
 	<File name="include/stb_image.h" open="0" top="0" tabpos="0">
 		<Cursor position="3643" topLine="9" />
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="3409" topLine="15" />
+	<File name="main.cpp" open="0" top="0" tabpos="10">
+		<Cursor position="3608" topLine="85" />
 	</File>
-	<File name="src/App.cpp" open="1" top="0" tabpos="11">
+	<File name="src/App.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="1725" topLine="49" />
 	</File>
 	<File name="src/ArrayBuffer.cpp" open="0" top="0" tabpos="7">
@@ -94,8 +97,8 @@
 	<File name="src/Block.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="53" topLine="0" />
 	</File>
-	<File name="src/BlockNode.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="203" topLine="0" />
+	<File name="src/BlockNode.cpp" open="1" top="1" tabpos="4">
+		<Cursor position="14969" topLine="449" />
 	</File>
 	<File name="src/Buffer.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="296" topLine="0" />
@@ -103,17 +106,20 @@
 	<File name="src/CameraNode.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="573" topLine="5" />
 	</File>
-	<File name="src/Collider.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="1712" topLine="30" />
+	<File name="src/Collider.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="318" topLine="0" />
 	</File>
-	<File name="src/CollisionShape.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="1660" topLine="24" />
+	<File name="src/CollisionEvent.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="611" topLine="0" />
 	</File>
-	<File name="src/CollisionSystem.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="6099" topLine="170" />
+	<File name="src/CollisionShape.cpp" open="0" top="0" tabpos="9">
+		<Cursor position="895" topLine="24" />
 	</File>
-	<File name="src/CuboidShape.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="924" topLine="16" />
+	<File name="src/CollisionSystem.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="20185" topLine="234" />
+	</File>
+	<File name="src/CuboidShape.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="655" topLine="13" />
 	</File>
 	<File name="src/FloatingCamera.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="1063" topLine="8" />
@@ -121,8 +127,8 @@
 	<File name="src/InputMapping.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="390" topLine="5" />
 	</File>
-	<File name="src/Jumpman.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="652" topLine="192" />
+	<File name="src/Jumpman.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="9126" topLine="266" />
 	</File>
 	<File name="src/LocalHardwareInput.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="4" />
@@ -133,14 +139,17 @@
 	<File name="src/MeshNode.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="729" topLine="0" />
 	</File>
-	<File name="src/Orientation.cpp" open="1" top="0" tabpos="10">
-		<Cursor position="580" topLine="0" />
+	<File name="src/Orientation.cpp" open="0" top="0" tabpos="16">
+		<Cursor position="3202" topLine="94" />
 	</File>
 	<File name="src/OrientationCamera.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="494" topLine="3" />
+		<Cursor position="554" topLine="7" />
 	</File>
-	<File name="src/Renderer.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="569" topLine="10" />
+	<File name="src/RayShape.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="310" topLine="42" />
+	</File>
+	<File name="src/Renderer.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="592" topLine="0" />
 	</File>
 	<File name="src/ResourceManager.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="20974" topLine="585" />
@@ -149,7 +158,7 @@
 		<Cursor position="497" topLine="0" />
 	</File>
 	<File name="src/SceneNode.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="1997" topLine="71" />
+		<Cursor position="2333" topLine="98" />
 	</File>
 	<File name="src/ShaderProgram.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="621" topLine="21" />

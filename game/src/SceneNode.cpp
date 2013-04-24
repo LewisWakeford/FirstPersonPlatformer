@@ -40,6 +40,7 @@ void SceneNode::onLoop(GLdouble deltaTime)
         simulateSelf(deltaTime);
 
         mApp->getCollisionSystem()->pushMatrix(mTransform);
+        setAbsoluteTransform(mApp->getCollisionSystem()->currentMatrix());
 
         pushColliders();
 
@@ -58,6 +59,7 @@ void SceneNode::onRender(GLenum renderPass)
     {
         //Push Matrix onto renderer's stack.
         mApp->getRenderer()->pushMatrix(getTransform());
+
 
     if(mRenderPass == renderPass)
     {
@@ -108,6 +110,11 @@ void SceneNode::onCleanup()
 void SceneNode::setTransform(glm::mat4 transform)
 {
     mTransform = transform;
+}
+
+void SceneNode::setAbsoluteTransform(glm::mat4 transform)
+{
+    mAbsoluteTransform = transform;
 }
 
 glm::mat4 SceneNode::getTransform() const

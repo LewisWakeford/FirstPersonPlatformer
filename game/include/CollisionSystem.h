@@ -22,8 +22,8 @@ class CollisionSystem
 
         bool narrowCuboidOnCuboid(const Collider* A, const Collider* B, std::vector<glm::vec3>* contactPoints, double* time);
 
-        //Casts a ray out into the
-        bool narrowRayOnCuboid(const Collider& rayCollider, const Collider& CubeoidCollider, std::vector<glm::vec3>* contactPoints, double* time);
+        //Casts a ray out into the world
+        bool narrowRayOnCuboid(const Collider* rayCollider, const Collider* CubeoidCollider, std::vector<glm::vec3>* contactPoints, double* time);
 
         //Returns false if no intersection, point of interesction returned in result.
         bool lineIntersection(glm::vec2 A1, glm::vec2 A2, glm::vec2 B1, glm::vec2 B2, glm::vec2* result);

@@ -2,12 +2,16 @@
 
 #include "OrientationCamera.h"
 #include "CuboidShape.h"
+#include "RayShape.h"
 #include "App.h"
+#include "BlockNode.h"
 
 #include "glm/core/type_vec3.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 
 #include <iostream>
+
+float Jumpman::sGrabRange = 5.0;
 
 Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_RENDER_NONE)
 {
@@ -63,6 +67,7 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mLeftNumber = 3;
     mRightNumber = 4;
     mTopNumber = 5;
+    mRayNumber = 6;
 
     CuboidShape* feet = new CuboidShape(-0.25f, -mFeetHeight, -0.25f, 0.5f, 0.5f, 0.5f);
     CuboidShape* back = new CuboidShape(-0.25f, -mFeetHeight+0.5f, 0.25, 0.5f, 1.3f, 0.25f);
@@ -70,6 +75,7 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     CuboidShape* left = new CuboidShape(-0.5f, -mFeetHeight+0.5f, -0.25f, 0.25f, 1.3f, 0.5f);
     CuboidShape* right = new CuboidShape(0.25f, -mFeetHeight+0.5f, -0.25f, 0.25f, 1.3f, 0.5f);
     CuboidShape* top = new CuboidShape(-0.25f, 1.3f, -0.25f, 0.5f, 0.5f, 0.5f);
+    mCrosshairRay = new RayShape(glm::vec3(0.0f, mHeadHeight, 0.0f), glm::vec3(0.0f, 0.0f, -sGrabRange)); //Keep a reference for when we move the camera.
 
     addCollider(new Collider(feet, mFeetNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
     addCollider(new Collider(front, mFrontNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
@@ -77,6 +83,7 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     addCollider(new Collider(left, mLeftNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
     addCollider(new Collider(right, mRightNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
     addCollider(new Collider(top, mTopNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
+    addCollider(new Collider(mCrosshairRay, mRayNumber, this, GAME_COLLISION_NONE, GAME_COLLISION_BLOCK));
 }
 
 Jumpman::~Jumpman()
@@ -214,7 +221,7 @@ void Jumpman::onCollision(CollisionEvent event)
 
     if(reference == mFeetNumber)
     {
-        std::cout << " FEET " << std::endl;
+        //std::cout << " FEET " << std::endl;
         mIsGrounded = true;
 
         glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getUp());
@@ -230,7 +237,7 @@ void Jumpman::onCollision(CollisionEvent event)
             glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
             mOrientation.translate(rollback.x, rollback.y, rollback.z);
             mVelocity -= (forwardVelocity * inverseForward);
-            std::cout << "FRONT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            //std::cout << "FRONT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
         }
     }
     else if(reference == mBackNumber)
@@ -243,7 +250,7 @@ void Jumpman::onCollision(CollisionEvent event)
             glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
             mOrientation.translate(rollback.x, rollback.y, rollback.z);
             mVelocity -= (forwardVelocity * inverseForward);
-            std::cout << "BACK: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            //std::cout << "BACK: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
         }
     }
     else if(reference == mLeftNumber)
@@ -255,7 +262,7 @@ void Jumpman::onCollision(CollisionEvent event)
             glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
             mOrientation.translate(rollback.x, rollback.y, rollback.z);
             mVelocity -= (rightVelocity * mOrientation.getRight());
-            std::cout << "LEFT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            //std::cout << "LEFT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
         }
     }
     else if(reference == mRightNumber)
@@ -267,12 +274,26 @@ void Jumpman::onCollision(CollisionEvent event)
             glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
             mOrientation.translate(rollback.x, rollback.y, rollback.z);
             mVelocity -= (rightVelocity * mOrientation.getRight());
-            std::cout << "RIGHT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            //std::cout << "RIGHT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
         }
     }
     else if(reference == mTopNumber)
     {
-        std::cout << " TOP " << std::endl;
+        //std::cout << " TOP " << std::endl;
+    }
+    else if(reference == mRayNumber)
+    {
+        std::vector<glm::vec3> contactPoints = event.getContactPoints();
+
+        //Should only be one point, but just make sure.
+        for(int i = 0; i < contactPoints.size(); i++)
+        {
+            BlockNode* blockNode = (BlockNode*) event.collidedWith()->getMaster();
+            bool climbable = blockNode->isClimable(contactPoints[i]);
+            std::cout << " RAYHIT: "; if(climbable) std::cout << "brick" << std::endl; else std::cout << "metal" << std::endl;
+            //std::cout << "     X: " << contactPoints[i].x << " Y: " << contactPoints[i].y <<" Z:" << contactPoints[i].z << std::endl;
+        }
+
     }
 }
 
@@ -396,6 +417,12 @@ void Jumpman::simulateSelf(double deltaTime)
 
     //Aim vector is the same as camera forward.
     mAim = glm::rotate(mOrientation.getForward(), float(mAltitude), mOrientation.getRight());
+
+    glm::vec3 forward = mFPCamera->orientation()->getForward();
+    forward.x = -(forward.x);
+    forward.z = -(forward.z);
+    mCrosshairRay->setDirection(mFPCamera->orientation()->getForward() * -sGrabRange);
+    //mCrosshairRay->setDirection(forward * sGrabRange);
 
     mTransform = mOrientation.getOrientationMatrix();
 

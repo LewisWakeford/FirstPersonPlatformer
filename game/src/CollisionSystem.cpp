@@ -1,5 +1,6 @@
 #include "CollisionSystem.h"
 #include "CuboidShape.h"
+#include "RayShape.h"
 
 CollisionSystem::CollisionSystem()
 {
@@ -126,6 +127,14 @@ bool CollisionSystem::narrowphaseTest(const Collider* A, const Collider* B, std:
     if(typeA == SHAPE_CUBOID && typeB == SHAPE_CUBOID)
     {
         return narrowCuboidOnCuboid(A, B, contactPoints, contactTime);
+    }
+    if(typeA == SHAPE_RAY && typeB == SHAPE_CUBOID)
+    {
+        return narrowRayOnCuboid(A, B, contactPoints, contactTime);
+    }
+    if(typeB == SHAPE_RAY && typeA == SHAPE_CUBOID)
+    {
+        return narrowRayOnCuboid(B, A, contactPoints, contactTime);
     }
     else return false;
 }
@@ -275,6 +284,7 @@ bool CollisionSystem::narrowCuboidOnCuboid(const Collider* A, const Collider* B,
     float minBZ;
     float maxBZ;
 
+    //Build AABBs from transformed BBs
     for(unsigned int i = 0; i < 4; i++)
     {
         glm::vec4 translatedA = (matrixA * glm::vec4(cornersA[i], 1.0f));
@@ -490,6 +500,136 @@ bool CollisionSystem::narrowCuboidOnCuboid(const Collider* A, const Collider* B,
 
         return false;
 
+}
+
+bool CollisionSystem::narrowRayOnCuboid(const Collider* rayCollider, const Collider* cuboidCollider, std::vector<glm::vec3>* contactPoints, double* contactTime)
+{
+    RayShape* rayShape = (RayShape*)rayCollider->getShape();
+    CuboidShape* cuboidShape = (CuboidShape*)cuboidCollider->getShape();
+
+    //Cannot (and don't need to) perform directly up/down raycasts.
+    if(rayShape->getDirection().x == 0 && rayShape->getDirection().z == 0)
+    {
+        return false;
+    }
+
+    Orientation startRay = rayCollider->getOrientation(0.0);
+    Orientation endRay = rayCollider->getOrientation(1.0);
+
+    Orientation startCuboid = cuboidCollider->getOrientation(0.0);
+    Orientation endCuboid = cuboidCollider->getOrientation(1.0);
+
+    glm::mat4 matrixEndRay = endRay.getOrientationMatrix();
+    glm::mat4 matrixEndCuboid = endCuboid.getOrientationMatrix();
+
+    glm::vec4 translatedRayOrigin = matrixEndRay * glm::vec4(rayShape->getOrigin(), 1.0f);
+    glm::vec4 translateRayDest = matrixEndRay * glm::vec4(rayShape->getDirection()+rayShape->getOrigin(), 1.0f);
+
+    glm::vec2 xzRayOrigin(translatedRayOrigin.x, translatedRayOrigin.z);
+    glm::vec2 xzRayDest(translateRayDest.x, translateRayDest.z);
+
+
+
+    //Build 2D square
+
+    glm::vec3 corners[4];
+    corners[0] = cuboidShape->getPos(); //Origin
+    corners[1] = corners[0] + glm::vec3(cuboidShape->getXSize(), 0.0f, 0.0f);
+    corners[2] = corners[1] + glm::vec3(0.0f, 0.0f, cuboidShape->getZSize());
+    corners[3] = corners[0] + glm::vec3(0.0f, 0.0f, cuboidShape->getZSize());
+
+    glm::vec2 corners_2D[4];
+
+    for(unsigned int i = 0; i < 4; i++)
+    {
+        glm::vec4 translatedA = (matrixEndCuboid * glm::vec4(corners[i], 1.0f));
+        corners_2D[i] = glm::vec2(translatedA.x, translatedA.z);
+    }
+
+
+    //Perform 2D raycast in XZ plane
+    glm::vec2 collisionPoints[4];
+    bool collided[4];
+
+    for(unsigned int i = 0; i < 4; i++)
+    {
+        collided[i] = lineIntersectionInBounds(xzRayOrigin, xzRayDest, corners_2D[i], corners_2D[(i+1)%4], &collisionPoints[i]);
+    }
+
+    //Find Y values at points of intersection:
+        //Ray's line equation is origin + dest * t
+        // x = oX + (dX * t)
+        // y = oY + (dY * t)
+        // z = oZ + (dZ * t)
+
+        //We have x and z, so we can get t:
+        // t = (x - oX)/dX
+
+        //With t we can get y
+
+    float yValues[4];
+
+    glm::vec4 cuboidPos_low = glm::vec4(cuboidShape->getPos(), 1.0f);
+    glm::vec4 cuboidPos_high = glm::vec4(cuboidShape->getPos(), 1.0f);
+    cuboidPos_high.y += cuboidShape->getYSize();
+
+    float minY = (matrixEndCuboid * cuboidPos_low).y;
+    float maxY = (matrixEndCuboid * cuboidPos_high).y;
+
+    if(maxY < minY)
+    {
+        float temp = minY;
+        minY = maxY;
+        maxY = temp;
+    }
+
+    float deltaX = xzRayDest.x - xzRayOrigin.x;
+    float deltaY = translateRayDest.y - translatedRayOrigin.y;
+    float deltaZ = xzRayDest.y - xzRayOrigin.y;
+
+    for(unsigned int i = 0; i < 4; i++)
+    {
+        if(collided[i])
+        {
+            float t;
+            if(deltaX != 0) t = (collisionPoints[i].x - xzRayOrigin.x) / deltaX;
+            else if(deltaZ != 0) t = (collisionPoints[i].y - xzRayOrigin.y) / deltaZ;
+            yValues[i] = translatedRayOrigin.y + (deltaY * t);
+            collided[i] = (yValues[i] <= maxY && yValues[i] >= minY);
+        }
+    }
+
+    bool contact = false;
+
+    unsigned int closest = 0;
+    float closestDistance = rayShape->getDirection().length();;
+
+    for(unsigned int i = 0; i < 4; i++)
+    {
+        if(collided[i])
+        {
+            float distance = glm::distance(translatedRayOrigin, glm::vec4(collisionPoints[i].x, yValues[i], collisionPoints[i].y, 1.0f));
+            if(distance <= closestDistance)
+            {
+                closest = i;
+                closestDistance = distance;
+                contact = true;
+            }
+
+        }
+    }
+
+    *contactTime = 1.0;
+    if(contact)
+    {
+        contactPoints->push_back(glm::vec3(collisionPoints[closest].x, yValues[closest], collisionPoints[closest].y));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    return contact;
 }
 
 bool CollisionSystem::lineIntersection(glm::vec2 A1, glm::vec2 A2, glm::vec2 B1, glm::vec2 B2, glm::vec2* result)

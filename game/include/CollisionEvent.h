@@ -15,7 +15,7 @@ class CollisionEvent
 
         Collider* collidedWith();
         Collider* myCollider();
-        glm::vec3 getContactPoint();
+        const std::vector<glm::vec3>& getContactPoints();
         double getCollisionTime();
 
     protected:
