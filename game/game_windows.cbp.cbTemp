@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="game" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="Collision\;ResourceObjects\;SceneGraph\;Map\;Map\;SceneGraph\Camera\;Map\;SceneGraph\Map\;Map\;SceneGraph\Other\;Map\;Core\;Resources\;Control\;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++0x" />
+			<Add option="-Wall" />
+			<Add directory="..\..\Libs\Boost\boost_1_51_0" />
+			<Add directory="..\..\Libs\GLFW\include" />
+			<Add directory="..\..\Libs\glew156\include" />
+			<Add directory="..\game" />
+			<Add directory="include" />
+			<Add directory="..\..\Libs\glm" />
+		</Compiler>
+		<Linker>
+			<Add library="glew32s" />
+			<Add library="glfw" />
+			<Add library="opengl32" />
+			<Add library="..\..\Libs\bullet-2.81-rev2613_unzipped\bullet-2.81-rev2613\lib\libBulletCollision.a" />
+			<Add library="..\..\Libs\bullet-2.81-rev2613_unzipped\bullet-2.81-rev2613\lib\libBulletDynamics.a" />
+			<Add library="..\..\Libs\bullet-2.81-rev2613_unzipped\bullet-2.81-rev2613\lib\libLinearMath.a" />
+			<Add directory="..\..\Libs\GLEW\lib" />
+			<Add directory="..\..\Libs\GLFW\lib" />
+			<Add directory="..\..\Libs\Boost\boost_1_51_0" />
+		</Linker>
+		<Unit filename="game.h" />
+		<Unit filename="include\ActionSet.h">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="include\App.h">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="include\ArrayBuffer.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\Block.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\BlockNode.h">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="include\Buffer.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\Cache.h" />
+		<Unit filename="include\CameraNode.h">
+			<Option virtualFolder="SceneGraph\Camera\" />
+		</Unit>
+		<Unit filename="include\Collider.h">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="include\CollisionEvent.h">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="include\CollisionShape.h">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="include\CollisionSystem.h">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="include\Crosshair.h" />
+		<Unit filename="include\CuboidShape.h">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="include\DataType.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\FloatingCamera.h">
+			<Option virtualFolder="SceneGraph\Camera\" />
+		</Unit>
+		<Unit filename="include\I_CollisionReciever.h">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="include\I_Controllable.h">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="include\InputMapping.h">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="include\Jumpman.h" />
+		<Unit filename="include\LocalHardwareInput.h">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="include\MapManager.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\MapNode.h">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="include\MapProperties.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\Material.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\Mesh.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\MeshNode.h">
+			<Option virtualFolder="SceneGraph\Other\" />
+		</Unit>
+		<Unit filename="include\Orientation.h" />
+		<Unit filename="include\OrientationCamera.h">
+			<Option virtualFolder="SceneGraph\Camera\" />
+		</Unit>
+		<Unit filename="include\Persistant.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\PersistantNode.h">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="include\PlayerSpawn.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\PlayerSpawnNode.h">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="include\RayShape.h" />
+		<Unit filename="include\Renderer.h">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="include\ResourceManager.h">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="include\SceneGraph.h">
+			<Option virtualFolder="SceneGraph\" />
+		</Unit>
+		<Unit filename="include\SceneNode.h">
+			<Option virtualFolder="SceneGraph\" />
+		</Unit>
+		<Unit filename="include\Shader.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\ShaderProgram.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\Texture.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\UINode.h" />
+		<Unit filename="include\UniformBuffer.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\VertexArrayObject.h">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="include\WayPoint.h">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="include\WayPointNode.h">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="include\stb_image.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="map\example.map" />
+		<Unit filename="shader\block.frag" />
+		<Unit filename="shader\block.vert" />
+		<Unit filename="shader\graph.frag" />
+		<Unit filename="shader\graph.vert" />
+		<Unit filename="src\ActionSet.cpp">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="src\App.cpp">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="src\ArrayBuffer.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\Block.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\BlockNode.cpp">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="src\Buffer.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\CameraNode.cpp">
+			<Option virtualFolder="SceneGraph\Camera\" />
+		</Unit>
+		<Unit filename="src\Collider.cpp">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="src\CollisionEvent.cpp">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="src\CollisionShape.cpp">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="src\CollisionSystem.cpp">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="src\Crosshair.cpp" />
+		<Unit filename="src\CuboidShape.cpp">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="src\DataType.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\FloatingCamera.cpp">
+			<Option virtualFolder="SceneGraph\Camera\" />
+		</Unit>
+		<Unit filename="src\I_CollisionReciever.cpp">
+			<Option virtualFolder="Collision\" />
+		</Unit>
+		<Unit filename="src\I_Controllable.cpp">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="src\InputMapping.cpp">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="src\Jumpman.cpp" />
+		<Unit filename="src\LocalHardwareInput.cpp">
+			<Option virtualFolder="Control\" />
+		</Unit>
+		<Unit filename="src\MapManager.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\MapNode.cpp">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="src\MapProperties.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\Material.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\Mesh.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\MeshNode.cpp">
+			<Option virtualFolder="SceneGraph\Other\" />
+		</Unit>
+		<Unit filename="src\Orientation.cpp" />
+		<Unit filename="src\OrientationCamera.cpp">
+			<Option virtualFolder="SceneGraph\Camera\" />
+		</Unit>
+		<Unit filename="src\Persistant.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\PersistantNode.cpp">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="src\PlayerSpawn.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\PlayerSpawnNode.cpp">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="src\RayShape.cpp" />
+		<Unit filename="src\Renderer.cpp">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="src\ResourceManager.cpp">
+			<Option virtualFolder="Core\" />
+		</Unit>
+		<Unit filename="src\SceneGraph.cpp">
+			<Option virtualFolder="SceneGraph\" />
+		</Unit>
+		<Unit filename="src\SceneNode.cpp">
+			<Option virtualFolder="SceneGraph\" />
+		</Unit>
+		<Unit filename="src\Shader.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\ShaderProgram.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\Texture.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\UINode.cpp" />
+		<Unit filename="src\UniformBuffer.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\VertexArrayObject.cpp">
+			<Option virtualFolder="ResourceObjects\" />
+		</Unit>
+		<Unit filename="src\WayPoint.cpp">
+			<Option virtualFolder="Map\" />
+		</Unit>
+		<Unit filename="src\WayPointNode.cpp">
+			<Option virtualFolder="SceneGraph\Map\" />
+		</Unit>
+		<Unit filename="src\thirdparty\stb_image.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -11,9 +11,9 @@
 
 #include <iostream>
 
-float Jumpman::sLungeRange = 3.0f;
-float Jumpman::sGrabRange = 1.0f;
-float Jumpman::sLungeVelocity = 5.0f;
+float Jumpman::sLungeRange = 2.0f;
+float Jumpman::sGrabRange = 1.5f;
+float Jumpman::sLungeVelocity = 10.0f;
 double Jumpman::sMaxTimeAttemptingToClimb = 1.0;
 
 Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_RENDER_NONE)
@@ -22,6 +22,13 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
 
     mIsGrounded = false;
+
+    mCanMoveForward = true;
+    mCanMoveBackward = true;
+    mCanMoveLeft = true;
+    mCanMoveRight = true;
+    mCanJump = true;
+
 
     mForwardMovement = 0;
     mRightMovement = 0;
@@ -43,7 +50,7 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mAirAccelRatio = 0.5f;
 
     mJumpAccel = 5.0f;
-    mLeapAccel = 5.0f;
+    mLeapAccel = 10.0f;
 
     mAim = mOrientation.getForward();
 
@@ -82,10 +89,10 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mRayNumber = 6;
 
     CuboidShape* feet = new CuboidShape(-0.25f, -mFeetHeight, -0.25f, 0.5f, 0.5f, 0.5f);
-    CuboidShape* back = new CuboidShape(-0.25f, -mFeetHeight+0.5f, 0.25, 0.5f, 1.3f, 0.25f);
-    CuboidShape* front = new CuboidShape(-0.25f, -mFeetHeight+0.5f, -0.5, 0.5f, 1.3f, 0.25f);
-    CuboidShape* left = new CuboidShape(-0.5f, -mFeetHeight+0.5f, -0.25f, 0.25f, 1.3f, 0.5f);
-    CuboidShape* right = new CuboidShape(0.25f, -mFeetHeight+0.5f, -0.25f, 0.25f, 1.3f, 0.5f);
+    CuboidShape* back = new CuboidShape(-0.15f, -mFeetHeight+0.25f, 0.25, 0.5f, 1.3f, 0.25f);
+    CuboidShape* front = new CuboidShape(-0.25f, -mFeetHeight+0.25f, -0.35, 0.5f, 1.3f, 0.25f);
+    CuboidShape* left = new CuboidShape(-0.35f, -mFeetHeight+0.25f, -0.25f, 0.25f, 1.3f, 0.5f);
+    CuboidShape* right = new CuboidShape(0.15f, -mFeetHeight+0.25f, -0.25f, 0.25f, 1.3f, 0.5f);
     CuboidShape* top = new CuboidShape(-0.25f, 1.3f, -0.25f, 0.5f, 0.5f, 0.5f);
     mCrosshairRay = new RayShape(glm::vec3(0.0f, mHeadHeight, 0.0f), glm::vec3(0.0f, 0.0f, -sLungeRange)); //Keep a reference for when we move the camera.
 
@@ -116,7 +123,7 @@ void Jumpman::applyGravity(double deltaTime)
         float verticalVelocity = glm::dot(mVelocity, mOrientation.getUp());
         if(verticalVelocity < 0) //Moving down relative to up vector.
         {
-            mVelocity -= verticalVelocity * mOrientation.getUp(); //Should totally cancel vertical component.
+            mVelocity.y = 0; //Should totally cancel vertical component.
         }
     }
 }
@@ -137,6 +144,11 @@ void Jumpman::applyAcceleration(double deltaTime)
 void Jumpman::limitVelocity(double deltaTime)
 {
     float speed = glm::length(mVelocity);
+
+    if(speed < 0.005f)
+    {
+        mVelocity = glm::vec3(0.0f);
+    }
 
     //Speed cannot be greater than max air speed.
     if(speed > mAirMaxSpeed)
@@ -235,6 +247,9 @@ void Jumpman::onCollision(CollisionEvent event)
 
     double rollbackTime = event.getCollisionTime() * mDeltaTime;
 
+    float bounce = 1.3f;
+    float bounceMin = 0.2f;
+
     unsigned int reference = collider->getRefNumber();
 
     if(reference == mFeetNumber)
@@ -242,62 +257,8 @@ void Jumpman::onCollision(CollisionEvent event)
         //std::cout << " FEET " << std::endl;
         mIsGrounded = true;
 
-        glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getUp());
-        mOrientation.translate(rollback.x, rollback.y, rollback.z);
-    }
-    else if(reference == mFrontNumber)
-    {
-        glm::vec3 inverseForward = -mOrientation.getForward();
-        float forwardVelocity = glm::dot(inverseForward, mVelocity);
-
-        if(forwardVelocity > 0)
-        {
-            glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
-            mOrientation.translate(rollback.x, rollback.y, rollback.z);
-            mVelocity -= (forwardVelocity * inverseForward);
-            //std::cout << "FRONT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
-        }
-    }
-    else if(reference == mBackNumber)
-    {
-        glm::vec3 inverseForward = -mOrientation.getForward();
-        float forwardVelocity = glm::dot(inverseForward, mVelocity);
-
-        if(forwardVelocity < 0)
-        {
-            glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
-            mOrientation.translate(rollback.x, rollback.y, rollback.z);
-            mVelocity -= (forwardVelocity * inverseForward);
-            //std::cout << "BACK: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
-        }
-    }
-    else if(reference == mLeftNumber)
-    {
-        float rightVelocity = glm::dot(mOrientation.getRight(), mVelocity);
-
-        if(rightVelocity < 0)
-        {
-            glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
-            mOrientation.translate(rollback.x, rollback.y, rollback.z);
-            mVelocity -= (rightVelocity * mOrientation.getRight());
-            //std::cout << "LEFT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
-        }
-    }
-    else if(reference == mRightNumber)
-    {
-        float rightVelocity = glm::dot(mOrientation.getRight(), mVelocity);
-
-        if(rightVelocity > 0)
-        {
-            glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
-            mOrientation.translate(rollback.x, rollback.y, rollback.z);
-            mVelocity -= (rightVelocity * mOrientation.getRight());
-            //std::cout << "RIGHT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
-        }
-    }
-    else if(reference == mTopNumber)
-    {
-        //std::cout << " TOP " << std::endl;
+        //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getUp());
+        //mOrientation.translate(rollback.x, rollback.y, rollback.z);
     }
     else if(reference == mRayNumber)
     {
@@ -312,8 +273,77 @@ void Jumpman::onCollision(CollisionEvent event)
             //std::cout << " RAYHIT: "; if(climbable) std::cout << "brick" << std::endl; else std::cout << "metal" << std::endl;
             //std::cout << "     X: " << contactPoints[i].x << " Y: " << contactPoints[i].y <<" Z:" << contactPoints[i].z << std::endl;
         }
-
     }
+    else
+    {
+        if(reference == mFrontNumber)
+        {
+            mCanMoveForward = false;
+            glm::vec3 inverseForward = -mOrientation.getForward();
+            float forwardVelocity = glm::dot(inverseForward, mVelocity);
+
+            if(forwardVelocity > 0.005f)
+            {
+                //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
+                //mOrientation.translate(rollback.x, rollback.y, rollback.z);
+                mVelocity -= ( ((bounce * forwardVelocity)+bounceMin) * inverseForward);
+                std::cout << "FRONT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            }
+        }
+        else if(reference == mBackNumber)
+        {
+            mCanMoveBackward = false;
+            glm::vec3 inverseForward = -mOrientation.getForward();
+            float forwardVelocity = glm::dot(inverseForward, mVelocity);
+
+            if(forwardVelocity < 0.005f)
+            {
+                //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
+                //mOrientation.translate(rollback.x, rollback.y, rollback.z);
+                mVelocity -= (((bounce * forwardVelocity)-bounceMin) * inverseForward);
+                std::cout << "BACK: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            }
+        }
+        else if(reference == mLeftNumber)
+        {
+            mCanMoveLeft = false;
+            float rightVelocity = glm::dot(mOrientation.getRight(), mVelocity);
+
+            if(rightVelocity < 0.005f)
+            {
+                //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
+                //mOrientation.translate(rollback.x, rollback.y, rollback.z);
+                mVelocity -= (((bounce * rightVelocity)-bounceMin) * mOrientation.getRight());
+                std::cout << "LEFT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            }
+        }
+        else if(reference == mRightNumber)
+        {
+            mCanMoveRight = false;
+            float rightVelocity = glm::dot(mOrientation.getRight(), mVelocity);
+
+            if(rightVelocity > 0.005f)
+            {
+                //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
+                //mOrientation.translate(rollback.x, rollback.y, rollback.z);
+                mVelocity -= (((bounce * rightVelocity)+bounceMin) * mOrientation.getRight());
+                std::cout << "RIGHT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
+            }
+        }
+        else if(reference == mTopNumber)
+        {
+            mCanJump = false;
+            float upVelocity = glm::dot(mOrientation.getUp(), mVelocity);
+
+            if(upVelocity > 0.005f)
+            {
+                mVelocity -= (((bounce * upVelocity)-bounceMin) * mOrientation.getUp());
+            }
+            //std::cout << " TOP " << std::endl;
+        }
+    }
+
+
 }
 
 void Jumpman::simulateSelf(double deltaTime)
@@ -339,23 +369,27 @@ void Jumpman::simulateSelf(double deltaTime)
 
     //Don't bother accelerating if we are already going too fast.
     bool canMoveForward = true;
-    if(forwardVelocity > mGroundMaxSpeed && mForwardMovement == 1)
+    if(mForwardMovement == 1)
     {
-        canMoveForward = false;
+        if(forwardVelocity > mGroundMaxSpeed || !mCanMoveForward)
+            canMoveForward = false;
     }
-    else if(forwardVelocity < -mGroundMaxSpeed && mForwardMovement == -1)
+    else if(mForwardMovement == -1)
     {
-        canMoveForward = false;
+        if(forwardVelocity < -mGroundMaxSpeed || !mCanMoveBackward)
+            canMoveForward = false;
     }
 
     bool canMoveRight = true;
-    if(rightVelocity > mGroundMaxSpeed && mRightMovement == 1)
+    if(mRightMovement == 1)
     {
-        canMoveRight = false;
+        if(rightVelocity > mGroundMaxSpeed || !mCanMoveRight)
+            canMoveRight = false;
     }
-    else if(rightVelocity < -mGroundMaxSpeed && mRightMovement == -1)
+    else if(mRightMovement == -1 )
     {
-        canMoveRight = false;
+        if(rightVelocity < -mGroundMaxSpeed || !mCanMoveLeft)
+            canMoveRight = false;
     }
 
     if(forwardVelocity < 0) currentForwardMovement = 1;
@@ -392,9 +426,9 @@ void Jumpman::simulateSelf(double deltaTime)
         rightAccel = (-currentRightMovement) * mGroundDeaccel;
     }
 
-    if(mIsGrounded || mAttached)
+    if((mIsGrounded || mAttached) && mCanJump)
     {
-        if(mJumpTimer > 0.0)
+        if(mJumpTimer > 0.0 && upVelocity <= 0.0f)
         {
             mJumpTimer -= deltaTime;
             if(mJumpTimer < 0.0) mJumpTimer = 0.0;
@@ -512,6 +546,11 @@ void Jumpman::simulateSelf(double deltaTime)
     mTransform = mOrientation.getOrientationMatrix();
 
     mIsGrounded = false;
+    mCanMoveForward = true;
+    mCanMoveBackward = true;
+    mCanMoveLeft = true;
+    mCanMoveRight = true;
+    mCanJump = true;
 
 }
 

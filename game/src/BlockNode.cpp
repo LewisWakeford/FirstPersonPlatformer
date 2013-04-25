@@ -293,7 +293,7 @@ void BlockNode::buildMesh()
     {
         texture = mApp->getResourceManager()->createTextureFromFile("texture/panels.png");checkError();
         texture->bind();
-        texture->generateMipMaps(1000);
+        texture->generateMipMaps(10);
         texture->setMinFilter(GL_LINEAR_MIPMAP_LINEAR);
         texture->setMaxFilter(GL_LINEAR);
         texture->setWrapS(GL_REPEAT);

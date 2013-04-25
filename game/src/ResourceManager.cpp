@@ -618,7 +618,7 @@ Material* ResourceManager::loadMaterialFromMtl(std::string filename)
                     std::string textureFilename = strtok(0, " ");
                     Texture* texture = createTextureFromFile("texture/" + textureFilename);
                     texture->bind();
-                    texture->generateMipMaps(1000);
+                    texture->generateMipMaps(10);
                     texture->setMinFilter(GL_LINEAR_MIPMAP_LINEAR);
                     texture->setMaxFilter(GL_LINEAR);
                     texture->setWrapS(GL_REPEAT);

@@ -42,6 +42,12 @@ class Jumpman : public I_Controllable, public SceneNode
 
         int mForwardMovement;
         int mRightMovement;
+        bool mCanMoveForward;
+        bool mCanMoveBackward;
+        bool mCanMoveLeft;
+        bool mCanMoveRight;
+        bool mCanJump;
+
         bool mJumping;
         bool mLeaping;
         bool mClimbing;

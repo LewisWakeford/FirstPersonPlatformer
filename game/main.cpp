@@ -118,6 +118,7 @@ int main()
 
         checkError();
 
+        double fps = 0.0;
         unsigned int frames = 0;
         double lastFPSUpdate = 0.0;
         double elapsedTime = 0.0;
@@ -152,11 +153,11 @@ int main()
 
             if(elapsedTime-lastFPSUpdate >= 1.0)
             {
-                double fps = frames/(elapsedTime-lastFPSUpdate);
+                fps = frames/(elapsedTime-lastFPSUpdate);
                 lastFPSUpdate = elapsedTime;
                 frames = 0;
-                std::cout << "FPS: " << fps << std::endl;
             }
+            std::cout << "FPS: " << fps << std::endl;
 
             // exit if ESC was pressed or window was closed
             running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);

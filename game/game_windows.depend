@@ -4299,7 +4299,7 @@
 
 1361119333 c:\code\libs\glm\glm\gtx\rotate_vector.inl
 
-1366889002 source:c:\code\firstpersonplatformer\game\main.cpp
+1366931490 source:c:\code\firstpersonplatformer\game\main.cpp
 	"game.h"
 	<iostream>
 	<exception>
@@ -4315,7 +4315,7 @@
 	"Jumpman.h"
 	"Crosshair.h"
 
-1366887216 c:\code\firstpersonplatformer\game\game.h
+1366931241 c:\code\firstpersonplatformer\game\game.h
 	<GL/glew.h>
 	<GL/glfw.h>
 	<iostream>
@@ -4338,14 +4338,14 @@
 	<string>
 	<map>
 
-1366887216 c:\code\firstpersonplatformer\game\map
+1366907701 c:\code\firstpersonplatformer\game\map
 
 1366887216 c:\code\firstpersonplatformer\game\include\renderer.h
 	<vector>
 	"game.h"
 	<glm/glm.hpp>
 
-1366887216 c:\code\firstpersonplatformer\game\include\collisionsystem.h
+1366915803 c:\code\firstpersonplatformer\game\include\collisionsystem.h
 	"Collider.h"
 
 1366887216 c:\code\firstpersonplatformer\game\include\collider.h
@@ -4472,10 +4472,10 @@
 	<regex>
 	<boost/lexical_cast.hpp>
 
-1366888808 c:\code\firstpersonplatformer\game\include\persistantnode.h
+1366907701 c:\code\firstpersonplatformer\game\include\persistantnode.h
 	<SceneNode.h>
 
-1366892137 c:\code\firstpersonplatformer\game\include\jumpman.h
+1366917305 c:\code\firstpersonplatformer\game\include\jumpman.h
 	"I_Controllable.h"
 	"Collider.h"
 	"Orientation.h"
@@ -4491,7 +4491,7 @@
 1366887216 source:c:\code\firstpersonplatformer\game\src\actionset.cpp
 	"ActionSet.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\app.cpp
+1366915500 source:c:\code\firstpersonplatformer\game\src\app.cpp
 	"App.h"
 	"Renderer.h"
 	"ResourceManager.h"
@@ -4513,7 +4513,7 @@
 1366887216 c:\code\firstpersonplatformer\game\include\blocknode.h
 	<PersistantNode.h>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\blocknode.cpp
+1366929302 source:c:\code\firstpersonplatformer\game\src\blocknode.cpp
 	"BlockNode.h"
 	"App.h"
 	"Renderer.h"
@@ -4552,7 +4552,7 @@
 1366887216 source:c:\code\firstpersonplatformer\game\src\collisionshape.cpp
 	"CollisionShape.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\collisionsystem.cpp
+1366931374 source:c:\code\firstpersonplatformer\game\src\collisionsystem.cpp
 	"CollisionSystem.h"
 	"CuboidShape.h"
 	"RayShape.h"
@@ -4583,11 +4583,11 @@
 1366887216 source:c:\code\firstpersonplatformer\game\src\i_controllable.cpp
 	"I_Controllable.h"
 
-1366890206 source:c:\code\firstpersonplatformer\game\src\inputmapping.cpp
+1366907701 source:c:\code\firstpersonplatformer\game\src\inputmapping.cpp
 	"InputMapping.h"
 	"ActionSet.h"
 
-1366892960 source:c:\code\firstpersonplatformer\game\src\jumpman.cpp
+1366922101 source:c:\code\firstpersonplatformer\game\src\jumpman.cpp
 	"Jumpman.h"
 	"OrientationCamera.h"
 	"CuboidShape.h"
@@ -4664,17 +4664,17 @@
 1366887216 source:c:\code\firstpersonplatformer\game\src\persistant.cpp
 	"Persistant.h"
 
-1366889154 source:c:\code\firstpersonplatformer\game\src\persistantnode.cpp
+1366907701 source:c:\code\firstpersonplatformer\game\src\persistantnode.cpp
 	"PersistantNode.h"
 
 1366887216 source:c:\code\firstpersonplatformer\game\src\playerspawn.cpp
 	"PlayerSpawn.h"
 	"PlayerSpawnNode.h"
 
-1366888887 c:\code\firstpersonplatformer\game\include\playerspawnnode.h
+1366907701 c:\code\firstpersonplatformer\game\include\playerspawnnode.h
 	<PersistantNode.h>
 
-1366890001 source:c:\code\firstpersonplatformer\game\src\playerspawnnode.cpp
+1366907701 source:c:\code\firstpersonplatformer\game\src\playerspawnnode.cpp
 	"PlayerSpawnNode.h"
 	"App.h"
 	"SceneGraph.h"
@@ -4689,7 +4689,7 @@
 	"Mesh.h"
 	"CameraNode.h"
 
-1366887820 source:c:\code\firstpersonplatformer\game\src\resourcemanager.cpp
+1366929365 source:c:\code\firstpersonplatformer\game\src\resourcemanager.cpp
 	"ResourceManager.h"
 	"glm/gtc/type_ptr.hpp"
 	<iostream>

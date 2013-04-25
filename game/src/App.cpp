@@ -54,7 +54,7 @@ void App::init()
     checkError();
     mSceneGraph = new SceneGraph();
     checkError();
-    mCollisionSystem = new CollisionSystem();
+    mCollisionSystem = new CollisionSystem(this);
     checkError();
     mFrameCount = 0;
     mTickCount = 0;

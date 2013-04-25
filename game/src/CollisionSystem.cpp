@@ -2,8 +2,18 @@
 #include "CuboidShape.h"
 #include "RayShape.h"
 
-CollisionSystem::CollisionSystem()
+static double lastBenchmarkTime = 0.0;
+
+inline void benchMark(std::string message)
 {
+    double currentTime = glfwGetTime();
+    std::cout << message << " : " << currentTime - lastBenchmarkTime << "s" << std::endl;
+    lastBenchmarkTime = currentTime;
+}
+
+CollisionSystem::CollisionSystem(App* app)
+{
+    mApp = app;
 
 }
 
@@ -20,9 +30,14 @@ void CollisionSystem::pushCollider(Collider* collider)
 
 void CollisionSystem::checkCollisions()
 {
+
+    mBoxTests = 0;
+    mRayChecks = 0;
     //If collision checking starts to get slow, maybe add a broadER phase with sheres?
 
     //Broadphase Collision, find pairs that potentially collide.
+    benchMark("Starting Collision Tests");
+
     std::vector<Collider*> collisionPairs;
     for(unsigned int i = 0; i < mObjectList.size(); i++)
     {
@@ -43,6 +58,8 @@ void CollisionSystem::checkCollisions()
             }
         }
     }
+
+    benchMark("Broadphase");
 
     //NarrowPhase, more precise collision checking.
     for(unsigned int i = 0; i < collisionPairs.size(); i+=2)
@@ -70,10 +87,16 @@ void CollisionSystem::checkCollisions()
         }
     }
 
+    benchMark("Nearphase");
+
     for(unsigned int i = 0; i < mObjectList.size(); i++)
     {
         mObjectList[i]->processCollisions();
     }
+
+    benchMark("Process Results");
+
+   // std::cout << "BOX: " << mBoxTests << " RAY: " << mRayChecks << std::endl;
 
     mObjectList.clear();
 }
@@ -126,14 +149,17 @@ bool CollisionSystem::narrowphaseTest(const Collider* A, const Collider* B, std:
 
     if(typeA == SHAPE_CUBOID && typeB == SHAPE_CUBOID)
     {
+        mBoxTests++;
         return narrowCuboidOnCuboid(A, B, contactPoints, contactTime);
     }
     if(typeA == SHAPE_RAY && typeB == SHAPE_CUBOID)
     {
+        mRayChecks++;
         return narrowRayOnCuboid(A, B, contactPoints, contactTime);
     }
-    if(typeB == SHAPE_RAY && typeA == SHAPE_CUBOID)
+    else if(typeB == SHAPE_RAY && typeA == SHAPE_CUBOID)
     {
+        mRayChecks++;
         return narrowRayOnCuboid(B, A, contactPoints, contactTime);
     }
     else return false;

@@ -38,7 +38,7 @@ Blocks are specified with the <bl> tag.
 	The origin of the block as a 3d coordinate x, y, z.
 	Measuered in metres, can be float and negative.
 	#
-	<origin> {0.0, -10.0, -2.5} </origin>
+	<origin> {0.0, -10.0, -2.0} </origin>
 
 	#
 	The begining and end of the block in the x axis, respectively.
@@ -121,8 +121,168 @@ Blocks are specified with the <bl> tag.
 
 	<n_z> 2 </n_z>
 	<p_z> 2 </p_z>
+</bl>
 
-	<rot> 45 </rot>
+
+<bl>
+	<origin> {18.0, -10.0, -20.0} </origin>
+
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 5 </p_y>
+
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+	
+	<west>
+		{2,3, 2,5}
+	</west>
+</bl>
+
+<bl>
+	<origin> {18.0, -5.0, -17.0} </origin>
+
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	<n_y> 2 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 8 </p_z>
+</bl>
+
+<bl>
+	<origin> {18.0, -5.0, -3.0} </origin>
+
+	<n_x> 0 </n_x>
+	<p_x> 1 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 10 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+	
+	<south>
+		{0,0, 1,0, 
+		0,1, 1,1,
+		0,2, 1,2,
+		0,3, 1,3,
+		0,4, 1,4,
+		0,5, 1,5,
+		0,6, 1,6,
+		0,7, 1,7,
+		0,8, 1,8,
+		0,9, 1,9,
+		0,10, 1,10}
+	</south>
+</bl>
+
+<bl>
+	<origin> {18.0, 5.0, -17.0} </origin>
+
+	<n_x> 1 </n_x>
+	<p_x> 1 </p_x>
+
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 8 </p_z>
+</bl>
+
+<bl>
+	<origin> {12.0, 5.0, -17.0} </origin>
+
+	<n_x> 1 </n_x>
+	<p_x> 1 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 1 </n_z>
+	<p_z> 1 </p_z>
+</bl>
+
+<bl>
+	<origin> {8.0, 5.0, -13.0} </origin>
+
+	<n_x> 1 </n_x>
+	<p_x> 0 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 1 </p_z>
+</bl>
+
+<bl>
+	<origin> {5.0, 5.0, -15.0} </origin>
+
+	<n_x> 0 </n_x>
+	<p_x> 0 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+</bl>
+
+<bl>
+	<origin> {3.0, 5.0, -10.0} </origin>
+
+	<n_x> 0 </n_x>
+	<p_x> 0 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+</bl>
+
+<bl>
+	<origin> {1.0, 5.0, -14.0} </origin>
+
+	<n_x> 0 </n_x>
+	<p_x> 0 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+</bl>
+
+<bl>
+	<origin> {-2.0, 5.0, -12.0} </origin>
+
+	<n_x> 0 </n_x>
+	<p_x> 0 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+</bl>
+
+<bl>
+	<origin> {-2.0, 5.0, -12.0} </origin>
+
+	<n_x> 0 </n_x>
+	<p_x> 0 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
 </bl>
 
 <bl>

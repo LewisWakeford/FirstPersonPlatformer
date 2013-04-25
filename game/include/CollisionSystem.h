@@ -6,7 +6,7 @@
 class CollisionSystem
 {
     public:
-        CollisionSystem();
+        CollisionSystem(App* app);
         virtual ~CollisionSystem();
 
         void pushCollider(Collider* collider);
@@ -35,6 +35,11 @@ class CollisionSystem
         std::vector<Collider*> mObjectList; //The list of nodes we need to check for collisions next simulation.
 
         std::vector<glm::mat4> mMatrixStack;
+
+        int mRayChecks;
+        int mBoxTests;
+
+        App* mApp;
 
     private:
 };
