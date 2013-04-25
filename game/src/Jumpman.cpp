@@ -54,6 +54,9 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mFixedLookSpeed = 60.0;
     mLookSpeedRatio = 180.0;
 
+    mClimable = false;
+    mClimableCoord = glm::vec3(0.0f);
+
     SceneNodePtr cameraPtr(camera);
     addChild(cameraPtr);
 
@@ -188,6 +191,11 @@ void Jumpman::processInput(const ActionSet* actionSet)
         mLeaping = true;
     }
 
+    if(actionSet->getB(ACTION_B_CLIMB))
+    {
+        mClimbing = true;
+    }
+
     if(actionSet->getB(ACTION_B_PITCH_P) && !actionSet->getB(ACTION_B_PITCH_N))
     {
         mDeltaAlt = mFixedLookSpeed;
@@ -289,8 +297,9 @@ void Jumpman::onCollision(CollisionEvent event)
         for(int i = 0; i < contactPoints.size(); i++)
         {
             BlockNode* blockNode = (BlockNode*) event.collidedWith()->getMaster();
-            bool climbable = blockNode->isClimable(contactPoints[i]);
-            std::cout << " RAYHIT: "; if(climbable) std::cout << "brick" << std::endl; else std::cout << "metal" << std::endl;
+            mClimable = blockNode->isClimable(contactPoints[i]);
+            mClimableCoord = contactPoints[i];
+            //std::cout << " RAYHIT: "; if(climbable) std::cout << "brick" << std::endl; else std::cout << "metal" << std::endl;
             //std::cout << "     X: " << contactPoints[i].x << " Y: " << contactPoints[i].y <<" Z:" << contactPoints[i].z << std::endl;
         }
 

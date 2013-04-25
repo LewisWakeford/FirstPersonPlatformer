@@ -129,13 +129,15 @@ GLdouble App::deltaTime()
         return 0;
     }
     GLdouble currentTime = glfwGetTime();
-    return currentTime - mLastTickTime;
+    GLdouble delta = currentTime - mLastTickTime;
+    mLastTickTime = currentTime;
+    return delta;
 }
 
 void App::clockTick()
 {
     mLocalHardwareInput.updateMouse();
-    mLastTickTime = glfwGetTime();
+    //mLastTickTime = glfwGetTime();
     mTickCount++;
 }
 

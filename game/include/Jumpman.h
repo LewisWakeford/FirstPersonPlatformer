@@ -42,6 +42,7 @@ class Jumpman : public I_Controllable, public SceneNode
         int mRightMovement;
         bool mJumping;
         bool mLeaping;
+        bool mClimbing;
 
         double mJumpCooldown; //Time in seconds after landing you must wait before attempting to jump again.
         double mJumpTimer;    //While non-zero, cannot jump. Decrements every tick.
@@ -86,6 +87,9 @@ class Jumpman : public I_Controllable, public SceneNode
         RayShape* mCrosshairRay;
 
         static float sGrabRange;
+
+        bool mClimable; //There is a climbable wall under the crosshair.
+        glm::vec3 mClimableCoord; //The world coordinate under the crosshair.
 
     private:
 };

@@ -485,7 +485,7 @@ bool BlockNode::isClimable(glm::vec3 point)
     unsigned int iU = glm::floor(fU);
     unsigned int iV = glm::floor(fV);
 
-    std::cout << face << ": " << iU << ", " << iV;
+    //std::cout << face << ": " << iU << ", " << iV;
 
     return isClimable(face, iU, iV);
 }

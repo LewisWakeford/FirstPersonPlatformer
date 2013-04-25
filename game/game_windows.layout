@@ -28,10 +28,10 @@
 	<File name="include\CollisionEvent.h" open="0" top="0" tabpos="2">
 		<Cursor position="501" topLine="0" />
 	</File>
-	<File name="include\CollisionShape.h" open="1" top="0" tabpos="3">
-		<Cursor position="748" topLine="16" />
+	<File name="include\CollisionShape.h" open="0" top="0" tabpos="3">
+		<Cursor position="450" topLine="0" />
 	</File>
-	<File name="include\CollisionSystem.h" open="1" top="0" tabpos="2">
+	<File name="include\CollisionSystem.h" open="0" top="0" tabpos="2">
 		<Cursor position="383" topLine="0" />
 	</File>
 	<File name="include\Crosshair.h" open="0" top="0" tabpos="0">
@@ -41,7 +41,7 @@
 		<Cursor position="566" topLine="1" />
 	</File>
 	<File name="include\Jumpman.h" open="0" top="0" tabpos="4">
-		<Cursor position="3408" topLine="48" />
+		<Cursor position="1450" topLine="10" />
 	</File>
 	<File name="include\LocalHardwareInput.h" open="0" top="0" tabpos="3">
 		<Cursor position="312" topLine="0" />
@@ -77,7 +77,7 @@
 		<Cursor position="94" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="513" topLine="7" />
+		<Cursor position="3723" topLine="103" />
 	</File>
 	<File name="map\example.map" open="0" top="0" tabpos="6">
 		<Cursor position="1114" topLine="28" />
@@ -95,16 +95,16 @@
 		<Cursor position="292" topLine="0" />
 	</File>
 	<File name="src\App.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="221" topLine="0" />
+		<Cursor position="2736" topLine="112" />
 	</File>
 	<File name="src\ArrayBuffer.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="523" topLine="2" />
 	</File>
 	<File name="src\Block.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2263" topLine="41" />
+		<Cursor position="1652" topLine="43" />
 	</File>
 	<File name="src\BlockNode.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="2470" topLine="144" />
+		<Cursor position="15313" topLine="453" />
 	</File>
 	<File name="src\Buffer.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="547" topLine="16" />
@@ -118,8 +118,8 @@
 	<File name="src\CollisionShape.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1873" topLine="36" />
 	</File>
-	<File name="src\CollisionSystem.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="199" topLine="15" />
+	<File name="src\CollisionSystem.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="778" topLine="45" />
 	</File>
 	<File name="src\Crosshair.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="602" topLine="27" />
@@ -134,7 +134,7 @@
 		<Cursor position="1029" topLine="36" />
 	</File>
 	<File name="src\Jumpman.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="639" topLine="12" />
+		<Cursor position="8457" topLine="256" />
 	</File>
 	<File name="src\LocalHardwareInput.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1045" topLine="27" />
@@ -154,8 +154,8 @@
 	<File name="src\Renderer.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="355" topLine="0" />
 	</File>
-	<File name="src\ResourceManager.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="19846" topLine="0" />
+	<File name="src\ResourceManager.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="14621" topLine="355" />
 	</File>
 	<File name="src\SceneGraph.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="223" topLine="0" />
