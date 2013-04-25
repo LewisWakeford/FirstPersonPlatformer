@@ -38,7 +38,7 @@ Blocks are specified with the <bl> tag.
 	The origin of the block as a 3d coordinate x, y, z.
 	Measuered in metres, can be float and negative.
 	#
-	<origin> {0.0, -10.0, 2.5} </origin>
+	<origin> {0.0, -10.0, -2.5} </origin>
 
 	#
 	The begining and end of the block in the x axis, respectively.
@@ -52,7 +52,7 @@ Blocks are specified with the <bl> tag.
 	<n_y> 0 </n_y>
 	<p_y> 0 </p_y>
 
-	<n_z> 2 </n_z>
+	<n_z> 15 </n_z>
 	<p_z> 2 </p_z>
 
 	# List of Climable Panels.
@@ -72,6 +72,56 @@ Blocks are specified with the <bl> tag.
 	Rotation of the block around it's origin, in degrees.
 	Optional, defaults to 0.
 	#
+	<rot> 45 </rot>
+</bl>
+
+<bl>
+	#
+	The origin of the block as a 3d coordinate x, y, z.
+	Measuered in metres, can be float and negative.
+	#
+	<origin> {0.0, -10.0, -15.0} </origin>
+
+	#
+	The begining and end of the block in the x axis, respectively.
+	Measured in metres, must be integer and positive.
+	Optional, if ommitted each defaults to 0.
+	#
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 0 </n_y>
+	<p_y> 1 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+
+	<rot> 45 </rot>
+</bl>
+
+<bl>
+	#
+	The origin of the block as a 3d coordinate x, y, z.
+	Measuered in metres, can be float and negative.
+	#
+	<origin> {0.0, -10.0, -20.0} </origin>
+
+	#
+	The begining and end of the block in the x axis, respectively.
+	Measured in metres, must be integer and positive.
+	Optional, if ommitted each defaults to 0.
+	#
+	<n_x> 2 </n_x>
+	<p_x> 15 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 0 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+
 	<rot> 45 </rot>
 </bl>
 
@@ -121,7 +171,7 @@ Blocks are specified with the <bl> tag.
 Player spawn is specificed with the <sp> tag.
 #
 <sp>
-	<origin> {0.0, 0.0, 0.0} </origin>
+	<origin> {0.0, 2.0, 0.0} </origin>
 </sp>
 
 #

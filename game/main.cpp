@@ -88,18 +88,11 @@ int main()
 
         renderer->setDimensions((GLdouble)width, (GLdouble)height);
 
-        OrientationCamera* FPCamera = new OrientationCamera(&theApp, GAME_RENDER_GEOMETRY, 90.0f, 0.1f, 1000.0f);
-        SceneNodePtr jumpmanPtr(new Jumpman(&theApp, FPCamera));
-        theApp.setRegular((Jumpman*)jumpmanPtr.get(), FPCamera);
-
         SceneNodePtr cameraPtr(new FloatingCamera(&theApp, GAME_RENDER_GEOMETRY, 90.0f, 0.1f, 1000.0f));
         ((FloatingCamera*)cameraPtr.get())->yaw(3.1f);
         theApp.setEditor((FloatingCamera*)cameraPtr.get(), (FloatingCamera*)cameraPtr.get());
 
-        theApp.useRegular();
-
         sceneGraph->getRoot()->addChild(cameraPtr);
-        sceneGraph->getRoot()->addChild(jumpmanPtr);
 
         Mesh* debugMesh = theApp.getResourceManager()->getMesh("debug_cube");
         SceneNodePtr meshPtr(new MeshNode(&theApp, GAME_RENDER_GEOMETRY, debugMesh));

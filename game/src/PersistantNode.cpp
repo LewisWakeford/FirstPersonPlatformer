@@ -14,3 +14,8 @@ bool PersistantNode::hasChanged()
 {
     return mHasChanged;
 }
+
+void PersistantNode::simulateSelf(double deltaTime)
+{
+    //Do nothing.
+}

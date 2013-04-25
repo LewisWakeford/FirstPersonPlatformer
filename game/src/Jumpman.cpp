@@ -11,7 +11,10 @@
 
 #include <iostream>
 
-float Jumpman::sGrabRange = 5.0;
+float Jumpman::sLungeRange = 3.0f;
+float Jumpman::sGrabRange = 1.0f;
+float Jumpman::sLungeVelocity = 5.0f;
+double Jumpman::sMaxTimeAttemptingToClimb = 1.0;
 
 Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_RENDER_NONE)
 {
@@ -24,6 +27,12 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mRightMovement = 0;
     mJumping = false;
     mLeaping = false;
+    mClimbing = false;
+
+    mClimbTarget = glm::vec3(0.0f);
+    mTimeAttemptingToClimb = 0.0;
+    mAttemptingToClimb = false;
+    mAttached = false;
 
     mGroundMaxSpeed = 15.0f;
     mGroundAccel = 8.0f;
@@ -78,7 +87,7 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     CuboidShape* left = new CuboidShape(-0.5f, -mFeetHeight+0.5f, -0.25f, 0.25f, 1.3f, 0.5f);
     CuboidShape* right = new CuboidShape(0.25f, -mFeetHeight+0.5f, -0.25f, 0.25f, 1.3f, 0.5f);
     CuboidShape* top = new CuboidShape(-0.25f, 1.3f, -0.25f, 0.5f, 0.5f, 0.5f);
-    mCrosshairRay = new RayShape(glm::vec3(0.0f, mHeadHeight, 0.0f), glm::vec3(0.0f, 0.0f, -sGrabRange)); //Keep a reference for when we move the camera.
+    mCrosshairRay = new RayShape(glm::vec3(0.0f, mHeadHeight, 0.0f), glm::vec3(0.0f, 0.0f, -sLungeRange)); //Keep a reference for when we move the camera.
 
     addCollider(new Collider(feet, mFeetNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
     addCollider(new Collider(front, mFrontNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
@@ -160,6 +169,7 @@ void Jumpman::processInput(const ActionSet* actionSet)
     mRightMovement = 0;
     mJumping = false;
     mLeaping = false;
+    mClimbing = false;
     mDeltaAzi = 0.0;
     mDeltaAlt = 0.0;
 
@@ -382,7 +392,7 @@ void Jumpman::simulateSelf(double deltaTime)
         rightAccel = (-currentRightMovement) * mGroundDeaccel;
     }
 
-    if(mIsGrounded)
+    if(mIsGrounded || mAttached)
     {
         if(mJumpTimer > 0.0)
         {
@@ -394,19 +404,85 @@ void Jumpman::simulateSelf(double deltaTime)
         {
             mVelocity += mJumpAccel * mOrientation.getUp() ;
             mJumpTimer = mJumpCooldown;
+            mAttached = false;
         }
         else if(mLeaping && mJumpTimer <= 0.0)
         {
             mVelocity -= mLeapAccel * mAim;
             mJumpTimer = mJumpCooldown;
+            mAttached = false;
         }
+    }
+
+    //Climbing Code
+
+    glm::vec3 myWorldPos = mOrientation.getPos();
+    if(mClimbing)
+    {
+        //If not already attached to something, attempt to climb.
+        if(mClimable && !mAttached && !mAttemptingToClimb)
+        {
+            glm::vec3 vectorToClimbPoint = mClimableCoord - myWorldPos;
+            float distanceToClimbPoint = glm::length(vectorToClimbPoint);
+
+            if(distanceToClimbPoint <= sLungeRange)
+            {
+                //Lunge towards the climbpoint if out of range.
+                if(distanceToClimbPoint > sGrabRange)
+                {
+                    mVelocity += glm::normalize(vectorToClimbPoint) * sLungeVelocity;
+
+                }
+
+                std::cout << "Attempting to Climb" << std::endl;
+                mAttemptingToClimb = true;
+                mTimeAttemptingToClimb = 0.0;
+
+                mClimbTarget = mClimableCoord;
+            }
+
+
+        }
+        //Detach if attached.
+        else if(mAttached)
+        {
+            mAttached = false;
+        }
+    }
+
+    if(mAttemptingToClimb && !mClimbing)
+    {
+        glm::vec3 vectorToClimbPoint = mClimbTarget - myWorldPos;
+        float distanceToClimbPoint = glm::length(vectorToClimbPoint);
+        std::cout << distanceToClimbPoint << std::endl;
+        if(distanceToClimbPoint <= sGrabRange)
+        {
+            mVelocity = glm::vec3(0.0f); //Kill all movement
+            mAcceleration = glm::vec3(0.0f);
+
+            mAttached = true;
+            mAttemptingToClimb = false;
+        }
+        else
+        {
+            mTimeAttemptingToClimb += deltaTime;
+        }
+    }
+
+    if(mTimeAttemptingToClimb >= sMaxTimeAttemptingToClimb)
+    {
+        mAttemptingToClimb = false;
+        std::cout << "Give up" << std::endl;
     }
 
     mAcceleration = (mOrientation.getForward() * -forwardAccel) + (mOrientation.getRight() * rightAccel);
 
-    applyAcceleration(deltaTime);
-    applyGravity(deltaTime);
-    limitVelocity(deltaTime);
+    if(!mAttached)
+    {
+        applyAcceleration(deltaTime);
+        applyGravity(deltaTime);
+        limitVelocity(deltaTime);
+    }
 
     mOrientation.translate(mVelocity.x*deltaTime, mVelocity.y*deltaTime, mVelocity.z*deltaTime);
 
@@ -430,11 +506,17 @@ void Jumpman::simulateSelf(double deltaTime)
     glm::vec3 forward = mFPCamera->orientation()->getForward();
     forward.x = -(forward.x);
     forward.z = -(forward.z);
-    mCrosshairRay->setDirection(mFPCamera->orientation()->getForward() * -sGrabRange);
+    mCrosshairRay->setDirection(mFPCamera->orientation()->getForward() * -sLungeRange);
     //mCrosshairRay->setDirection(forward * sGrabRange);
 
     mTransform = mOrientation.getOrientationMatrix();
 
     mIsGrounded = false;
 
+}
+
+void Jumpman::teleport(float x, float y, float z)
+{
+    glm::vec3 teleportPos(x,y,z);
+    mOrientation.setPos(teleportPos);
 }

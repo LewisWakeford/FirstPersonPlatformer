@@ -139,6 +139,9 @@
 	<File name="src\LocalHardwareInput.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1045" topLine="27" />
 	</File>
+	<File name="src\MapManager.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="1619" topLine="35" />
+	</File>
 	<File name="src\Material.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="804" topLine="32" />
 	</File>
@@ -154,8 +157,8 @@
 	<File name="src\Renderer.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="355" topLine="0" />
 	</File>
-	<File name="src\ResourceManager.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="14621" topLine="355" />
+	<File name="src\ResourceManager.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="18335" topLine="540" />
 	</File>
 	<File name="src\SceneGraph.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="223" topLine="0" />

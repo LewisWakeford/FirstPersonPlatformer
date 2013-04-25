@@ -40,6 +40,7 @@ InputMapping::InputMapping()
     //E - Roll Clockwise
     mMapping[69] = ACTION_B_ROLL_N;
 
+    mMapping[GLFW_MOUSE_BUTTON_1] = ACTION_B_CLIMB;
     mMapping[GLFW_MOUSE_BUTTON_2] = ACTION_B_LEAP;
 
     mMouseXAxis = ACTION_D_AIM_H;

@@ -365,7 +365,7 @@ Mesh* ResourceManager::loadMeshFromObj(std::string filename, ShaderProgram* shad
     mesh = createMesh(filename);
 
     std::ifstream fileStream;
-    fileStream.open(filename.c_str(), std::ios::binary);
+    fileStream.open(filename.c_str());
 checkError();
     if(fileStream.is_open())
     {
@@ -552,7 +552,7 @@ Material* ResourceManager::loadMaterialFromMtl(std::string filename)
     material = createMaterial(filename);
 
     std::ifstream fileStream;
-    fileStream.open(filename.c_str(), std::ios::binary);
+    fileStream.open(filename.c_str());
 
     if(fileStream.is_open())
     {

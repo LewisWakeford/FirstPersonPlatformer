@@ -12,8 +12,14 @@ class PlayerSpawnNode : public PersistantNode
 
         std::vector<float> getOrigin();
 
+        virtual void simulateSelf(double deltaTime);
+
     protected:
+        void spawnPlayer();
+
         std::vector<float> mOrigin; //change to glm vector
+
+        bool mSpawnedPlayer;
     private:
 };
 

@@ -12,6 +12,8 @@ class PersistantNode : public SceneNode
 
         bool hasChanged();
 
+        virtual void simulateSelf(double deltaTime);
+
     protected:
         bool mHasChanged;
 
