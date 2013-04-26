@@ -34,12 +34,6 @@ class Jumpman : public I_Controllable, public SceneNode
         glm::vec3 mAcceleration; //Current Acceleration.
         glm::vec3 mVelocity; //Current Velocity.
 
-        //All measures in metres, seconds and newtons.
-        double mGroundMaxSpeed; //The maximum speed you can build up to when grounded, before friction starts to slow you.
-        double mGroundAccel; //The acceleration rate while your feet are grounded.
-        double mGroundDeaccel; //The deacceleration rate when you try to move in an opposing direction to the current one.
-        double mGroundFriction; //Percentage of speed lost per second when over the ground speed limit;
-
         int mForwardMovement;
         int mRightMovement;
         bool mCanMoveForward;
@@ -58,12 +52,6 @@ class Jumpman : public I_Controllable, public SceneNode
         bool mAttemptingToClimb;
         bool mAttached;
 
-        double mJumpCooldown; //Time in seconds after landing you must wait before attempting to jump again.
-        double mJumpTimer;    //While non-zero, cannot jump. Decrements every tick.
-
-        double mAirMaxSpeed; //Terminal Velocity
-        double mAirAccelRatio; //How much percentage of the regular acceleration can you perform in mid-air. 1.0 gives almost perfect air control, 0.0 is realistic.
-
         double mHeadHeight; //The distance from the origin that the camera is placed at.
         double mFeetHeight; //The distance from the origin that the feet collide with the world.
 
@@ -75,17 +63,16 @@ class Jumpman : public I_Controllable, public SceneNode
 
         double mAzimuth; //Absolute orientation in the x/z plain.
         double mAltitude; //Up/Down angle.
-        double mMaxAltitude; //How far "up" the player can look. At 1/2 pi they cannot look further back than directly up.
-        double mMinAltitude; //How far "down" the player can look. At 1/2 pi they cannot look further forward than directly down.
 
         double mDeltaAzi;
         double mDeltaAlt;
-        double mFixedLookSpeed; //The angle per second that you look around when using a digital input like keys.
-        double mLookSpeedRatio; //The angle per second per unit of movment on an analogue input. Basically, mouse sensitivity.
 
         double mDeltaTime; //Copy of this frames delta time, for rolling back movement after collisions.
 
         OrientationCamera* mFPCamera; //First person camera linked to this object.
+
+        double mJumpTimerAll;
+        double mJumpTimerGround;
 
         unsigned int mFeetNumber;
         unsigned int mFrontNumber;
@@ -103,6 +90,24 @@ class Jumpman : public I_Controllable, public SceneNode
         static float sFallLimit;
         static float sJumpAccel; //The amount of upwards acceleration added when jumping.
         static float sLeapAccel; //The amount of forwards acceleration added when leaping.
+
+        static float sGroundMaxSpeed;
+        static float sGroundAccel;
+        static float sGroundDeaccel;
+        static float sGroundFriction;
+
+       static  float sAirMaxSpeed;
+       static  float sAirAccelRatio;
+
+        static float sMaxAltitude;
+       static  float sMinAltitude;
+
+       static  float sFixedLookSpeed;
+       static  float sLookSpeedRatio;
+
+
+        static float sJumpCooldownGround; //Time taken after landing to be able to jump again.
+       static float sJumpCooldownAir; //Time after jumping before being able to jump again.
 
         bool mClimable; //There is a climbable wall under the crosshair.
         glm::vec3 mClimableCoord; //The world coordinate under the crosshair.

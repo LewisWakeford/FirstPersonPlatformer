@@ -142,9 +142,6 @@
 		<Unit filename="include/ShaderProgram.h">
 			<Option virtualFolder="ResourceObjects/" />
 		</Unit>
-		<Unit filename="include/TestMesh.h">
-			<Option virtualFolder="SceneGraph/Other/" />
-		</Unit>
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/UniformBuffer.h">
 			<Option virtualFolder="ResourceObjects/" />
@@ -252,9 +249,6 @@
 		</Unit>
 		<Unit filename="src/ShaderProgram.cpp">
 			<Option virtualFolder="ResourceObjects/" />
-		</Unit>
-		<Unit filename="src/TestMesh.cpp">
-			<Option virtualFolder="SceneGraph/Other/" />
 		</Unit>
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/UniformBuffer.cpp">

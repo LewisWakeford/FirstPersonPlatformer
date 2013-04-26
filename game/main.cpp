@@ -46,7 +46,7 @@ int main()
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
 
-        if( !glfwOpenWindow(1280, 720, 0, 0, 0, 0, 0, 0, GLFW_WINDOW) )
+        if( !glfwOpenWindow(1920, 1080, 0, 0, 0, 0, 0, 0, GLFW_FULLSCREEN) )
         {
             glfwTerminate();
             return 0;
@@ -111,7 +111,7 @@ int main()
         glDisable(GL_CULL_FACE);checkError();
 
         //I basically messed up and had all my matrixes inverted, so all my geometry is wound the wrong way now...
-        //glfwDisable(GLFW_MOUSE_CURSOR);
+        glfwDisable(GLFW_MOUSE_CURSOR);
         glFrontFace(GL_CCW);checkError();
         glCullFace(GL_BACK);checkError();
         glClearColor(0.5f, 0.8f, 1.0f, 1.0f);checkError();
@@ -129,16 +129,16 @@ int main()
         int currentMap = 0;
 
         GLfloat windowCorners[] = { 0.0f, 0.0f,
-                                    0.0f, 1.0f,
-                                    1.0f, 1.0f,
-                                    1.0f, 1.0f,
                                     1.0f, 0.0f,
+                                    1.0f, 1.0f,
+                                    1.0f, 1.0f,
+                                    0.0f, 1.0f,
                                     0.0f, 0.0f };
 
 
         VertexArrayObject* VAO = theApp.getResourceManager()->createVAO("splashscreen");
         ShaderProgram* renderImage = theApp.getResourceManager()->createProgramFromFiles("splash", "shader/render_image.vert", "shader/render_image.frag");
-        Texture* splashScreen = theApp.getResourceManager()->createTextureFromFile("texture/waypoint.png");
+        Texture* splashScreen = theApp.getResourceManager()->createTextureFromFile("texture/splash.png");
         splashScreen->bind();
         splashScreen->generateMipMaps(10);
         splashScreen->setMinFilter(GL_LINEAR_MIPMAP_LINEAR);
@@ -178,7 +178,7 @@ int main()
 
             splashScreen->bind();             checkError();
 
-            renderImage->setUniformMatrix4fv("m_MVP", glm::value_ptr(glm::ortho(0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f)));             checkError();
+            renderImage->setUniformMatrix4fv("m_MVP", glm::value_ptr(glm::ortho(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f)));             checkError();
                          checkError();
 
             glDrawArrays(GL_TRIANGLES,0,6);             checkError();

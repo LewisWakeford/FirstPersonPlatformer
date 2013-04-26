@@ -27,7 +27,7 @@ void PlayerSpawnNode::simulateSelf(double deltaTime)
 
 void PlayerSpawnNode::spawnPlayer()
 {
-    OrientationCamera* FPCamera = new OrientationCamera(mApp, GAME_RENDER_GEOMETRY, 90.0f, 0.1f, 1000.0f);
+    OrientationCamera* FPCamera = new OrientationCamera(mApp, GAME_RENDER_GEOMETRY, 100.0f, 0.1f, 1000.0f);
     SceneNodePtr jumpmanPtr(new Jumpman(mApp, FPCamera));
     ((Jumpman*)jumpmanPtr.get())->setSpawn(mOrigin[0], mOrigin[1], mOrigin[2]);
     mApp->setRegular((Jumpman*)jumpmanPtr.get(), FPCamera);

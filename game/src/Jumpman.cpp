@@ -16,8 +16,27 @@ float Jumpman::sGrabRange = 1.5f;
 float Jumpman::sLungeVelocity = 10.0f;
 double Jumpman::sMaxTimeAttemptingToClimb = 1.0;
 float Jumpman::sFallLimit = -100.0f;
-float Jumpman::sLeapAccel = 10.0f;
-float Jumpman::sJumpAccel = 10.0f;
+float Jumpman::sLeapAccel = 7.5f;
+float Jumpman::sJumpAccel = 7.5f;
+
+float Jumpman::sGroundMaxSpeed = 10.0f;
+float Jumpman::sGroundAccel = 8.0f;
+float Jumpman::sGroundDeaccel = 30.0f;
+float Jumpman::sGroundFriction = 40.0f;
+
+float Jumpman::sAirMaxSpeed = 200.0f;
+float Jumpman::sAirAccelRatio = 0.5f;
+
+float Jumpman::sMaxAltitude = 90.0f;
+float Jumpman::sMinAltitude = -90.0f;
+
+float Jumpman::sFixedLookSpeed = 60.0;
+float Jumpman::sLookSpeedRatio = 180.0;
+
+
+float Jumpman::sJumpCooldownGround = 0.05; //Time taken after landing to be able to jump again.
+float Jumpman::sJumpCooldownAir = 0.25; //Time after jumping before being able to jump again.
+
 
 Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_RENDER_NONE)
 {
@@ -44,31 +63,20 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mAttemptingToClimb = false;
     mAttached = false;
 
-    mGroundMaxSpeed = 15.0f;
-    mGroundAccel = 8.0f;
-    mGroundDeaccel = 30.0f;
-    mGroundFriction = 20.0f;
-
-    mAirMaxSpeed = 200.0f;
-    mAirAccelRatio = 0.5f;
-
     mAim = mOrientation.getForward();
 
     mAzimuth = 0.0f;
     mAltitude = 0.0f;
-    mMaxAltitude = 90.0f;
-    mMinAltitude = -90.0f;
 
     mHeadHeight = 0.6f;
     mFeetHeight = 0.8f;
 
-    mJumpTimer = 0.0;
-    mJumpCooldown = 0.05;
+    mJumpTimerGround = 0.0;
+    mJumpTimerAll = 0.0;
 
     mDeltaAzi = 0.0;
     mDeltaAlt = 0.0;
-    mFixedLookSpeed = 60.0;
-    mLookSpeedRatio = 180.0;
+
 
     mClimable = false;
     mClimableCoord = glm::vec3(0.0f);
@@ -137,7 +145,7 @@ void Jumpman::applyAcceleration(double deltaTime)
     }
     else
     {
-        mVelocity += mAcceleration * float(mAirAccelRatio * deltaTime);
+        mVelocity += mAcceleration * float(sAirAccelRatio * deltaTime);
     }
 }
 
@@ -151,19 +159,19 @@ void Jumpman::limitVelocity(double deltaTime)
     }
 
     //Speed cannot be greater than max air speed.
-    if(speed > mAirMaxSpeed)
+    if(speed > sAirMaxSpeed)
     {
-        float slowDownRatio = mAirMaxSpeed/speed;
+        float slowDownRatio = sAirMaxSpeed/speed;
         mVelocity *= slowDownRatio;
     }
 
     float verticalVelocity = glm::dot(mVelocity, mOrientation.getUp());
 
     //If grounded we need to apply friction.
-    if(mIsGrounded && speed > mGroundMaxSpeed && verticalVelocity < 0)
+    if(mIsGrounded && speed > sGroundMaxSpeed && verticalVelocity < 0)
     {
-        float slowDownRatio = mGroundMaxSpeed/speed;
-        float frictionRatio = 1.0 - (mGroundFriction * deltaTime);
+        float slowDownRatio = sGroundMaxSpeed/speed;
+        float frictionRatio = 1.0 - (sGroundFriction * deltaTime);
         if(slowDownRatio < frictionRatio)
         {
             mVelocity *= slowDownRatio;
@@ -220,24 +228,24 @@ void Jumpman::processInput(const ActionSet* actionSet)
 
     if(actionSet->getB(ACTION_B_PITCH_P) && !actionSet->getB(ACTION_B_PITCH_N))
     {
-        mDeltaAlt = mFixedLookSpeed;
+        mDeltaAlt = sFixedLookSpeed;
     }
     if(!actionSet->getB(ACTION_B_PITCH_P) && actionSet->getB(ACTION_B_PITCH_N))
     {
-        mDeltaAlt = -mFixedLookSpeed;
+        mDeltaAlt = -sFixedLookSpeed;
     }
 
     if(actionSet->getB(ACTION_B_YAW_P) && !actionSet->getB(ACTION_B_YAW_N))
     {
-        mDeltaAzi = mFixedLookSpeed;
+        mDeltaAzi = sFixedLookSpeed;
     }
     if(!actionSet->getB(ACTION_B_YAW_P) && actionSet->getB(ACTION_B_YAW_N))
     {
-        mDeltaAzi = -mFixedLookSpeed;
+        mDeltaAzi = -sFixedLookSpeed;
     }
 
-    mDeltaAlt += mLookSpeedRatio * actionSet->getD(ACTION_D_AIM_V);
-    mDeltaAzi += mLookSpeedRatio * actionSet->getD(ACTION_D_AIM_H);
+    mDeltaAlt += sLookSpeedRatio * actionSet->getD(ACTION_D_AIM_V);
+    mDeltaAzi += sLookSpeedRatio * actionSet->getD(ACTION_D_AIM_H);
 
 }
 
@@ -377,26 +385,26 @@ void Jumpman::simulateSelf(double deltaTime)
 
     //Don't bother accelerating if we are already going too fast.
     bool canMoveForward = true;
-    if(mForwardMovement == 1)
+    if(mForwardMovement == -1)
     {
-        if(forwardVelocity > mGroundMaxSpeed || !mCanMoveForward)
+        if(forwardVelocity > sGroundMaxSpeed || !mCanMoveForward)
             canMoveForward = false;
     }
-    else if(mForwardMovement == -1)
+    else if(mForwardMovement == 1)
     {
-        if(forwardVelocity < -mGroundMaxSpeed || !mCanMoveBackward)
+        if(forwardVelocity < -sGroundMaxSpeed || !mCanMoveBackward)
             canMoveForward = false;
     }
 
     bool canMoveRight = true;
     if(mRightMovement == 1)
     {
-        if(rightVelocity > mGroundMaxSpeed || !mCanMoveRight)
+        if(rightVelocity > sGroundMaxSpeed || !mCanMoveRight)
             canMoveRight = false;
     }
     else if(mRightMovement == -1 )
     {
-        if(rightVelocity < -mGroundMaxSpeed || !mCanMoveLeft)
+        if(rightVelocity < -sGroundMaxSpeed || !mCanMoveLeft)
             canMoveRight = false;
     }
 
@@ -407,17 +415,17 @@ void Jumpman::simulateSelf(double deltaTime)
     {
         if(mForwardMovement != 0 && currentForwardMovement != 0 && mForwardMovement != currentForwardMovement)
         {
-            forwardAccel = mGroundDeaccel;
+            forwardAccel = sGroundDeaccel;
         }
         else
         {
-            forwardAccel = mGroundAccel;
+            forwardAccel = sGroundAccel;
         }
         forwardAccel *= mForwardMovement;
     }
     else if(mForwardMovement == 0)
     {
-        forwardAccel = -(currentForwardMovement) * mGroundDeaccel;
+        forwardAccel = -(currentForwardMovement) * sGroundDeaccel;
     }
 
     if(rightVelocity > 0) currentRightMovement = 1;
@@ -425,33 +433,40 @@ void Jumpman::simulateSelf(double deltaTime)
 
     if(mRightMovement != 0 && canMoveRight)
     {
-        if(mRightMovement != 0 && currentRightMovement != 0 && mRightMovement != currentRightMovement) rightAccel = mGroundDeaccel;
-        else  rightAccel = mGroundAccel;
+        if(mRightMovement != 0 && currentRightMovement != 0 && mRightMovement != currentRightMovement) rightAccel = sGroundDeaccel;
+        else  rightAccel = sGroundAccel;
         rightAccel *= mRightMovement;
     }
     else if(mRightMovement == 0)
     {
-        rightAccel = (-currentRightMovement) * mGroundDeaccel;
+        rightAccel = (-currentRightMovement) * sGroundDeaccel;
     }
 
-    if((mIsGrounded || mAttached) && mCanJump)
+    if(mJumpTimerAll > 0.0)
     {
-        if(mJumpTimer > 0.0 && upVelocity <= 0.0f)
+        mJumpTimerAll -= deltaTime;
+    }
+
+    if((mIsGrounded || mAttached) && mCanJump && mJumpTimerAll <= 0)
+    {
+        if(mJumpTimerGround > 0.0 && upVelocity <= 0.0f)
         {
-            mJumpTimer -= deltaTime;
-            if(mJumpTimer < 0.0) mJumpTimer = 0.0;
+            mJumpTimerGround -= deltaTime;
+            if(mJumpTimerGround < 0.0) mJumpTimerGround = 0.0;
         }
 
-        if(mJumping && mJumpTimer <= 0.0)
+        if(mJumping && mJumpTimerGround <= 0.0)
         {
             mVelocity += sJumpAccel * mOrientation.getUp() ;
-            mJumpTimer = mJumpCooldown;
+            mJumpTimerGround = sJumpCooldownGround;
+            mJumpTimerAll = sJumpCooldownAir;
             mAttached = false;
         }
-        else if(mLeaping && mJumpTimer <= 0.0)
+        else if(mLeaping && mJumpTimerGround <= 0.0)
         {
             mVelocity -= sLeapAccel * mAim;
-            mJumpTimer = mJumpCooldown;
+            mJumpTimerGround = sJumpCooldownGround;
+            mJumpTimerAll = sJumpCooldownAir;
             mAttached = false;
         }
     }
@@ -531,8 +546,8 @@ void Jumpman::simulateSelf(double deltaTime)
     //Re-orient camera and aim vector.
     mAzimuth += mDeltaAzi * deltaTime;
     mAltitude += mDeltaAlt * deltaTime;
-    if(mAltitude > mMaxAltitude) mAltitude = mMaxAltitude;
-    if(mAltitude < mMinAltitude) mAltitude = mMinAltitude;
+    if(mAltitude > sMaxAltitude) mAltitude = sMaxAltitude;
+    if(mAltitude < sMinAltitude) mAltitude = sMinAltitude;
 
     //Only change forward and right vectors.
     mOrientation.resetRotation();
