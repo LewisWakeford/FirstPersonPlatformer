@@ -88,12 +88,12 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     mTopNumber = 5;
     mRayNumber = 6;
 
-    CuboidShape* feet = new CuboidShape(-0.25f, -mFeetHeight, -0.25f, 0.5f, 0.5f, 0.5f);
-    CuboidShape* back = new CuboidShape(-0.15f, -mFeetHeight+0.25f, 0.25, 0.5f, 1.3f, 0.25f);
-    CuboidShape* front = new CuboidShape(-0.25f, -mFeetHeight+0.25f, -0.35, 0.5f, 1.3f, 0.25f);
-    CuboidShape* left = new CuboidShape(-0.35f, -mFeetHeight+0.25f, -0.25f, 0.25f, 1.3f, 0.5f);
-    CuboidShape* right = new CuboidShape(0.15f, -mFeetHeight+0.25f, -0.25f, 0.25f, 1.3f, 0.5f);
-    CuboidShape* top = new CuboidShape(-0.25f, 1.3f, -0.25f, 0.5f, 0.5f, 0.5f);
+    CuboidShape* feet = new CuboidShape(-0.15f, -mFeetHeight, -0.15f, 0.3f, 0.3f, 0.3f);
+    CuboidShape* back = new CuboidShape(-0.25f, -mFeetHeight+0.25f, 0.15, 0.5f, mHeadHeight+mFeetHeight, 0.25f);
+    CuboidShape* front = new CuboidShape(-0.25f, -mFeetHeight+0.25f, -0.35, 0.5f, mHeadHeight+mFeetHeight, 0.25f);
+    CuboidShape* left = new CuboidShape(-0.35f, -mFeetHeight+0.25f, -0.25f, 0.25f, mHeadHeight+mFeetHeight, 0.5f);
+    CuboidShape* right = new CuboidShape(0.15f, -mFeetHeight+0.25f, -0.25f, 0.25f, mHeadHeight+mFeetHeight, 0.5f);
+    CuboidShape* top = new CuboidShape(-0.25f, mHeadHeight, -0.25f, 0.3f, 0.3f, 0.53f);
     mCrosshairRay = new RayShape(glm::vec3(0.0f, mHeadHeight, 0.0f), glm::vec3(0.0f, 0.0f, -sLungeRange)); //Keep a reference for when we move the camera.
 
     addCollider(new Collider(feet, mFeetNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
@@ -256,6 +256,14 @@ void Jumpman::onCollision(CollisionEvent event)
     {
         //std::cout << " FEET " << std::endl;
         mIsGrounded = true;
+
+         std::vector<glm::vec3> contactPoints = event.getContactPoints();
+         float yOverlap = contactPoints[0].y;
+
+         if(yOverlap > 0)
+         {
+             mOrientation.translate(0.0f, yOverlap, 0.0f);
+         }
 
         //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getUp());
         //mOrientation.translate(rollback.x, rollback.y, rollback.z);

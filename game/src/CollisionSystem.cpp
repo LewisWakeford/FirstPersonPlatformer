@@ -132,14 +132,15 @@ glm::mat4 CollisionSystem::currentMatrix()
 bool CollisionSystem::broadphaseTest(const Collider* A, const Collider* B)
 {
     BoundingBox prevBoundingBoxA = A->getBoundingBox(0.0);
-    BoundingBox currBoundingBoxA = A->getBoundingBox(1.0);
-    BoundingBox compositeBoundingBoxA = BoundingBox::composite(prevBoundingBoxA, currBoundingBoxA);
+    //BoundingBox currBoundingBoxA = A->getBoundingBox(1.0);
+    //BoundingBox compositeBoundingBoxA = BoundingBox::composite(prevBoundingBoxA, currBoundingBoxA);
 
     BoundingBox prevBoundingBoxB = B->getBoundingBox(0.0);
-    BoundingBox currBoundingBoxB = B->getBoundingBox(1.0);
-    BoundingBox compositeBoundingBoxB = BoundingBox::composite(prevBoundingBoxB, currBoundingBoxB);
+    //BoundingBox currBoundingBoxB = B->getBoundingBox(1.0);
+    //BoundingBox compositeBoundingBoxB = BoundingBox::composite(prevBoundingBoxB, currBoundingBoxB);
 
-    return BoundingBox::overlap(compositeBoundingBoxA, compositeBoundingBoxB);
+    //return BoundingBox::overlap(compositeBoundingBoxA, compositeBoundingBoxB);#
+    return BoundingBox::overlap(prevBoundingBoxA, prevBoundingBoxB);
 }
 
 bool CollisionSystem::narrowphaseTest(const Collider* A, const Collider* B, std::vector<glm::vec3>* contactPoints, double* contactTime)
@@ -177,6 +178,66 @@ bool CollisionSystem::narrowCuboidOnCuboid(const Collider* A, const Collider* B,
     //TODO: check they are not overlapping at start of step.
 
     //Determine in which direction in Y the shapes are moving.
+
+
+    //Get orientation at timestep
+    Orientation orientAtTimeA = A->getOrientation(0.0);
+    Orientation orientAtTimeB = B->getOrientation(0.0);
+
+    //Get 2D shapes at timestep
+    glm::mat4 matrixA = orientAtTimeA.getOrientationMatrix();
+    glm::mat4 matrixB = orientAtTimeB.getOrientationMatrix();
+
+
+    //A is always the the platform.
+    //Hacky, but this needed to be done.
+
+    glm::vec3 APos = orientAtTimeA.getPos();
+
+    glm::vec3 cornersAMin = shapeA->getPos() + APos;
+    glm::vec3 cornersAMax = cornersAMin + glm::vec3(shapeA->getXSize(), shapeA->getYSize(), shapeA->getZSize());
+
+    glm::vec3 cornersB[8];
+    cornersB[0] = shapeB->getPos(); //Origin
+    cornersB[1] = cornersB[0] + glm::vec3(shapeB->getXSize(), 0.0f, 0.0f);
+    cornersB[2] = cornersB[1] + glm::vec3(0.0f, 0.0f, shapeB->getZSize());
+    cornersB[3] = cornersB[0] + glm::vec3(0.0f, 0.0f, shapeB->getZSize());
+
+    cornersB[4] = cornersB[0] + glm::vec3(0.0f, shapeB->getYSize(), 0.0f);
+    cornersB[5] = cornersB[1] + glm::vec3(0.0f, shapeB->getYSize(), 0.0f);
+    cornersB[6] = cornersB[2] + glm::vec3(0.0f, shapeB->getYSize(), 0.0f);
+    cornersB[7] = cornersB[3] + glm::vec3(0.0f, shapeB->getYSize(), 0.0f);
+
+    //Build AABBs from transformed BBs
+    bool collision = false;
+
+    for(unsigned int i = 0; i < 8 && !collision; i++)
+    {
+        glm::vec4 translatedB = (matrixB * glm::vec4(cornersB[i], 1.0f));
+        cornersB[i] = glm::vec3(translatedB);
+
+        bool intersectX = false;
+        bool intersectY = false;
+        bool intersectZ = false;
+
+        if(translatedB.x <= cornersAMax.x && translatedB.x >= cornersAMin.x) intersectX = true;
+        if(translatedB.y <= cornersAMax.y && translatedB.y >= cornersAMin.y) intersectY = true;
+        if(translatedB.z <= cornersAMax.z && translatedB.z >= cornersAMin.z) intersectZ = true;
+
+        collision = intersectX && intersectY && intersectZ;
+    }
+
+    //Return y overlap in the contact point.
+    //Again, very hacky. But oh well.
+    float yOverlap = cornersAMax.y - cornersB[0].y;
+    contactPoints->push_back(glm::vec3(0.0f, yOverlap, 0.0f));
+    *contactTime = 0;
+
+
+
+    return collision;
+
+    /*
     Orientation startA = A->getOrientation(0.0);
     Orientation endA = A->getOrientation(1.0);
 
@@ -188,6 +249,8 @@ bool CollisionSystem::narrowCuboidOnCuboid(const Collider* A, const Collider* B,
 
     float yMovementA = yStartA - endA.getPos().y; //Negative = moving up, pos = moving down.
     float yMovementB = yStartB - endB.getPos().y;
+
+    if()
 
     //If they are moveing in opposite directions, intersection is not possible:
     if( (yMovementA < 0 && yMovementB > 0) || (yMovementA > 0 && yMovementB < 0) )
@@ -525,7 +588,7 @@ bool CollisionSystem::narrowCuboidOnCuboid(const Collider* A, const Collider* B,
     }
 
         return false;
-
+    */
 }
 
 bool CollisionSystem::narrowRayOnCuboid(const Collider* rayCollider, const Collider* cuboidCollider, std::vector<glm::vec3>* contactPoints, double* contactTime)

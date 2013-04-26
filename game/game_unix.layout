@@ -106,7 +106,7 @@
 	<File name="src/CameraNode.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="573" topLine="5" />
 	</File>
-	<File name="src/Collider.cpp" open="1" top="0" tabpos="6">
+	<File name="src/Collider.cpp" open="1" top="0" tabpos="5">
 		<Cursor position="318" topLine="0" />
 	</File>
 	<File name="src/CollisionEvent.cpp" open="1" top="0" tabpos="2">

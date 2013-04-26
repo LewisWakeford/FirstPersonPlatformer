@@ -4192,7 +4192,7 @@
 1363689680 source:/home/u10/b0146182/game/src/I_CollisionReciever.cpp
 	"I_CollisionReciever.h"
 
-1366814769 source:/home/u10/b0146182/FirstPersonPlatformer/game/main.cpp
+1366967870 source:/home/u10/b0146182/FirstPersonPlatformer/game/main.cpp
 	"game.h"
 	<iostream>
 	<exception>
@@ -4231,14 +4231,14 @@
 	<string>
 	<map>
 
-1366797164 /home/u10/b0146182/FirstPersonPlatformer/game/map
+1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/map
 
 1366797163 /home/u10/b0146182/FirstPersonPlatformer/game/include/Renderer.h
 	<vector>
 	"game.h"
 	<glm/glm.hpp>
 
-1366803005 /home/u10/b0146182/FirstPersonPlatformer/game/include/CollisionSystem.h
+1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/CollisionSystem.h
 	"Collider.h"
 
 1366817277 /home/u10/b0146182/FirstPersonPlatformer/game/include/Collider.h
@@ -4365,10 +4365,10 @@
 	<regex>
 	<boost/lexical_cast.hpp>
 
-1366797162 /home/u10/b0146182/FirstPersonPlatformer/game/include/PersistantNode.h
+1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/PersistantNode.h
 	<SceneNode.h>
 
-1366809083 /home/u10/b0146182/FirstPersonPlatformer/game/include/Jumpman.h
+1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/Jumpman.h
 	"I_Controllable.h"
 	"Collider.h"
 	"Orientation.h"
@@ -4380,7 +4380,7 @@
 1366797166 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/ActionSet.cpp
 	"ActionSet.h"
 
-1366797166 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/App.cpp
+1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/App.cpp
 	"App.h"
 	"Renderer.h"
 	"ResourceManager.h"
@@ -4402,7 +4402,7 @@
 1366817990 /home/u10/b0146182/FirstPersonPlatformer/game/include/BlockNode.h
 	<PersistantNode.h>
 
-1366824408 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/BlockNode.cpp
+1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/BlockNode.cpp
 	"BlockNode.h"
 	"App.h"
 	"Renderer.h"
@@ -4441,7 +4441,7 @@
 1366797167 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/CollisionShape.cpp
 	"CollisionShape.h"
 
-1366819672 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/CollisionSystem.cpp
+1366970745 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/CollisionSystem.cpp
 	"CollisionSystem.h"
 	"CuboidShape.h"
 	"RayShape.h"
@@ -4462,11 +4462,11 @@
 1366797168 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/I_Controllable.cpp
 	"I_Controllable.h"
 
-1366797168 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/InputMapping.cpp
+1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/InputMapping.cpp
 	"InputMapping.h"
 	"ActionSet.h"
 
-1366820717 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Jumpman.cpp
+1366970597 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Jumpman.cpp
 	"Jumpman.h"
 	"OrientationCamera.h"
 	"CuboidShape.h"
@@ -4557,25 +4557,29 @@
 1366797169 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Persistant.cpp
 	"Persistant.h"
 
-1366797169 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PersistantNode.cpp
+1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PersistantNode.cpp
 	"PersistantNode.h"
 
 1366797169 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PlayerSpawn.cpp
 	"PlayerSpawn.h"
 	"PlayerSpawnNode.h"
 
-1366797162 /home/u10/b0146182/FirstPersonPlatformer/game/include/PlayerSpawnNode.h
+1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/PlayerSpawnNode.h
 	<PersistantNode.h>
 
-1366797169 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PlayerSpawnNode.cpp
+1366967912 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PlayerSpawnNode.cpp
 	"PlayerSpawnNode.h"
+	"App.h"
+	"SceneGraph.h"
+	"OrientationCamera.h"
+	"Jumpman.h"
 
 1366797170 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Renderer.cpp
 	"Renderer.h"
 	"Mesh.h"
 	"CameraNode.h"
 
-1366797170 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/ResourceManager.cpp
+1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/ResourceManager.cpp
 	"ResourceManager.h"
 	"glm/gtc/type_ptr.hpp"
 	<iostream>
