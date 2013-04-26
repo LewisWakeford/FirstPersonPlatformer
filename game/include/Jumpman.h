@@ -21,7 +21,7 @@ class Jumpman : public I_Controllable, public SceneNode
 
         virtual void onCollision(CollisionEvent event);
 
-        void teleport(float x, float y, float z);
+        void setSpawn(float x, float y, float z);
 
         OrientationCamera* getCamera;
 
@@ -64,9 +64,6 @@ class Jumpman : public I_Controllable, public SceneNode
         double mAirMaxSpeed; //Terminal Velocity
         double mAirAccelRatio; //How much percentage of the regular acceleration can you perform in mid-air. 1.0 gives almost perfect air control, 0.0 is realistic.
 
-        float mJumpAccel; //The amount of upwards acceleration added when jumping.
-        float mLeapAccel; //The amount of forwards acceleration added when leaping.
-
         double mHeadHeight; //The distance from the origin that the camera is placed at.
         double mFeetHeight; //The distance from the origin that the feet collide with the world.
 
@@ -103,9 +100,14 @@ class Jumpman : public I_Controllable, public SceneNode
         static float sGrabRange;
         static float sLungeRange;
         static float sLungeVelocity;
+        static float sFallLimit;
+        static float sJumpAccel; //The amount of upwards acceleration added when jumping.
+        static float sLeapAccel; //The amount of forwards acceleration added when leaping.
 
         bool mClimable; //There is a climbable wall under the crosshair.
         glm::vec3 mClimableCoord; //The world coordinate under the crosshair.
+
+        glm::vec3 mSpawnPos;
 
     private:
 };

@@ -1,0 +1,128 @@
+#
+Level Editor File Format
+-------------------------------
+The hash symbol starts and ends a comment block and everything within is ignored by the parser.
+New lines and tabs are counted as whitespace, all whitespace has the same meaning.
+Consecutive white space is condensed into a single whitepspace character.
+
+<T> <- Tag begin
+</T> <- Tag end
+
+"string" <- Strings are contained within "", some tags expect a string
+Some tags expect multiple values, these values are seperated by ','.
+Some tags expect vectors, vectors are inside {}
+
+#
+
+#
+Level Header Starts with the <H> Tag
+This contains data about the actual map.
+#
+<H>
+	# The internal name of the level, as refered to by campaign files. #
+	<name> "tutorial_1" </name>
+
+	# The display name of the level, as shown to the user. #
+	<display_name> "Baby Steps" </display_name>
+
+	# Number of beacons required to complete level. #
+	<min_beacons> 1 </min_beacons>
+
+</H>
+
+#
+Player spawn is specificed with the <sp> tag.
+#
+<sp>
+	<origin> {0.0, 2.0, 0.0} </origin>
+</sp>
+
+#
+Beacons are specified with the <wp> tag (for waypoint)
+#
+<wp>
+	#
+	The origin of the beacon as a 3d coordinate x, y, z.
+	Measuered in metres, can be float.
+	#
+	<origin> {0.0, 7.0, -20.0} </origin>
+</wp>
+
+<bl>
+	<origin> {0.0, 0.0, 0.0} </origin>
+
+
+	<n_x> 5 </n_x>
+	<p_x> 5 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 5 </n_z>
+	<p_z> 5 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {0.0, 7.0, -20.0} </origin>
+
+
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {4.0, 5.0, -17.0} </origin>
+
+
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	<n_y> 0 </n_y>
+	<p_y> 2 </p_y>
+
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {-4.0, 3.0, -15.0} </origin>
+
+
+	<n_x> 2 </n_x>
+	<p_x> 2 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {-4.0, 3.0, -10.0} </origin>
+
+
+	<n_x> 1 </n_x>
+	<p_x> 1 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 1 </n_z>
+	<p_z> 1 </p_z>
+
+</bl>

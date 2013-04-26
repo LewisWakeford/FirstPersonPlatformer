@@ -15,6 +15,8 @@
 #include "Jumpman.h"
 #include "Crosshair.h"
 
+#include <glm/gtc/type_ptr.hpp>
+
 App theApp;
 
 void GLFWCALL keyCallback(int key, int action)
@@ -33,6 +35,7 @@ int main()
 
         int     width, height;
         bool    running = true;
+        bool    notStarted = true;
 
         if(GL_TRUE != glfwInit())
         {
@@ -82,9 +85,9 @@ int main()
         theApp.getResourceManager()->createProgramFromFiles("generic_mesh", "shader/generic_mesh.vert", "shader/generic_mesh.frag");
         theApp.getResourceManager()->createProgramFromFiles("generic_ui", "shader/generic_ui.vert", "shader/generic_ui.frag");
 
-        theApp.getMapManager()->load("map/example.map");checkError();
-        theApp.getMapManager()->buildMap();checkError();
-        theApp.getMapManager()->saveMap();checkError();
+        //theApp.getMapManager()->load("map/example.map");checkError();
+       // theApp.getMapManager()->buildMap();checkError();
+        //theApp.getMapManager()->saveMap();checkError();
 
         renderer->setDimensions((GLdouble)width, (GLdouble)height);
 
@@ -94,29 +97,103 @@ int main()
 
         sceneGraph->getRoot()->addChild(cameraPtr);
 
+    /*
         Mesh* debugMesh = theApp.getResourceManager()->getMesh("debug_cube");
         SceneNodePtr meshPtr(new MeshNode(&theApp, GAME_RENDER_GEOMETRY, debugMesh));
         sceneGraph->addNode(meshPtr);
 
-        SceneNodePtr crosshair(new Crosshair(&theApp, width/2, height/2, 10.0f, 1.0f, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
-        sceneGraph->addNode(crosshair);
+    */
 
         checkError();
 
         //End app setup
-        glEnable(GL_DEPTH_TEST);checkError();
-        glEnable(GL_CULL_FACE);checkError();
+        glDisable(GL_DEPTH_TEST);checkError();
+        glDisable(GL_CULL_FACE);checkError();
 
         //I basically messed up and had all my matrixes inverted, so all my geometry is wound the wrong way now...
-        glfwDisable(GLFW_MOUSE_CURSOR);
+        //glfwDisable(GLFW_MOUSE_CURSOR);
         glFrontFace(GL_CCW);checkError();
         glCullFace(GL_BACK);checkError();
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);checkError();
+        glClearColor(0.5f, 0.8f, 1.0f, 1.0f);checkError();
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);checkError();
 
         glfwSetWindowTitle("Game");checkError();
 
         checkError();
+
+        std::vector<std::string> mapFiles;
+        mapFiles.push_back("map/level1.map");
+        mapFiles.push_back("map/level2.map");
+        mapFiles.push_back("map/level3.map");
+
+        int currentMap = 0;
+
+        GLfloat windowCorners[] = { 0.0f, 0.0f,
+                                    0.0f, 1.0f,
+                                    1.0f, 1.0f,
+                                    1.0f, 1.0f,
+                                    1.0f, 0.0f,
+                                    0.0f, 0.0f };
+
+
+        VertexArrayObject* VAO = theApp.getResourceManager()->createVAO("splashscreen");
+        ShaderProgram* renderImage = theApp.getResourceManager()->createProgramFromFiles("splash", "shader/render_image.vert", "shader/render_image.frag");
+        Texture* splashScreen = theApp.getResourceManager()->createTextureFromFile("texture/waypoint.png");
+        splashScreen->bind();
+        splashScreen->generateMipMaps(10);
+        splashScreen->setMinFilter(GL_LINEAR_MIPMAP_LINEAR);
+        splashScreen->setMaxFilter(GL_LINEAR);
+        splashScreen->setWrapS(GL_REPEAT);
+        splashScreen->setWrapT(GL_REPEAT);
+        splashScreen->unbind();
+
+        Buffer* windowCoords = theApp.getResourceManager()->createBuffer(GL_ARRAY_BUFFER, "splashscreen_quad");
+
+        renderImage->use();             checkError();
+        GLint positionLocation = renderImage->getAttribLocation("v2_position");
+
+        VAO->init();
+        VAO->bind();
+
+        windowCoords->init();
+        windowCoords->bind();
+
+        windowCoords->setData(windowCorners, 12, sizeof(GLfloat));
+        glEnableVertexAttribArray(positionLocation);             checkError();
+        glVertexAttribPointer(positionLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+        windowCoords->unbind();
+
+
+
+        int safeGuard = 0;
+
+        while(notStarted || safeGuard > 10000)
+        {
+            //Display Splash Screen
+            glClear(GL_COLOR_BUFFER_BIT);
+
+
+            glActiveTexture(GL_TEXTURE0);             checkError();
+
+            splashScreen->bind();             checkError();
+
+            renderImage->setUniformMatrix4fv("m_MVP", glm::value_ptr(glm::ortho(0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f)));             checkError();
+                         checkError();
+
+            glDrawArrays(GL_TRIANGLES,0,6);             checkError();
+                     checkError();
+            splashScreen->unbind();             checkError();
+
+            glfwSwapBuffers();             checkError();
+            notStarted = !theApp.playerHasStarted();             checkError();
+            safeGuard++;
+        }
+
+        VAO->unbind();
+
+        glEnable(GL_DEPTH_TEST);checkError();
+        glEnable(GL_CULL_FACE);checkError();
 
         double fps = 0.0;
         unsigned int frames = 0;
@@ -125,6 +202,28 @@ int main()
 
         while(running)
         {
+            if(theApp.nextMap())
+            {
+                if(currentMap >= mapFiles.size())
+                {
+                    std::cout << "YOU WIN!" << std::endl;
+
+                    glfwTerminate();
+
+                    return 0;
+                }
+                else
+                {
+                    theApp.getMapManager()->load(mapFiles[currentMap]);
+                    theApp.getMapManager()->buildMap();
+                    theApp.getMapManager()->saveMap();
+                    currentMap++;
+                    theApp.useEditor();
+                    SceneNodePtr crosshair(new Crosshair(&theApp, width/2, height/2, 10.0f, 1.0f, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
+                    sceneGraph->addNode(crosshair);
+                }
+            }
+
             GLdouble timeToWait = theApp.sleepTime();
             GLdouble deltaTime = theApp.deltaTime();
 
@@ -157,10 +256,16 @@ int main()
                 lastFPSUpdate = elapsedTime;
                 frames = 0;
             }
-            std::cout << "FPS: " << fps << std::endl;
+            //std::cout << "FPS: " << fps << std::endl;
 
             // exit if ESC was pressed or window was closed
             running = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+
+            //End of level, reset scene graph.
+            if(theApp.nextMap())
+            {
+                theApp.getSceneGraph()->setRoot(SceneNodePtr(new SceneNode(&theApp, GAME_RENDER_NONE)));
+            }
 
             if(running) checkError();
 

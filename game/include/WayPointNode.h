@@ -16,6 +16,8 @@ class WayPointNode : public PersistantNode
         void simulateSelf(GLdouble deltaTime);
         void renderSelf();
 
+        void onCollision(CollisionEvent event);
+
     protected:
         std::vector<float> mOrigin; //change to glm vector
 

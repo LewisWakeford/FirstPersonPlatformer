@@ -22,7 +22,7 @@ class Mesh
     public:
 
         //Render the mesh with the MVP matrix.
-        void render(glm::mat4 MVP) const;
+        void render(glm::mat4 MVP, glm::mat3 normal) const;
 
         void setVAO(VertexArrayObject* vao);
         void setNumIndices(GLuint indiceCount);

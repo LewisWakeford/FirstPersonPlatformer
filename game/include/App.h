@@ -66,6 +66,12 @@ class App
 
         double gGravity;
 
+        bool nextMap(); //Returns true when time to load a new level.
+        void reachedEndOfLevel(); //Load next map.
+        void mapLoaded();
+
+        bool playerHasStarted();
+
 
     protected:
 
@@ -101,6 +107,9 @@ class App
         I_Controllable* mEditorController;
         CameraNode* mRegularCamera;
         CameraNode* mEditorCamera;
+
+        bool mNeedToLoadMap;
+        bool mPlayerHasStarted;
 
     private:
 };

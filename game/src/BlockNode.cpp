@@ -30,7 +30,6 @@ BlockNode::BlockNode(App* app) : PersistantNode(app, GAME_RENDER_GEOMETRY)
 
 BlockNode::~BlockNode()
 {
-    //dtor
 }
 
 void BlockNode::setOrigin(std::vector<float> origin)
@@ -152,7 +151,8 @@ void BlockNode::simulateSelf(GLdouble deltaTime)
 void BlockNode::renderSelf()
 {
     glm::mat4 MVP = mApp->getRenderer()->getProjectionMatrix() * mApp->getRenderer()->getViewMatrix() * mApp->getRenderer()->currentMatrix();
-    mMesh->render(MVP);
+    glm::mat3 normal = glm::mat3(mApp->getRenderer()->currentMatrix());
+    mMesh->render(MVP, normal);
 }
 
 void BlockNode::buildMesh()
@@ -178,7 +178,7 @@ void BlockNode::buildMesh()
     unsigned int numIndices = numberOfPanels * 6;
 
     std::vector<GLfloat> blockVertices;
-    blockVertices.resize((3*numVertices) + (2*numVertices));//3 floats per vertex for coords, 2 floats per vertex for texcoords.
+    blockVertices.resize((6*numVertices) + (2*numVertices));//3 floats per vertex for coords, 2 floats per vertex for texcoords, 3 floats for normal
 
     std::vector<GLuint> blockIndices;
     blockIndices.resize(numIndices);
@@ -253,14 +253,15 @@ void BlockNode::buildMesh()
     vao->init();checkError();
 
     //Create Shader Program
-    ShaderProgram* program = mApp->getResourceManager()->getProgram("block");checkError();
+    ShaderProgram* program = mApp->getResourceManager()->getProgram("generic_mesh");checkError();
     if(program == 0)
     {
-        program = mApp->getResourceManager()->createProgramFromFiles("block", "shader/block.vert", "shader/block.frag");checkError();
+        program = mApp->getResourceManager()->createProgramFromFiles("generic_mesh", "shader/generic_mesh.vert", "shader/generic_mesh.frag");checkError();
     }
 
     GLuint positionLocation = program->getAttribLocation("v3_position");checkError();
     GLuint texcoordLocation = program->getAttribLocation("v2_texcoord");checkError();
+    GLuint normalLocation = program->getAttribLocation("v3_normal");checkError();
 
     //Build Vertex Buffer
     ArrayBuffer* vertexBuffer = mApp->getResourceManager()->createArrayBuffer(GL_ARRAY_BUFFER, ref + "_vertex_buffer");checkError();
@@ -270,12 +271,15 @@ void BlockNode::buildMesh()
     vertexBuffer->unbind();
     GLuint vertexArray = 0;
     GLuint textureArray = 1;
-    vertexBuffer->setArray(vertexArray, 3, GL_FLOAT, 5*sizeof(GLfloat), 0, positionLocation);checkError();
-    vertexBuffer->setArray(textureArray, 2, GL_FLOAT, 5*sizeof(GLfloat), 3*sizeof(GLfloat), texcoordLocation);checkError();
+    GLuint normalArray = 2;
+    vertexBuffer->setArray(vertexArray, 3, GL_FLOAT, 8*sizeof(GLfloat), 0, positionLocation);checkError();
+    vertexBuffer->setArray(textureArray, 2, GL_FLOAT, 8*sizeof(GLfloat), 3*sizeof(GLfloat), texcoordLocation);checkError();
+    vertexBuffer->setArray(normalArray, 3, GL_FLOAT, 8*sizeof(GLfloat), 5*sizeof(GLfloat), normalLocation);
 
     vao->bind();
     vao->linkVertexArray(positionLocation, vertexBuffer, vertexArray);checkError();
     vao->linkVertexArray(texcoordLocation, vertexBuffer, textureArray);checkError();
+    vao->linkVertexArray(normalLocation, vertexBuffer, normalArray);
     vao->unbind();
 
 
@@ -334,12 +338,13 @@ void BlockNode::buildFace(std::vector<GLfloat>& vertexArray, std::vector<GLuint>
 {
     GLfloat panelSize = 1.0f;
 
+    glm::vec3 normal = glm::cross(upwards, sideways);
+
     for(unsigned int v = 0; v < upSize; v++)
     {
          for(unsigned int u = 0; u < sideSize; u++)
         {
-            GLuint indexOffset = vertexArray.size()/5;
-
+            GLuint indexOffset = vertexArray.size()/8;
             //Bottom Left of the Panel, assuming it is facing us.
             glm::vec3 bottomLeft = start;
 
@@ -371,18 +376,22 @@ void BlockNode::buildFace(std::vector<GLfloat>& vertexArray, std::vector<GLuint>
             //Bottom Left = 0
             vertexArray.push_back(bottomLeft.x); vertexArray.push_back(bottomLeft.y); vertexArray.push_back(bottomLeft.z);
             vertexArray.push_back(bottomLeftTex.x); vertexArray.push_back(bottomLeftTex.y);
+            vertexArray.push_back(normal.x); vertexArray.push_back(normal.y); vertexArray.push_back(normal.z);
 
             //Top Left = 1
             vertexArray.push_back(topLeft.x); vertexArray.push_back(topLeft.y); vertexArray.push_back(topLeft.z);
             vertexArray.push_back(topLeftTex.x); vertexArray.push_back(topLeftTex.y);
+            vertexArray.push_back(normal.x); vertexArray.push_back(normal.y); vertexArray.push_back(normal.z);
 
             //Bottom Right = 2
             vertexArray.push_back(bottomRight.x); vertexArray.push_back(bottomRight.y); vertexArray.push_back(bottomRight.z);
             vertexArray.push_back(bottomRightTex.x); vertexArray.push_back(bottomRightTex.y);
+            vertexArray.push_back(normal.x); vertexArray.push_back(normal.y); vertexArray.push_back(normal.z);
 
             //Top Right = 3
             vertexArray.push_back(topRight.x); vertexArray.push_back(topRight.y); vertexArray.push_back(topRight.z);
             vertexArray.push_back(topRightTex.x); vertexArray.push_back(topRightTex.y);
+            vertexArray.push_back(normal.x); vertexArray.push_back(normal.y); vertexArray.push_back(normal.z);
 
             indexArray.push_back(indexOffset);
             indexArray.push_back(indexOffset+1);
@@ -391,6 +400,7 @@ void BlockNode::buildFace(std::vector<GLfloat>& vertexArray, std::vector<GLuint>
             indexArray.push_back(indexOffset+2);
             indexArray.push_back(indexOffset+1);
             indexArray.push_back(indexOffset+3);
+
         }
     }
 }

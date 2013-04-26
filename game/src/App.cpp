@@ -9,6 +9,8 @@
 App::App()
 {
     gGravity = 10.0f;
+    mNeedToLoadMap = true;
+    mPlayerHasStarted = false;
 }
 
 App::~App()
@@ -126,7 +128,8 @@ GLdouble App::deltaTime()
 {
     if(mTickCount < 1)
     {
-        return 0;
+        mLastTickTime = glfwGetTime();
+        return 0.0;
     }
     GLdouble currentTime = glfwGetTime();
     GLdouble delta = currentTime - mLastTickTime;
@@ -149,6 +152,8 @@ void App::clockFrame()
 
 void App::keyCallback(int key, int action)
 {
+    mPlayerHasStarted = true;
+
     if(key == GLFW_KEY_F10 && action == GLFW_RELEASE)
     {
         useRegular();
@@ -205,4 +210,24 @@ void App::useEditor()
     setControllable(mEditorController);
     mRenderer->setCamera(mEditorCamera);
     mLocalHardwareInput.setMapping(&mMapEditorControl);
+}
+
+bool App::nextMap()
+{
+    return mNeedToLoadMap;
+}
+
+void App::reachedEndOfLevel()
+{
+    mNeedToLoadMap = true;
+}
+
+void App::mapLoaded()
+{
+    mNeedToLoadMap = false;
+}
+
+bool App::playerHasStarted()
+{
+    return mPlayerHasStarted;
 }

@@ -60,7 +60,8 @@ unsigned int Collider::getRefNumber()
 
 Orientation Collider::getOrientation(double timeStepFraction) const
 {
-    return Orientation::mix(mPrevTransform, mCurrentTransform, timeStepFraction);
+    return mPrevTransform;
+    //return Orientation::mix(mPrevTransform, mCurrentTransform, timeStepFraction);
 }
 
 CollisionShape* Collider::getShape() const

@@ -22,7 +22,7 @@ Mesh::~Mesh()
     //dtor
 }
 
-void Mesh::render(glm::mat4 MVP) const
+void Mesh::render(glm::mat4 MVP, glm::mat3 normal) const
 {
     checkError();
     if(mVertexArrayObject != 0 && mIndexBuffer != 0)
@@ -31,6 +31,7 @@ void Mesh::render(glm::mat4 MVP) const
         mIndexBuffer->bind();checkError();
 
         const GLfloat* matrixPtr = glm::value_ptr(MVP);checkError();
+        const GLfloat* normalMatrixPtr = glm::value_ptr(normal);
 
         if(mShaderProgram != 0)
         {
@@ -47,7 +48,12 @@ void Mesh::render(glm::mat4 MVP) const
                 }
             }
 
-            mShaderProgram->setUniformMatrix4fv("m_MVP", matrixPtr);
+            mShaderProgram->setUniformMatrix4fv("m_MVP", matrixPtr);checkError();
+            mShaderProgram->setUniformMatrix3fv("m_normal", normalMatrixPtr);checkError();
+            mShaderProgram->setUniform3f("v3_world_light_diffuse", glm::value_ptr(glm::vec3(0.6f, 0.6f, 0.6f)));checkError();
+            mShaderProgram->setUniform3f("v3_world_light_ambient", glm::value_ptr(glm::vec3(0.3f, 0.3f, 0.3f)));checkError();
+            mShaderProgram->setUniform3f("v3_world_light_vector", glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));checkError();
+
             checkError();
         }
 

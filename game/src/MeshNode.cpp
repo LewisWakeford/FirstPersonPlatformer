@@ -28,7 +28,8 @@ void MeshNode::renderSelf()
 {
     //Render mesh
     glm::mat4 MVP = mApp->getRenderer()->getProjectionMatrix() * mApp->getRenderer()->getViewMatrix() * mApp->getRenderer()->currentMatrix();
+    glm::mat3 normal = glm::mat3(mApp->getRenderer()->currentMatrix());
     //glm::mat4 MVP = mApp->getRenderer()->getProjectionMatrix() * mApp->getRenderer()->currentMatrix();
     if(mMesh != -0)
-        mMesh->render(MVP);
+        mMesh->render(MVP, normal);
 }

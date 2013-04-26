@@ -24,12 +24,14 @@ class ShaderProgram
         GLuint getUniformBlockIndex(std::string uniformBlockName);
         void bindBlock(GLuint blockIndex, GLuint bindingIndex);
 
-        GLuint getAttribLocation(std::string);
+        GLint getAttribLocation(std::string);
 
         void setUniform1i(std::string uniformName, const GLint value);
         void setUniform1ui(std::string uniformName, const GLuint value);
         void setUniform1f(std::string uniformName, const GLfloat value);
+        void setUniform3f(std::string uniformName, const GLfloat* valuePtr);
         void setUniform4f(std::string uniformName, const GLfloat* valuePtr);
+        void setUniformMatrix3fv(std::string uniformName, const GLfloat* valuePtr);
         void setUniformMatrix4fv(std::string uniformName, const GLfloat* valuePtr);
         void setVertexAttribPointer(std::string attribName,
                             GLint  	size,

@@ -87,6 +87,12 @@ void ShaderProgram::setUniform1f(std::string uniformName, const GLfloat value)
     glUniform1f(location, value);
 }
 
+void ShaderProgram::setUniform3f(std::string uniformName, const GLfloat* valuePtr)
+{
+    GLint location = glGetUniformLocation(mID, uniformName.c_str());
+    glUniform3fv(location, 1, valuePtr);
+}
+
 void ShaderProgram::setUniform4f(std::string uniformName, const GLfloat* valuePtr)
 {
     GLint location = glGetUniformLocation(mID, uniformName.c_str());
@@ -97,6 +103,12 @@ void ShaderProgram::setUniformMatrix4fv(std::string uniformName, const GLfloat* 
 {
     GLint location = glGetUniformLocation(mID, uniformName.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, valuePtr);
+}
+
+void ShaderProgram::setUniformMatrix3fv(std::string uniformName, const GLfloat* valuePtr)
+{
+    GLint location = glGetUniformLocation(mID, uniformName.c_str());
+    glUniformMatrix3fv(location, 1, GL_FALSE, valuePtr);
 }
 
 void ShaderProgram::setVertexAttribPointer(std::string attribName,
@@ -121,7 +133,7 @@ void ShaderProgram::bindBlock(GLuint blockIndex, GLuint bindingIndex)
     glUniformBlockBinding(mID, blockIndex, bindingIndex);
 }
 
-GLuint ShaderProgram::getAttribLocation(std::string attribName)
+GLint ShaderProgram::getAttribLocation(std::string attribName)
 {
     return glGetAttribLocation(mID, attribName.c_str());
 }

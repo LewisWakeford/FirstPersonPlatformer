@@ -4192,7 +4192,7 @@
 1363689680 source:/home/u10/b0146182/game/src/I_CollisionReciever.cpp
 	"I_CollisionReciever.h"
 
-1366967870 source:/home/u10/b0146182/FirstPersonPlatformer/game/main.cpp
+1366987099 source:/home/u10/b0146182/FirstPersonPlatformer/game/main.cpp
 	"game.h"
 	<iostream>
 	<exception>
@@ -4207,14 +4207,15 @@
 	"MapManager.h"
 	"Jumpman.h"
 	"Crosshair.h"
+	<glm/gtc/type_ptr.hpp>
 
-1366797156 /home/u10/b0146182/FirstPersonPlatformer/game/game.h
+1366974739 /home/u10/b0146182/FirstPersonPlatformer/game/game.h
 	<GL/glew.h>
 	<GL/glfw.h>
 	<iostream>
 	<string>
 
-1366797158 /home/u10/b0146182/FirstPersonPlatformer/game/include/App.h
+1366977829 /home/u10/b0146182/FirstPersonPlatformer/game/include/App.h
 	"game.h"
 	"LocalHardwareInput.h"
 	"ActionSet.h"
@@ -4231,7 +4232,7 @@
 	<string>
 	<map>
 
-1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/map
+1366977071 /home/u10/b0146182/FirstPersonPlatformer/game/map
 
 1366797163 /home/u10/b0146182/FirstPersonPlatformer/game/include/Renderer.h
 	<vector>
@@ -4270,7 +4271,7 @@
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 
-1366797163 /home/u10/b0146182/FirstPersonPlatformer/game/include/ResourceManager.h
+1366973644 /home/u10/b0146182/FirstPersonPlatformer/game/include/ResourceManager.h
 	<vector>
 	<unordered_map>
 	"Shader.h"
@@ -4288,7 +4289,7 @@
 	<string>
 	"game.h"
 
-1366797163 /home/u10/b0146182/FirstPersonPlatformer/game/include/ShaderProgram.h
+1366990289 /home/u10/b0146182/FirstPersonPlatformer/game/include/ShaderProgram.h
 	<string>
 	"game.h"
 	"Shader.h"
@@ -4309,7 +4310,7 @@
 	<vector>
 	"game.h"
 
-1366797161 /home/u10/b0146182/FirstPersonPlatformer/game/include/Mesh.h
+1366989091 /home/u10/b0146182/FirstPersonPlatformer/game/include/Mesh.h
 	<vector>
 	"game.h"
 	<glm/glm.hpp>
@@ -4319,7 +4320,7 @@
 	<string>
 	"Cache.h"
 
-1366797159 /home/u10/b0146182/FirstPersonPlatformer/game/include/Cache.h
+1366973203 /home/u10/b0146182/FirstPersonPlatformer/game/include/Cache.h
 	<string>
 	<vector>
 	<unordered_map>
@@ -4368,7 +4369,7 @@
 1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/PersistantNode.h
 	<SceneNode.h>
 
-1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/Jumpman.h
+1366977178 /home/u10/b0146182/FirstPersonPlatformer/game/include/Jumpman.h
 	"I_Controllable.h"
 	"Collider.h"
 	"Orientation.h"
@@ -4380,7 +4381,7 @@
 1366797166 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/ActionSet.cpp
 	"ActionSet.h"
 
-1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/App.cpp
+1366981749 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/App.cpp
 	"App.h"
 	"Renderer.h"
 	"ResourceManager.h"
@@ -4402,7 +4403,7 @@
 1366817990 /home/u10/b0146182/FirstPersonPlatformer/game/include/BlockNode.h
 	<PersistantNode.h>
 
-1366967517 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/BlockNode.cpp
+1366990120 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/BlockNode.cpp
 	"BlockNode.h"
 	"App.h"
 	"Renderer.h"
@@ -4429,7 +4430,7 @@
 	"Renderer.h"
 	"glm/gtc/matrix_transform.hpp"
 
-1366817246 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Collider.cpp
+1366971680 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Collider.cpp
 	"App.h"
 	"Collider.h"
 	"CollisionSystem.h"
@@ -4441,7 +4442,7 @@
 1366797167 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/CollisionShape.cpp
 	"CollisionShape.h"
 
-1366970745 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/CollisionSystem.cpp
+1366982345 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/CollisionSystem.cpp
 	"CollisionSystem.h"
 	"CuboidShape.h"
 	"RayShape.h"
@@ -4466,7 +4467,7 @@
 	"InputMapping.h"
 	"ActionSet.h"
 
-1366970597 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Jumpman.cpp
+1366977208 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Jumpman.cpp
 	"Jumpman.h"
 	"OrientationCamera.h"
 	"CuboidShape.h"
@@ -4496,7 +4497,7 @@
 	"ActionSet.h"
 	"InputMapping.h"
 
-1366797168 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/MapManager.cpp
+1366973969 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/MapManager.cpp
 	<iostream>
 	<fstream>
 	"MapManager.h"
@@ -4529,7 +4530,7 @@
 1366797168 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Material.cpp
 	"Material.h"
 
-1366797168 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Mesh.cpp
+1366989065 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/Mesh.cpp
 	"Mesh.h"
 	"glm/gtc/type_ptr.hpp"
 	"VertexArrayObject.h"
@@ -4538,7 +4539,7 @@
 	"Material.h"
 	"Texture.h"
 
-1366797169 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/MeshNode.cpp
+1366989294 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/MeshNode.cpp
 	"MeshNode.h"
 	"App.h"
 	"Renderer.h"
@@ -4567,7 +4568,7 @@
 1366967516 /home/u10/b0146182/FirstPersonPlatformer/game/include/PlayerSpawnNode.h
 	<PersistantNode.h>
 
-1366967912 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PlayerSpawnNode.cpp
+1366976403 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/PlayerSpawnNode.cpp
 	"PlayerSpawnNode.h"
 	"App.h"
 	"SceneGraph.h"
@@ -4602,7 +4603,7 @@
 	<iostream>
 	<fstream>
 
-1366797170 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/ShaderProgram.cpp
+1366989252 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/ShaderProgram.cpp
 	"ShaderProgram.h"
 	"Texture.h"
 
@@ -4630,15 +4631,17 @@
 	"WayPoint.h"
 	"WayPointNode.h"
 
-1366797164 /home/u10/b0146182/FirstPersonPlatformer/game/include/WayPointNode.h
+1366974560 /home/u10/b0146182/FirstPersonPlatformer/game/include/WayPointNode.h
 	<PersistantNode.h>
 
-1366797171 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/WayPointNode.cpp
+1366989309 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/WayPointNode.cpp
 	"WayPointNode.h"
 	"App.h"
 	"ResourceManager.h"
 	"Mesh.h"
 	"Renderer.h"
+	"CuboidShape.h"
+	"Collider.h"
 	<glm/gtc/matrix_transform.hpp>
 
 1366797171 source:/home/u10/b0146182/FirstPersonPlatformer/game/src/thirdparty/stb_image.cpp

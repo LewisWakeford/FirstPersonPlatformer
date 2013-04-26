@@ -7,7 +7,7 @@ static double lastBenchmarkTime = 0.0;
 inline void benchMark(std::string message)
 {
     double currentTime = glfwGetTime();
-    std::cout << message << " : " << currentTime - lastBenchmarkTime << "s" << std::endl;
+    //std::cout << message << " : " << currentTime - lastBenchmarkTime << "s" << std::endl;
     lastBenchmarkTime = currentTime;
 }
 

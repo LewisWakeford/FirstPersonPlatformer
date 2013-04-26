@@ -37,6 +37,15 @@ class Cache
             }
         }
 
+        inline void remove(const std::string& ref)
+        {
+            std::unordered_map<std::string, unsigned int>::iterator index = mMap.find(ref);
+            if(index != mMap.end())
+            {
+                mVector.erase(mVector.begin + index);
+            }
+        }
+
         inline void purge()
         {
             mMap.clear();

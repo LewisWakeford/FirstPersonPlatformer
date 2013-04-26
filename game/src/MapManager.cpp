@@ -211,6 +211,7 @@ void MapManager::buildMap()
         SceneNodePtr node = SceneNodePtr(mPersistantList[i]->createNode());
         mApp->getSceneGraph()->addNode(node);
     }
+    mApp->mapLoaded();
 }
 
 bool MapManager::saveMap()

@@ -15,6 +15,9 @@ float Jumpman::sLungeRange = 2.0f;
 float Jumpman::sGrabRange = 1.5f;
 float Jumpman::sLungeVelocity = 10.0f;
 double Jumpman::sMaxTimeAttemptingToClimb = 1.0;
+float Jumpman::sFallLimit = -100.0f;
+float Jumpman::sLeapAccel = 10.0f;
+float Jumpman::sJumpAccel = 10.0f;
 
 Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_RENDER_NONE)
 {
@@ -48,9 +51,6 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
 
     mAirMaxSpeed = 200.0f;
     mAirAccelRatio = 0.5f;
-
-    mJumpAccel = 5.0f;
-    mLeapAccel = 10.0f;
 
     mAim = mOrientation.getForward();
 
@@ -444,13 +444,13 @@ void Jumpman::simulateSelf(double deltaTime)
 
         if(mJumping && mJumpTimer <= 0.0)
         {
-            mVelocity += mJumpAccel * mOrientation.getUp() ;
+            mVelocity += sJumpAccel * mOrientation.getUp() ;
             mJumpTimer = mJumpCooldown;
             mAttached = false;
         }
         else if(mLeaping && mJumpTimer <= 0.0)
         {
-            mVelocity -= mLeapAccel * mAim;
+            mVelocity -= sLeapAccel * mAim;
             mJumpTimer = mJumpCooldown;
             mAttached = false;
         }
@@ -551,6 +551,13 @@ void Jumpman::simulateSelf(double deltaTime)
     mCrosshairRay->setDirection(mFPCamera->orientation()->getForward() * -sLungeRange);
     //mCrosshairRay->setDirection(forward * sGrabRange);
 
+    if(myWorldPos.y < sFallLimit)
+    {
+        mOrientation.setPos(mSpawnPos);
+        mVelocity = glm::vec3(0.0f);
+        mAcceleration = glm::vec3(0.0f);
+    }
+
     mTransform = mOrientation.getOrientationMatrix();
 
     mIsGrounded = false;
@@ -562,8 +569,8 @@ void Jumpman::simulateSelf(double deltaTime)
 
 }
 
-void Jumpman::teleport(float x, float y, float z)
+void Jumpman::setSpawn(float x, float y, float z)
 {
-    glm::vec3 teleportPos(x,y,z);
-    mOrientation.setPos(teleportPos);
+    mSpawnPos = glm::vec3(x, y, z);
+    mOrientation.setPos(mSpawnPos);
 }

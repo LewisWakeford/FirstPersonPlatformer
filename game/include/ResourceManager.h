@@ -41,8 +41,6 @@ class ResourceManager
         Texture* createTextureFromFile(std::string filename); //Textures are loaded from files, so filename and ref are the same.
         Texture* createTexture(std::string, GLenum target); //Create a blank texture, just in case I need to do something fancy.
 
-
-
         Buffer* createBuffer(GLenum bufferType, std::string ref);
         ArrayBuffer* createArrayBuffer(GLenum bufferType, std::string ref);
         UniformBuffer* createUniformBuffer(std::string ref);
