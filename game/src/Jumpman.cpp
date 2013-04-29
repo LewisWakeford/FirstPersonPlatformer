@@ -12,36 +12,37 @@
 #include <iostream>
 
 float Jumpman::sLungeRange = 2.0f;
-float Jumpman::sGrabRange = 1.5f;
-float Jumpman::sLungeVelocity = 10.0f;
+float Jumpman::sGrabRange = 1.0f;
+float Jumpman::sLungeVelocity = 5.0f;
 double Jumpman::sMaxTimeAttemptingToClimb = 1.0;
 float Jumpman::sFallLimit = -100.0f;
-float Jumpman::sLeapAccel = 7.5f;
+float Jumpman::sLeapAccel = 12.5f;
 float Jumpman::sJumpAccel = 7.5f;
 
 float Jumpman::sGroundMaxSpeed = 10.0f;
-float Jumpman::sGroundAccel = 8.0f;
+float Jumpman::sGroundAccel = 20.0f;
 float Jumpman::sGroundDeaccel = 30.0f;
-float Jumpman::sGroundFriction = 40.0f;
+float Jumpman::sGroundFriction = 0.05f;
 
 float Jumpman::sAirMaxSpeed = 200.0f;
-float Jumpman::sAirAccelRatio = 0.5f;
+float Jumpman::sAirAccelRatio = 0.3f;
 
 float Jumpman::sMaxAltitude = 90.0f;
 float Jumpman::sMinAltitude = -90.0f;
 
 float Jumpman::sFixedLookSpeed = 60.0;
-float Jumpman::sLookSpeedRatio = 180.0;
+float Jumpman::sLookSpeedRatio = 0.3;
 
 
-float Jumpman::sJumpCooldownGround = 0.05; //Time taken after landing to be able to jump again.
-float Jumpman::sJumpCooldownAir = 0.25; //Time after jumping before being able to jump again.
+float Jumpman::sJumpCooldownGround = 0.03; //Time taken after landing to be able to jump again.
+float Jumpman::sJumpCooldownAir = 0.10; //Time after jumping before being able to jump again.
 
 
 Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_RENDER_NONE)
 {
     mAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
     mVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
+    mBounceVelocity = glm::vec3(0.0f);
 
     mIsGrounded = false;
 
@@ -101,7 +102,7 @@ Jumpman::Jumpman(App* app, OrientationCamera* camera) : SceneNode(app, GAME_REND
     CuboidShape* front = new CuboidShape(-0.25f, -mFeetHeight+0.25f, -0.35, 0.5f, mHeadHeight+mFeetHeight, 0.25f);
     CuboidShape* left = new CuboidShape(-0.35f, -mFeetHeight+0.25f, -0.25f, 0.25f, mHeadHeight+mFeetHeight, 0.5f);
     CuboidShape* right = new CuboidShape(0.15f, -mFeetHeight+0.25f, -0.25f, 0.25f, mHeadHeight+mFeetHeight, 0.5f);
-    CuboidShape* top = new CuboidShape(-0.25f, mHeadHeight, -0.25f, 0.3f, 0.3f, 0.53f);
+    CuboidShape* top = new CuboidShape(-0.15f, mHeadHeight, -0.15f, 0.3f, 0.3f, 0.3f);
     mCrosshairRay = new RayShape(glm::vec3(0.0f, mHeadHeight, 0.0f), glm::vec3(0.0f, 0.0f, -sLungeRange)); //Keep a reference for when we move the camera.
 
     addCollider(new Collider(feet, mFeetNumber, this, GAME_COLLISION_PLAYER, GAME_COLLISION_BLOCK));
@@ -128,7 +129,7 @@ void Jumpman::applyGravity(double deltaTime)
     }
     else
     {
-        float verticalVelocity = glm::dot(mVelocity, mOrientation.getUp());
+        float verticalVelocity = mVelocity.y;
         if(verticalVelocity < 0) //Moving down relative to up vector.
         {
             mVelocity.y = 0; //Should totally cancel vertical component.
@@ -143,19 +144,33 @@ void Jumpman::applyAcceleration(double deltaTime)
     {
         mVelocity += mAcceleration * float(deltaTime);
     }
-    else
+    else if (glm::length(glm::vec2(mVelocity.x, mVelocity.z)) < sGroundMaxSpeed)
     {
         mVelocity += mAcceleration * float(sAirAccelRatio * deltaTime);
     }
+    mVelocity += mBounceVelocity;
+    mBounceVelocity = glm::vec3(0.0f);
 }
 
 void Jumpman::limitVelocity(double deltaTime)
 {
     float speed = glm::length(mVelocity);
+    float verticalVelocity = mVelocity.y;
 
-    if(speed < 0.005f)
+    float speedCheck = speed;//*deltaTime;
+    float threshold = 0.5f;
+
+    //std::cout << speedCheck << " : " << threshold << std::endl;
+
+    if(mIsGrounded)
     {
-        mVelocity = glm::vec3(0.0f);
+        float frictionRatio = powf(sGroundFriction, deltaTime);
+        mVelocity *= frictionRatio;
+    }
+
+    if(verticalVelocity == 0 && (speedCheck < threshold) && glm::length(mAcceleration) == 0)
+    {
+        mVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
     }
 
     //Speed cannot be greater than max air speed.
@@ -165,21 +180,11 @@ void Jumpman::limitVelocity(double deltaTime)
         mVelocity *= slowDownRatio;
     }
 
-    float verticalVelocity = glm::dot(mVelocity, mOrientation.getUp());
-
     //If grounded we need to apply friction.
-    if(mIsGrounded && speed > sGroundMaxSpeed && verticalVelocity < 0)
+    if(mIsGrounded && speed > sGroundMaxSpeed && verticalVelocity <= 0)
     {
         float slowDownRatio = sGroundMaxSpeed/speed;
-        float frictionRatio = 1.0 - (sGroundFriction * deltaTime);
-        if(slowDownRatio < frictionRatio)
-        {
-            mVelocity *= slowDownRatio;
-        }
-        else
-        {
-            mVelocity *= frictionRatio;
-        }
+        mVelocity *= slowDownRatio;
     }
 }
 
@@ -260,6 +265,8 @@ void Jumpman::onCollision(CollisionEvent event)
 
     unsigned int reference = collider->getRefNumber();
 
+
+
     if(reference == mFeetNumber)
     {
         //std::cout << " FEET " << std::endl;
@@ -268,10 +275,22 @@ void Jumpman::onCollision(CollisionEvent event)
          std::vector<glm::vec3> contactPoints = event.getContactPoints();
          float yOverlap = contactPoints[0].y;
 
-         if(yOverlap > 0)
-         {
-             mOrientation.translate(0.0f, yOverlap, 0.0f);
-         }
+         float upVelocity = glm::dot(mOrientation.getUp(), mVelocity);
+
+        if(mVelocity.y < 0)
+        {
+            mVelocity.y = 0;
+        }
+
+        glm::vec3 pos = mOrientation.getPos();
+        if(yOverlap - pos.y < 0.3f)
+        {
+            pos.y = yOverlap+mFeetHeight;
+        }
+
+        mOrientation.setPos(pos);
+
+        std::cout << yOverlap << std::endl;
 
         //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getUp());
         //mOrientation.translate(rollback.x, rollback.y, rollback.z);
@@ -286,8 +305,8 @@ void Jumpman::onCollision(CollisionEvent event)
             BlockNode* blockNode = (BlockNode*) event.collidedWith()->getMaster();
             mClimable = blockNode->isClimable(contactPoints[i]);
             mClimableCoord = contactPoints[i];
-            //std::cout << " RAYHIT: "; if(climbable) std::cout << "brick" << std::endl; else std::cout << "metal" << std::endl;
-            //std::cout << "     X: " << contactPoints[i].x << " Y: " << contactPoints[i].y <<" Z:" << contactPoints[i].z << std::endl;
+            std::cout << " RAYHIT: "; if(mClimable) std::cout << "brick" << std::endl; else std::cout << "metal" << std::endl;
+            std::cout << "     X: " << contactPoints[i].x << " Y: " << contactPoints[i].y <<" Z:" << contactPoints[i].z << std::endl;
         }
     }
     else
@@ -298,11 +317,11 @@ void Jumpman::onCollision(CollisionEvent event)
             glm::vec3 inverseForward = -mOrientation.getForward();
             float forwardVelocity = glm::dot(inverseForward, mVelocity);
 
-            if(forwardVelocity > 0.005f)
+            if(forwardVelocity > 0.0f)
             {
                 //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
                 //mOrientation.translate(rollback.x, rollback.y, rollback.z);
-                mVelocity -= ( ((bounce * forwardVelocity)+bounceMin) * inverseForward);
+                mBounceVelocity -= ( ((bounce * forwardVelocity)+bounceMin) * inverseForward) ;
                 std::cout << "FRONT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
             }
         }
@@ -312,11 +331,11 @@ void Jumpman::onCollision(CollisionEvent event)
             glm::vec3 inverseForward = -mOrientation.getForward();
             float forwardVelocity = glm::dot(inverseForward, mVelocity);
 
-            if(forwardVelocity < 0.005f)
+            if(forwardVelocity < -0.0f)
             {
                 //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getForward());
                 //mOrientation.translate(rollback.x, rollback.y, rollback.z);
-                mVelocity -= (((bounce * forwardVelocity)-bounceMin) * inverseForward);
+                mBounceVelocity -= (((bounce * forwardVelocity)-bounceMin) * inverseForward);
                 std::cout << "BACK: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
             }
         }
@@ -325,11 +344,11 @@ void Jumpman::onCollision(CollisionEvent event)
             mCanMoveLeft = false;
             float rightVelocity = glm::dot(mOrientation.getRight(), mVelocity);
 
-            if(rightVelocity < 0.005f)
+            if(rightVelocity < -0.0f)
             {
                 //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
                 //mOrientation.translate(rollback.x, rollback.y, rollback.z);
-                mVelocity -= (((bounce * rightVelocity)-bounceMin) * mOrientation.getRight());
+                mBounceVelocity -= (((bounce * rightVelocity)-bounceMin) * mOrientation.getRight());
                 std::cout << "LEFT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
             }
         }
@@ -338,11 +357,11 @@ void Jumpman::onCollision(CollisionEvent event)
             mCanMoveRight = false;
             float rightVelocity = glm::dot(mOrientation.getRight(), mVelocity);
 
-            if(rightVelocity > 0.005f)
+            if(rightVelocity > 0.0f)
             {
                 //glm::vec3 rollback = float(rollbackTime) * (-mVelocity * mOrientation.getRight());
                 //mOrientation.translate(rollback.x, rollback.y, rollback.z);
-                mVelocity -= (((bounce * rightVelocity)+bounceMin) * mOrientation.getRight());
+                mBounceVelocity -= (((bounce * rightVelocity)+bounceMin) * mOrientation.getRight());
                 std::cout << "RIGHT: " << mVelocity.x << ", " << mVelocity.y << ", " << mVelocity.z << std::endl;
             }
         }
@@ -351,9 +370,9 @@ void Jumpman::onCollision(CollisionEvent event)
             mCanJump = false;
             float upVelocity = glm::dot(mOrientation.getUp(), mVelocity);
 
-            if(upVelocity > 0.005f)
+            if(upVelocity > 0.0f)
             {
-                mVelocity -= (((bounce * upVelocity)-bounceMin) * mOrientation.getUp());
+                mBounceVelocity -= (((bounce * upVelocity)-bounceMin) * mOrientation.getUp());
             }
             //std::cout << " TOP " << std::endl;
         }
@@ -385,14 +404,14 @@ void Jumpman::simulateSelf(double deltaTime)
 
     //Don't bother accelerating if we are already going too fast.
     bool canMoveForward = true;
-    if(mForwardMovement == -1)
+    if(mForwardMovement == 1)
     {
-        if(forwardVelocity > sGroundMaxSpeed || !mCanMoveForward)
+        if(forwardVelocity < -sGroundMaxSpeed || !mCanMoveForward)
             canMoveForward = false;
     }
-    else if(mForwardMovement == 1)
+    else if(mForwardMovement == -1)
     {
-        if(forwardVelocity < -sGroundMaxSpeed || !mCanMoveBackward)
+        if(forwardVelocity > sGroundMaxSpeed || !mCanMoveBackward)
             canMoveForward = false;
     }
 
@@ -411,6 +430,11 @@ void Jumpman::simulateSelf(double deltaTime)
     if(forwardVelocity < 0) currentForwardMovement = 1;
     if(forwardVelocity > 0) currentForwardMovement = -1;
 
+    if(canMoveForward)
+        std::cout << "TRUE" << std::endl;
+    else
+        std::cout << "FALSE" << std::endl;
+
     if(mForwardMovement != 0 && canMoveForward)
     {
         if(mForwardMovement != 0 && currentForwardMovement != 0 && mForwardMovement != currentForwardMovement)
@@ -425,7 +449,7 @@ void Jumpman::simulateSelf(double deltaTime)
     }
     else if(mForwardMovement == 0)
     {
-        forwardAccel = -(currentForwardMovement) * sGroundDeaccel;
+        forwardAccel = 0.0f;
     }
 
     if(rightVelocity > 0) currentRightMovement = 1;
@@ -439,7 +463,7 @@ void Jumpman::simulateSelf(double deltaTime)
     }
     else if(mRightMovement == 0)
     {
-        rightAccel = (-currentRightMovement) * sGroundDeaccel;
+        rightAccel = 0;
     }
 
     if(mJumpTimerAll > 0.0)
@@ -461,6 +485,7 @@ void Jumpman::simulateSelf(double deltaTime)
             mJumpTimerGround = sJumpCooldownGround;
             mJumpTimerAll = sJumpCooldownAir;
             mAttached = false;
+            mIsGrounded = false;
         }
         else if(mLeaping && mJumpTimerGround <= 0.0)
         {
@@ -468,6 +493,7 @@ void Jumpman::simulateSelf(double deltaTime)
             mJumpTimerGround = sJumpCooldownGround;
             mJumpTimerAll = sJumpCooldownAir;
             mAttached = false;
+            mIsGrounded = false;
         }
     }
 
@@ -510,15 +536,31 @@ void Jumpman::simulateSelf(double deltaTime)
     if(mAttemptingToClimb && !mClimbing)
     {
         glm::vec3 vectorToClimbPoint = mClimbTarget - myWorldPos;
+        float speedTowardsPoint = glm::dot(vectorToClimbPoint, mVelocity);
         float distanceToClimbPoint = glm::length(vectorToClimbPoint);
         std::cout << distanceToClimbPoint << std::endl;
         if(distanceToClimbPoint <= sGrabRange)
         {
-            mVelocity = glm::vec3(0.0f); //Kill all movement
-            mAcceleration = glm::vec3(0.0f);
+            if(!(speedTowardsPoint < 0))
+            {
+                mVelocity = glm::vec3(0.0f); //Kill all movement
+                mAcceleration = glm::vec3(0.0f);
 
-            mAttached = true;
-            mAttemptingToClimb = false;
+                if(distanceToClimbPoint < sGrabRange) //Make sure don't get sucked into wall
+                {
+                    float rollbackDistance = sGrabRange - distanceToClimbPoint;
+                    glm::vec3 rollbackVector = rollbackDistance * (-glm::normalize(vectorToClimbPoint));
+                    mOrientation.translate(rollbackVector);
+                }
+
+                mAttached = true;
+                mAttemptingToClimb = false;
+
+                //mOrientation.translate(mBounceVelocity.x*deltaTime, mBounceVelocity.y*deltaTime, mBounceVelocity.z*deltaTime);
+                mBounceVelocity = glm::vec3(0.0f);
+            }
+
+
         }
         else
         {
@@ -534,6 +576,8 @@ void Jumpman::simulateSelf(double deltaTime)
 
     mAcceleration = (mOrientation.getForward() * -forwardAccel) + (mOrientation.getRight() * rightAccel);
 
+    //std::cout << "ACCEL " << mAcceleration.x << ", " << mAcceleration.y << ", " << mAcceleration.z << std::endl;
+
     if(!mAttached)
     {
         applyAcceleration(deltaTime);
@@ -544,8 +588,8 @@ void Jumpman::simulateSelf(double deltaTime)
     mOrientation.translate(mVelocity.x*deltaTime, mVelocity.y*deltaTime, mVelocity.z*deltaTime);
 
     //Re-orient camera and aim vector.
-    mAzimuth += mDeltaAzi * deltaTime;
-    mAltitude += mDeltaAlt * deltaTime;
+    mAzimuth += mDeltaAzi;// * deltaTime;
+    mAltitude += mDeltaAlt;// * deltaTime;
     if(mAltitude > sMaxAltitude) mAltitude = sMaxAltitude;
     if(mAltitude < sMinAltitude) mAltitude = sMinAltitude;
 

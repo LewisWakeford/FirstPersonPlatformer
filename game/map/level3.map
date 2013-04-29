@@ -182,6 +182,19 @@ Blocks are specified with the <bl> tag.
 </bl>
 
 <bl>
+	<origin> {18.0, -7.0, -3.0} </origin>
+
+	<n_x> 1 </n_x>
+	<p_x> 2 </p_x>
+
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 4 </n_z>
+	<p_z> 0 </p_z>
+</bl>
+
+<bl>
 	<origin> {18.0, 5.0, -17.0} </origin>
 
 	<n_x> 1 </n_x>
@@ -285,53 +298,11 @@ Blocks are specified with the <bl> tag.
 	<p_z> 0 </p_z>
 </bl>
 
-<bl>
-	#
-	The origin of the block as a 3d coordinate x, y, z.
-	Measuered in metres, can be float and negative.
-	#
-	<origin> {0.0, -8.0, 0.0} </origin>
-
-	#
-	The begining and end of the block in the x axis, respectively.
-	Measured in metres, must be integer and positive.
-	Optional, if ommitted each defaults to 0.
-	#
-	<n_x> 2 </n_x>
-	<p_x> 2 </p_x>
-
-	# Ditto for the y and z axes. #
-	<n_y> 0 </n_y>
-	<p_y> 7 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-
-	# List of Climable Panels.
-	The face pointing towards the posistive x before rotation is considered the east face.
-	The face pointing towards the posistive y before roation is considered the north face.
-	#
-	<north>
-		{0,0, 1,2, 2,4, 1,6}
-	</north>
-	<east>
-		{0,0}
-	</east>
-	# Any omitted faces are assumed to have no climbable surfaces. #
-
-
-	#
-	Rotation of the block around it's origin, in degrees.
-	Optional, defaults to 0.
-	#
-	<rot> 45 </rot>
-</bl>
-
 #
 Player spawn is specificed with the <sp> tag.
 #
 <sp>
-	<origin> {0.0, 2.0, 0.0} </origin>
+	<origin> {0.0, -3.0, 0.0} </origin>
 </sp>
 
 #

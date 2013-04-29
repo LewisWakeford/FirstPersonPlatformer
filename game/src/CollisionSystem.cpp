@@ -229,7 +229,7 @@ bool CollisionSystem::narrowCuboidOnCuboid(const Collider* A, const Collider* B,
 
     //Return y overlap in the contact point.
     //Again, very hacky. But oh well.
-    float yOverlap = cornersAMax.y - cornersB[0].y;
+    float yOverlap = cornersAMax.y;// - cornersB[0].y;
     contactPoints->push_back(glm::vec3(0.0f, yOverlap, 0.0f));
     *contactTime = 0;
 

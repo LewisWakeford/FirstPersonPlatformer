@@ -488,10 +488,10 @@ bool BlockNode::isClimable(glm::vec3 point)
         }
 
 
-    if(face == BLOCK_FACE_EAST) fU = -(localPoint.z/panelSize) + mNegZ + 0.5f;
-    if(face == BLOCK_FACE_WEST) fU = ((localPoint.z/panelSize) + mNegZ + 0.5f);
-    if(face == BLOCK_FACE_NORTH)  fU = -(localPoint.x/panelSize)  + mNegX + 0.5f;
-    if(face == BLOCK_FACE_SOUTH) fU = ((localPoint.x/panelSize)  + mNegX + 0.5f);
+    if(face == BLOCK_FACE_EAST) fU = ((localPoint.z/panelSize) + mNegZ + 0.5f);
+    if(face == BLOCK_FACE_WEST) fU = mPosX - ((localPoint.z/panelSize) - 0.5f);
+    if(face == BLOCK_FACE_NORTH) fU = (localPoint.x/panelSize)  + mNegX + 0.5f;
+    if(face == BLOCK_FACE_SOUTH) fU = (localPoint.x/panelSize)  + mNegX + 0.5f;
     unsigned int iU = glm::floor(fU);
     unsigned int iV = glm::floor(fV);
 

@@ -46,7 +46,7 @@ int main()
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
 
-        if( !glfwOpenWindow(1920, 1080, 0, 0, 0, 0, 0, 0, GLFW_FULLSCREEN) )
+        if( !glfwOpenWindow(1920, 1080, 8, 8, 8, 8, 8, 0, GLFW_FULLSCREEN) )
         {
             glfwTerminate();
             return 0;
@@ -125,6 +125,7 @@ int main()
         mapFiles.push_back("map/level1.map");
         mapFiles.push_back("map/level2.map");
         mapFiles.push_back("map/level3.map");
+        mapFiles.push_back("map/level4.map");
 
         int currentMap = 0;
 
@@ -164,7 +165,10 @@ int main()
 
         windowCoords->unbind();
 
+        glActiveTexture(GL_TEXTURE0);
+        splashScreen->bind();
 
+        renderImage->setUniformMatrix4fv("m_MVP", glm::value_ptr(glm::ortho(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f)));
 
         int safeGuard = 0;
 
@@ -173,23 +177,14 @@ int main()
             //Display Splash Screen
             glClear(GL_COLOR_BUFFER_BIT);
 
+            glDrawArrays(GL_TRIANGLES,0,6);
 
-            glActiveTexture(GL_TEXTURE0);             checkError();
-
-            splashScreen->bind();             checkError();
-
-            renderImage->setUniformMatrix4fv("m_MVP", glm::value_ptr(glm::ortho(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f)));             checkError();
-                         checkError();
-
-            glDrawArrays(GL_TRIANGLES,0,6);             checkError();
-                     checkError();
-            splashScreen->unbind();             checkError();
-
-            glfwSwapBuffers();             checkError();
-            notStarted = !theApp.playerHasStarted();             checkError();
+            glfwSwapBuffers();
+            notStarted = !theApp.playerHasStarted();
             safeGuard++;
         }
 
+        splashScreen->unbind();
         VAO->unbind();
 
         glEnable(GL_DEPTH_TEST);checkError();
@@ -206,7 +201,46 @@ int main()
             {
                 if(currentMap >= mapFiles.size())
                 {
+                    glDisable(GL_DEPTH_TEST);checkError();
+                    glDisable(GL_CULL_FACE);checkError();
+
                     std::cout << "YOU WIN!" << std::endl;
+
+                    Texture* endScreen = theApp.getResourceManager()->createTextureFromFile("texture/end.png");
+                    endScreen->bind();
+                    endScreen->generateMipMaps(10);
+                    endScreen->setMinFilter(GL_LINEAR_MIPMAP_LINEAR);
+                    endScreen->setMaxFilter(GL_LINEAR);
+                    endScreen->setWrapS(GL_REPEAT);
+                    endScreen->setWrapT(GL_REPEAT);
+                    endScreen->unbind();
+
+                    VAO->bind();
+                    renderImage->use();
+                    glActiveTexture(GL_TEXTURE0);
+                    endScreen->bind();
+
+                    renderImage->setUniformMatrix4fv("m_MVP", glm::value_ptr(glm::ortho(0.0f, 1.0f, 1.0f, 0.0f, -1.0f, 1.0f)));
+
+                    safeGuard = 0;
+
+
+                    theApp.waitForInput();
+                    notStarted = true;
+                    while(notStarted || (safeGuard > 10000 && safeGuard < 100))
+                    {
+                        //Display Splash Screen
+                        glClear(GL_COLOR_BUFFER_BIT);
+
+                        glDrawArrays(GL_TRIANGLES,0,6);
+
+                        glfwSwapBuffers();
+                        notStarted = !theApp.playerHasStarted();
+                        safeGuard++;
+                    }
+
+                    endScreen->unbind();
+                    VAO->unbind();
 
                     glfwTerminate();
 

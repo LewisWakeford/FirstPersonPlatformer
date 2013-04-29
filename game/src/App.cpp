@@ -231,3 +231,8 @@ bool App::playerHasStarted()
 {
     return mPlayerHasStarted;
 }
+
+void App::waitForInput()
+{
+    mPlayerHasStarted = false;
+}

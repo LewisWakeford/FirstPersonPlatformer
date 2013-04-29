@@ -1,208 +1,249 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="game.h" open="1" top="0" tabpos="14">
-		<Cursor position="1616" topLine="51" />
-	</File>
-	<File name="include\ActionSet.h" open="0" top="0" tabpos="6">
-		<Cursor position="964" topLine="26" />
-	</File>
-	<File name="include\App.h" open="0" top="0" tabpos="11">
-		<Cursor position="1292" topLine="29" />
-	</File>
-	<File name="include\ArrayBuffer.h" open="0" top="0" tabpos="0">
-		<Cursor position="997" topLine="6" />
-	</File>
-	<File name="include\Block.h" open="0" top="0" tabpos="4">
-		<Cursor position="190" topLine="0" />
-	</File>
-	<File name="include\BlockNode.h" open="0" top="0" tabpos="1">
-		<Cursor position="1524" topLine="39" />
-	</File>
-	<File name="include\Cache.h" open="0" top="0" tabpos="0">
-		<Cursor position="444" topLine="3" />
-	</File>
-	<File name="include\Collider.h" open="0" top="0" tabpos="11">
-		<Cursor position="1559" topLine="0" />
-	</File>
-	<File name="include\CollisionEvent.h" open="0" top="0" tabpos="2">
-		<Cursor position="501" topLine="0" />
-	</File>
-	<File name="include\CollisionShape.h" open="0" top="0" tabpos="3">
-		<Cursor position="450" topLine="0" />
-	</File>
-	<File name="include\CollisionSystem.h" open="1" top="0" tabpos="2">
-		<Cursor position="482" topLine="6" />
-	</File>
-	<File name="include\Crosshair.h" open="0" top="0" tabpos="0">
-		<Cursor position="147" topLine="0" />
-	</File>
-	<File name="include\InputMapping.h" open="0" top="0" tabpos="5">
-		<Cursor position="566" topLine="1" />
-	</File>
-	<File name="include\Jumpman.h" open="1" top="0" tabpos="5">
-		<Cursor position="1550" topLine="39" />
-	</File>
-	<File name="include\LocalHardwareInput.h" open="0" top="0" tabpos="3">
-		<Cursor position="312" topLine="0" />
-	</File>
-	<File name="include\Material.h" open="0" top="0" tabpos="10">
-		<Cursor position="720" topLine="0" />
-	</File>
-	<File name="include\Mesh.h" open="0" top="0" tabpos="12">
-		<Cursor position="726" topLine="8" />
-	</File>
-	<File name="include\Orientation.h" open="0" top="0" tabpos="0">
-		<Cursor position="69" topLine="0" />
-	</File>
-	<File name="include\PersistantNode.h" open="0" top="0" tabpos="0">
-		<Cursor position="313" topLine="0" />
-	</File>
-	<File name="include\PlayerSpawnNode.h" open="0" top="0" tabpos="0">
-		<Cursor position="490" topLine="0" />
-	</File>
-	<File name="include\ResourceManager.h" open="0" top="0" tabpos="2">
-		<Cursor position="1694" topLine="18" />
-	</File>
-	<File name="include\SceneNode.h" open="0" top="0" tabpos="0">
-		<Cursor position="1165" topLine="16" />
-	</File>
-	<File name="include\Shader.h" open="0" top="0" tabpos="0">
-		<Cursor position="281" topLine="1" />
-	</File>
-	<File name="include\ShaderProgram.h" open="0" top="0" tabpos="0">
-		<Cursor position="804" topLine="9" />
-	</File>
-	<File name="include\Texture.h" open="1" top="0" tabpos="10">
-		<Cursor position="276" topLine="0" />
-	</File>
-	<File name="include\WayPointNode.h" open="0" top="0" tabpos="0">
-		<Cursor position="94" topLine="0" />
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="3684" topLine="93" />
-	</File>
-	<File name="map\example.map" open="0" top="0" tabpos="6">
-		<Cursor position="1114" topLine="28" />
-	</File>
-	<File name="shader\block.frag" open="0" top="0" tabpos="7">
-		<Cursor position="201" topLine="0" />
-	</File>
-	<File name="shader\block.vert" open="0" top="0" tabpos="6">
-		<Cursor position="248" topLine="0" />
-	</File>
-	<File name="shader\graph.vert" open="0" top="0" tabpos="0">
-		<Cursor position="169" topLine="0" />
-	</File>
-	<File name="src\ActionSet.cpp" open="1" top="0" tabpos="15">
-		<Cursor position="26" topLine="0" />
-	</File>
-	<File name="src\App.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="1300" topLine="37" />
-	</File>
-	<File name="src\ArrayBuffer.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="523" topLine="2" />
-	</File>
-	<File name="src\Block.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1652" topLine="43" />
-	</File>
-	<File name="src\BlockNode.cpp" open="1" top="0" tabpos="12">
-		<Cursor position="9161" topLine="276" />
-	</File>
-	<File name="src\Buffer.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="547" topLine="16" />
-	</File>
-	<File name="src\Collider.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="878" topLine="24" />
-	</File>
-	<File name="src\CollisionEvent.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="337" topLine="0" />
-	</File>
-	<File name="src\CollisionShape.cpp" open="1" top="1" tabpos="16">
-		<Cursor position="780" topLine="13" />
-	</File>
-	<File name="src\CollisionSystem.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="3618" topLine="115" />
-	</File>
-	<File name="src\Crosshair.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="1143" topLine="6" />
-	</File>
-	<File name="src\CuboidShape.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="744" topLine="20" />
-	</File>
-	<File name="src\DataType.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="3763" topLine="213" />
-	</File>
-	<File name="src\FloatingCamera.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="604" topLine="0" />
-	</File>
-	<File name="src\InputMapping.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1041" topLine="15" />
-	</File>
-	<File name="src\Jumpman.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="1977" topLine="82" />
-	</File>
-	<File name="src\LocalHardwareInput.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1045" topLine="27" />
-	</File>
-	<File name="src\MapManager.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1146" topLine="63" />
-	</File>
-	<File name="src\Material.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="804" topLine="32" />
-	</File>
-	<File name="src\Mesh.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="1111" topLine="32" />
-	</File>
-	<File name="src\MeshNode.cpp" open="0" top="0" tabpos="12">
-		<Cursor position="301" topLine="0" />
-	</File>
-	<File name="src\Orientation.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="3101" topLine="129" />
-	</File>
-	<File name="src\Persistant.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="385" topLine="0" />
-	</File>
-	<File name="src\PersistantNode.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="271" topLine="0" />
-	</File>
-	<File name="src\PlayerSpawn.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="352" topLine="0" />
-	</File>
-	<File name="src\PlayerSpawnNode.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="742" topLine="0" />
-	</File>
-	<File name="src\Renderer.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="355" topLine="0" />
-	</File>
-	<File name="src\ResourceManager.cpp" open="1" top="0" tabpos="13">
-		<Cursor position="21284" topLine="596" />
-	</File>
-	<File name="src\SceneGraph.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="275" topLine="0" />
-	</File>
-	<File name="src\SceneNode.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="625" topLine="31" />
-	</File>
-	<File name="src\Shader.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="215" topLine="0" />
-	</File>
-	<File name="src\ShaderProgram.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="2197" topLine="65" />
-	</File>
-	<File name="src\Texture.cpp" open="1" top="0" tabpos="11">
-		<Cursor position="1384" topLine="55" />
-	</File>
-	<File name="src\UniformBuffer.cpp" open="0" top="0" tabpos="12">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="src\VertexArrayObject.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="255" topLine="0" />
-	</File>
-	<File name="src\WayPoint.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="166" topLine="0" />
-	</File>
-	<File name="src\WayPointNode.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="499" topLine="0" />
+	<File name="src\BlockNode.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="15870" topLine="441" />
+		</Cursor>
+	</File>
+	<File name="src\SceneNode.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Shader.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\ShaderProgram.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Collider.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1738" topLine="57" />
+		</Cursor>
+	</File>
+	<File name="include\InputMapping.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Texture.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1144" topLine="61" />
+		</Cursor>
+	</File>
+	<File name="src\CollisionEvent.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Jumpman.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1263" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="src\CollisionShape.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="419" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="include\LocalHardwareInput.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\UniformBuffer.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\CollisionSystem.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7336" topLine="211" />
+		</Cursor>
+	</File>
+	<File name="src\VertexArrayObject.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Crosshair.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\WayPoint.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\WayPointNode.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Material.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Mesh.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Orientation.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="571" topLine="32" />
+		</Cursor>
+	</File>
+	<File name="src\InputMapping.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Jumpman.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="653" topLine="383" />
+		</Cursor>
+	</File>
+	<File name="src\LocalHardwareInput.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="920" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\MapManager.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Block.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="1" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3828" topLine="103" />
+		</Cursor>
+	</File>
+	<File name="include\BlockNode.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="map\example.map" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="game.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1572" topLine="76" />
+		</Cursor>
+	</File>
+	<File name="src\Material.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="shader\block.frag" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\ActionSet.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Mesh.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\ResourceManager.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="shader\block.vert" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Collider.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\App.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1929" topLine="48" />
+		</Cursor>
+	</File>
+	<File name="src\MeshNode.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\CollisionEvent.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Orientation.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3779" topLine="155" />
+		</Cursor>
+	</File>
+	<File name="include\CollisionShape.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\ActionSet.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\CollisionSystem.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\App.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="492" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="src\Renderer.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Texture.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\ResourceManager.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8216" topLine="259" />
+		</Cursor>
+	</File>
+	<File name="src\Block.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\SceneGraph.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="85" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -74,6 +74,8 @@ class Jumpman : public I_Controllable, public SceneNode
         double mJumpTimerAll;
         double mJumpTimerGround;
 
+        glm::vec3 mBounceVelocity;
+
         unsigned int mFeetNumber;
         unsigned int mFrontNumber;
         unsigned int mBackNumber;

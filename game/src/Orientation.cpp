@@ -178,6 +178,11 @@ void Orientation::translate(GLfloat x, GLfloat y, GLfloat z)
     mPos.z += z;
 }
 
+void Orientation::translate(const glm::vec3& trans)
+{
+    mPos += trans;
+}
+
 void Orientation::transform(const glm::mat4& transform)
 {
     mPos = glm::vec3(transform * glm::vec4(mPos, 1.0f));

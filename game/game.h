@@ -46,6 +46,7 @@ inline std::string getErrorString(GLint errorCode)
 
 inline void checkError()
 {
+    #ifdef DEBUG_MODE
     GLint errorCode = glGetError();
 
     unsigned int maxErrors = 40;
@@ -62,6 +63,7 @@ inline void checkError()
     {
         std::cout << "GL ERROR: Too many OpenGL errors" << std::endl;
     }
+    #endif //DEBUG_MODE
 };
 
 //---CONSTANTS---

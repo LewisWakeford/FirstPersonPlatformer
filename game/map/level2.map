@@ -31,307 +31,10 @@ This contains data about the actual map.
 </H>
 
 #
-Blocks are specified with the <bl> tag.
-#
-<bl>
-	#
-	The origin of the block as a 3d coordinate x, y, z.
-	Measuered in metres, can be float and negative.
-	#
-	<origin> {0.0, -10.0, -2.0} </origin>
-
-	#
-	The begining and end of the block in the x axis, respectively.
-	Measured in metres, must be integer and positive.
-	Optional, if ommitted each defaults to 0.
-	#
-	<n_x> 2 </n_x>
-	<p_x> 2 </p_x>
-
-	# Ditto for the y and z axes. #
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 15 </n_z>
-	<p_z> 2 </p_z>
-
-	# List of Climable Panels.
-	The face pointing towards the posistive x before rotation is considered the east face.
-	The face pointing towards the posistive y before roation is considered the north face.
-	#
-	<north>
-		{0,0, 0,1}
-	</north>
-	<east>
-		{0,0}
-	</east>
-	# Any omitted faces are assumed to have no climbable surfaces. #
-
-
-	#
-	Rotation of the block around it's origin, in degrees.
-	Optional, defaults to 0.
-	#
-	<rot> 45 </rot>
-</bl>
-
-<bl>
-	#
-	The origin of the block as a 3d coordinate x, y, z.
-	Measuered in metres, can be float and negative.
-	#
-	<origin> {0.0, -10.0, -15.0} </origin>
-
-	#
-	The begining and end of the block in the x axis, respectively.
-	Measured in metres, must be integer and positive.
-	Optional, if ommitted each defaults to 0.
-	#
-	<n_x> 2 </n_x>
-	<p_x> 2 </p_x>
-
-	# Ditto for the y and z axes. #
-	<n_y> 0 </n_y>
-	<p_y> 1 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-
-	<rot> 45 </rot>
-</bl>
-
-<bl>
-	#
-	The origin of the block as a 3d coordinate x, y, z.
-	Measuered in metres, can be float and negative.
-	#
-	<origin> {0.0, -10.0, -20.0} </origin>
-
-	#
-	The begining and end of the block in the x axis, respectively.
-	Measured in metres, must be integer and positive.
-	Optional, if ommitted each defaults to 0.
-	#
-	<n_x> 2 </n_x>
-	<p_x> 15 </p_x>
-
-	# Ditto for the y and z axes. #
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 2 </n_z>
-	<p_z> 2 </p_z>
-</bl>
-
-
-<bl>
-	<origin> {18.0, -10.0, -20.0} </origin>
-
-	<n_x> 2 </n_x>
-	<p_x> 2 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 5 </p_y>
-
-	<n_z> 2 </n_z>
-	<p_z> 2 </p_z>
-	
-	<west>
-		{2,3, 2,5}
-	</west>
-</bl>
-
-<bl>
-	<origin> {18.0, -5.0, -17.0} </origin>
-
-	<n_x> 2 </n_x>
-	<p_x> 2 </p_x>
-
-	<n_y> 2 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 8 </p_z>
-</bl>
-
-<bl>
-	<origin> {18.0, -5.0, -3.0} </origin>
-
-	<n_x> 0 </n_x>
-	<p_x> 1 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 10 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-	
-	<south>
-		{0,0, 1,0, 
-		0,1, 1,1,
-		0,2, 1,2,
-		0,3, 1,3,
-		0,4, 1,4,
-		0,5, 1,5,
-		0,6, 1,6,
-		0,7, 1,7,
-		0,8, 1,8,
-		0,9, 1,9,
-		0,10, 1,10}
-	</south>
-</bl>
-
-<bl>
-	<origin> {18.0, 5.0, -17.0} </origin>
-
-	<n_x> 1 </n_x>
-	<p_x> 1 </p_x>
-
-	<n_y> 1 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 8 </p_z>
-</bl>
-
-<bl>
-	<origin> {12.0, 5.0, -17.0} </origin>
-
-	<n_x> 1 </n_x>
-	<p_x> 1 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 1 </n_z>
-	<p_z> 1 </p_z>
-</bl>
-
-<bl>
-	<origin> {8.0, 5.0, -13.0} </origin>
-
-	<n_x> 1 </n_x>
-	<p_x> 0 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 1 </p_z>
-</bl>
-
-<bl>
-	<origin> {5.0, 5.0, -15.0} </origin>
-
-	<n_x> 0 </n_x>
-	<p_x> 0 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-</bl>
-
-<bl>
-	<origin> {3.0, 5.0, -10.0} </origin>
-
-	<n_x> 0 </n_x>
-	<p_x> 0 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-</bl>
-
-<bl>
-	<origin> {1.0, 5.0, -14.0} </origin>
-
-	<n_x> 0 </n_x>
-	<p_x> 0 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-</bl>
-
-<bl>
-	<origin> {-2.0, 5.0, -12.0} </origin>
-
-	<n_x> 0 </n_x>
-	<p_x> 0 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-</bl>
-
-<bl>
-	<origin> {-2.0, 5.0, -12.0} </origin>
-
-	<n_x> 0 </n_x>
-	<p_x> 0 </p_x>
-
-	<n_y> 0 </n_y>
-	<p_y> 0 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-</bl>
-
-<bl>
-	#
-	The origin of the block as a 3d coordinate x, y, z.
-	Measuered in metres, can be float and negative.
-	#
-	<origin> {0.0, -8.0, 0.0} </origin>
-
-	#
-	The begining and end of the block in the x axis, respectively.
-	Measured in metres, must be integer and positive.
-	Optional, if ommitted each defaults to 0.
-	#
-	<n_x> 2 </n_x>
-	<p_x> 2 </p_x>
-
-	# Ditto for the y and z axes. #
-	<n_y> 0 </n_y>
-	<p_y> 7 </p_y>
-
-	<n_z> 0 </n_z>
-	<p_z> 0 </p_z>
-
-	# List of Climable Panels.
-	The face pointing towards the posistive x before rotation is considered the east face.
-	The face pointing towards the posistive y before roation is considered the north face.
-	#
-	<north>
-		{0,0, 1,2, 2,4, 1,6}
-	</north>
-	<east>
-		{0,0}
-	</east>
-	# Any omitted faces are assumed to have no climbable surfaces. #
-
-
-	#
-	Rotation of the block around it's origin, in degrees.
-	Optional, defaults to 0.
-	#
-	<rot> 45 </rot>
-</bl>
-
-#
 Player spawn is specificed with the <sp> tag.
 #
 <sp>
-	<origin> {0.0, 2.0, 0.0} </origin>
+	<origin> {0, 2.0, 0} </origin>
 </sp>
 
 #
@@ -342,21 +45,117 @@ Beacons are specified with the <wp> tag (for waypoint)
 	The origin of the beacon as a 3d coordinate x, y, z.
 	Measuered in metres, can be float.
 	#
-	<origin> {-10.0, 0.0, -10.0} </origin>
+	<origin> {0.0, -2.0, -80.0} </origin>
 </wp>
 
 <bl>
-	<origin> {-10.0, 0.0, -10.0} </origin>
+	<origin> {0.0, 0.0, 0.0} </origin>
 
 
-	<n_x> 1 </n_x>
+	<n_x> 5 </n_x>
+	<p_x> 5 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 5 </n_z>
+	<p_z> 5 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {0.0, -2.0, -60.0} </origin>
+
+
+	<n_x> 2 </n_x>
 	<p_x> 2 </p_x>
 
 	# Ditto for the y and z axes. #
-	<n_y> 0 </n_y>
+	<n_y> 1 </n_y>
 	<p_y> 0 </p_y>
 
-	<n_z> 1 </n_z>
-	<p_z> 1 </p_z>
+	<n_z> 2 </n_z>
+	<p_z> 2 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {-24.0, -1.0, -24.0} </origin>
+
+
+	<n_x> 4 </n_x>
+	<p_x> 4 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 4 </n_z>
+	<p_z> 4 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {-30.0, -1.0, -30.0} </origin>
+
+
+	<n_x> 3 </n_x>
+	<p_x> 3 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 3 </n_z>
+	<p_z> 3 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {0.0, -2.0, -80.0} </origin>
+
+
+	<n_x> 3 </n_x>
+	<p_x> 3 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 3 </n_z>
+	<p_z> 3 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {0.0, -2.0, -84.0} </origin>
+
+
+	<n_x> 3 </n_x>
+	<p_x> 3 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 0 </n_y>
+	<p_y> 6 </p_y>
+
+	<n_z> 0 </n_z>
+	<p_z> 0 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {-15.0, -1.0, -45.0} </origin>
+
+
+	<n_x> 3 </n_x>
+	<p_x> 3 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 3 </n_z>
+	<p_z> 3 </p_z>
 
 </bl>

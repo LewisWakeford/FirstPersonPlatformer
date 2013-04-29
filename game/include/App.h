@@ -71,6 +71,7 @@ class App
         void mapLoaded();
 
         bool playerHasStarted();
+        void waitForInput();
 
 
     protected:

@@ -34,7 +34,7 @@ This contains data about the actual map.
 Player spawn is specificed with the <sp> tag.
 #
 <sp>
-	<origin> {0.0, 2.0, 0.0} </origin>
+	<origin> {-3.0, 2.0, 3.0} </origin>
 </sp>
 
 #
@@ -117,6 +117,37 @@ Beacons are specified with the <wp> tag (for waypoint)
 
 	<n_x> 1 </n_x>
 	<p_x> 1 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 1 </n_z>
+	<p_z> 1 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {0.0, 3.0, -10.0} </origin>
+
+
+	<n_x> 1 </n_x>
+	<p_x> 6 </p_x>
+
+	# Ditto for the y and z axes. #
+	<n_y> 1 </n_y>
+	<p_y> 0 </p_y>
+
+	<n_z> 1 </n_z>
+	<p_z> 1 </p_z>
+
+</bl>
+
+<bl>
+	<origin> {0.0, 5.0, -12.0} </origin>
+
+	<n_x> 1 </n_x>
+	<p_x> 6 </p_x>
 
 	# Ditto for the y and z axes. #
 	<n_y> 1 </n_y>

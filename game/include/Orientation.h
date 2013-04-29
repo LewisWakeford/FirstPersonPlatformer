@@ -28,6 +28,7 @@ class Orientation
 
         //Translate the orinentation, NOT using it's direction vectors.
         void translate(GLfloat x, GLfloat y, GLfloat z);
+        void translate(const glm::vec3&);
 
         //Transform the orientation by a matrix and attempt to keep vectors and position valid.
         void transform(const glm::mat4& transform);
