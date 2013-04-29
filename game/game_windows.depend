@@ -4299,7 +4299,7 @@
 
 1361119333 c:\code\libs\glm\glm\gtx\rotate_vector.inl
 
-1366931490 source:c:\code\firstpersonplatformer\game\main.cpp
+1367236571 source:c:\code\firstpersonplatformer\game\main.cpp
 	"game.h"
 	<iostream>
 	<exception>
@@ -4314,41 +4314,42 @@
 	"MapManager.h"
 	"Jumpman.h"
 	"Crosshair.h"
+	<glm/gtc/type_ptr.hpp>
 
-1366931241 c:\code\firstpersonplatformer\game\game.h
+1367236570 c:\code\firstpersonplatformer\game\game.h
 	<GL/glew.h>
 	<GL/glfw.h>
 	<iostream>
 	<string>
 
-1366887216 c:\code\firstpersonplatformer\game\include\app.h
+1367236576 c:\code\firstpersonplatformer\game\include\app.h
 	"game.h"
 	"LocalHardwareInput.h"
 	"ActionSet.h"
 	"InputMapping.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\localhardwareinput.h
+1367236578 c:\code\firstpersonplatformer\game\include\localhardwareinput.h
 
-1366887216 c:\code\firstpersonplatformer\game\include\actionset.h
+1367236575 c:\code\firstpersonplatformer\game\include\actionset.h
 	<vector>
 	"game.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\inputmapping.h
+1367236576 c:\code\firstpersonplatformer\game\include\inputmapping.h
 	"InputMapping.h"
 	<string>
 	<map>
 
-1366907701 c:\code\firstpersonplatformer\game\map
+1367224767 c:\code\firstpersonplatformer\game\map
 
-1366887216 c:\code\firstpersonplatformer\game\include\renderer.h
+1367236579 c:\code\firstpersonplatformer\game\include\renderer.h
 	<vector>
 	"game.h"
 	<glm/glm.hpp>
 
-1366915803 c:\code\firstpersonplatformer\game\include\collisionsystem.h
+1367236579 c:\code\firstpersonplatformer\game\include\collisionsystem.h
 	"Collider.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\collider.h
+1367236577 c:\code\firstpersonplatformer\game\include\collider.h
 	"game.h"
 	"SceneNode.h"
 	"CollisionShape.h"
@@ -4356,28 +4357,28 @@
 	<glm/glm.hpp>
 	<vector>
 
-1366887216 c:\code\firstpersonplatformer\game\include\scenenode.h
+1367236580 c:\code\firstpersonplatformer\game\include\scenenode.h
 	<vector>
 	"game.h"
 	<boost/shared_ptr.hpp>
 	<glm/glm.hpp>
 	"I_CollisionReciever.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\i_collisionreciever.h
+1367236579 c:\code\firstpersonplatformer\game\include\i_collisionreciever.h
 	"CollisionEvent.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\collisionevent.h
+1367236578 c:\code\firstpersonplatformer\game\include\collisionevent.h
 	<vector>
 	"glm/glm.hpp"
 
-1366887216 c:\code\firstpersonplatformer\game\include\collisionshape.h
+1367236578 c:\code\firstpersonplatformer\game\include\collisionshape.h
 
-1366887216 c:\code\firstpersonplatformer\game\include\orientation.h
+1367236577 c:\code\firstpersonplatformer\game\include\orientation.h
 	"game.h"
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 
-1366887216 c:\code\firstpersonplatformer\game\include\resourcemanager.h
+1367236574 c:\code\firstpersonplatformer\game\include\resourcemanager.h
 	<vector>
 	<unordered_map>
 	"Shader.h"
@@ -4391,107 +4392,107 @@
 	"UniformBuffer.h"
 	"Cache.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\shader.h
+1367236577 c:\code\firstpersonplatformer\game\include\shader.h
 	<string>
 	"game.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\shaderprogram.h
+1367236578 c:\code\firstpersonplatformer\game\include\shaderprogram.h
 	<string>
 	"game.h"
 	"Shader.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\material.h
+1367236576 c:\code\firstpersonplatformer\game\include\material.h
 	"game.h"
 	<string>
 	"glm/glm.hpp"
 
-1366887216 c:\code\firstpersonplatformer\game\include\vertexarrayobject.h
+1367236576 c:\code\firstpersonplatformer\game\include\vertexarrayobject.h
 	"game.h"
 	"ArrayBuffer.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\arraybuffer.h
+1367236574 c:\code\firstpersonplatformer\game\include\arraybuffer.h
 	<Buffer.h>
 
-1366887216 c:\code\firstpersonplatformer\game\include\buffer.h
+1367236578 c:\code\firstpersonplatformer\game\include\buffer.h
 	<vector>
 	"game.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\mesh.h
+1367236575 c:\code\firstpersonplatformer\game\include\mesh.h
 	<vector>
 	"game.h"
 	<glm/glm.hpp>
 
-1366887216 c:\code\firstpersonplatformer\game\include\texture.h
+1367236580 c:\code\firstpersonplatformer\game\include\texture.h
 	"game.h"
 	<string>
 	"Cache.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\cache.h
+1367236579 c:\code\firstpersonplatformer\game\include\cache.h
 	<string>
 	<vector>
 	<unordered_map>
 
-1366887216 c:\code\firstpersonplatformer\game\include\uniformbuffer.h
+1367236579 c:\code\firstpersonplatformer\game\include\uniformbuffer.h
 	"Buffer.h"
 	<string>
 
-1366887216 c:\code\firstpersonplatformer\game\include\floatingcamera.h
+1367236575 c:\code\firstpersonplatformer\game\include\floatingcamera.h
 	"OrientationCamera.h"
 	"I_Controllable.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\orientationcamera.h
+1367236577 c:\code\firstpersonplatformer\game\include\orientationcamera.h
 	"CameraNode.h"
 	"Orientation.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\cameranode.h
+1367236576 c:\code\firstpersonplatformer\game\include\cameranode.h
 	"SceneNode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\i_controllable.h
+1367236579 c:\code\firstpersonplatformer\game\include\i_controllable.h
 
-1366887216 c:\code\firstpersonplatformer\game\include\meshnode.h
+1367236575 c:\code\firstpersonplatformer\game\include\meshnode.h
 	"SceneNode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\scenegraph.h
+1367236578 c:\code\firstpersonplatformer\game\include\scenegraph.h
 	"game.h"
 	<GL/glfw.h>
 	<boost/shared_ptr.hpp>
 
-1366887216 c:\code\firstpersonplatformer\game\include\mapmanager.h
+1367236577 c:\code\firstpersonplatformer\game\include\mapmanager.h
 	<vector>
 	"Persistant.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\persistant.h
+1367236578 c:\code\firstpersonplatformer\game\include\persistant.h
 	<string>
 	<vector>
 	"DataType.h"
 	"PersistantNode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\datatype.h
+1367236575 c:\code\firstpersonplatformer\game\include\datatype.h
 	<string>
 	<vector>
 	<regex>
 	<boost/lexical_cast.hpp>
 
-1366907701 c:\code\firstpersonplatformer\game\include\persistantnode.h
+1367236580 c:\code\firstpersonplatformer\game\include\persistantnode.h
 	<SceneNode.h>
 
-1366917305 c:\code\firstpersonplatformer\game\include\jumpman.h
+1367236574 c:\code\firstpersonplatformer\game\include\jumpman.h
 	"I_Controllable.h"
 	"Collider.h"
 	"Orientation.h"
 	"RayShape.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\rayshape.h
+1367236576 c:\code\firstpersonplatformer\game\include\rayshape.h
 	"CollisionShape.h"
 	<glm/glm.hpp>
 
-1366887216 c:\code\firstpersonplatformer\game\include\crosshair.h
+1367236575 c:\code\firstpersonplatformer\game\include\crosshair.h
 	"SceneNode.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\actionset.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\actionset.cpp
 	"ActionSet.h"
 
-1366915500 source:c:\code\firstpersonplatformer\game\src\app.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\app.cpp
 	"App.h"
 	"Renderer.h"
 	"ResourceManager.h"
@@ -4500,20 +4501,20 @@
 	"MapManager.h"
 	"I_Controllable.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\arraybuffer.cpp
+1367236586 source:c:\code\firstpersonplatformer\game\src\arraybuffer.cpp
 	"ArrayBuffer.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\block.cpp
+1367236582 source:c:\code\firstpersonplatformer\game\src\block.cpp
 	"Block.h"
 	"BlockNode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\block.h
+1367236578 c:\code\firstpersonplatformer\game\include\block.h
 	"Persistant.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\blocknode.h
+1367236575 c:\code\firstpersonplatformer\game\include\blocknode.h
 	<PersistantNode.h>
 
-1366929302 source:c:\code\firstpersonplatformer\game\src\blocknode.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\blocknode.cpp
 	"BlockNode.h"
 	"App.h"
 	"Renderer.h"
@@ -4527,37 +4528,37 @@
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtc/matrix_inverse.hpp>
 
-1366887216 c:\code\firstpersonplatformer\game\include\cuboidshape.h
+1367236575 c:\code\firstpersonplatformer\game\include\cuboidshape.h
 	<glm/glm.hpp>
 	"CollisionShape.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\buffer.cpp
+1367236584 source:c:\code\firstpersonplatformer\game\src\buffer.cpp
 	"Buffer.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\cameranode.cpp
+1367236585 source:c:\code\firstpersonplatformer\game\src\cameranode.cpp
 	"CameraNode.h"
 	"App.h"
 	"Renderer.h"
 	"glm/gtc/matrix_transform.hpp"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\collider.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\collider.cpp
 	"App.h"
 	"Collider.h"
 	"CollisionSystem.h"
 	"CollisionEvent.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\collisionevent.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\collisionevent.cpp
 	"CollisionEvent.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\collisionshape.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\collisionshape.cpp
 	"CollisionShape.h"
 
-1366931374 source:c:\code\firstpersonplatformer\game\src\collisionsystem.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\collisionsystem.cpp
 	"CollisionSystem.h"
 	"CuboidShape.h"
 	"RayShape.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\crosshair.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\crosshair.cpp
 	"Crosshair.h"
 	"ShaderProgram.h"
 	"VertexArrayObject.h"
@@ -4567,27 +4568,27 @@
 	"ResourceManager.h"
 	"Renderer.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\cuboidshape.cpp
+1367236587 source:c:\code\firstpersonplatformer\game\src\cuboidshape.cpp
 	"CuboidShape.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\datatype.cpp
+1367236588 source:c:\code\firstpersonplatformer\game\src\datatype.cpp
 	"DataType.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\floatingcamera.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\floatingcamera.cpp
 	"FloatingCamera.h"
 	"ActionSet.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\i_collisionreciever.cpp
+1367236586 source:c:\code\firstpersonplatformer\game\src\i_collisionreciever.cpp
 	"I_CollisionReciever.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\i_controllable.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\i_controllable.cpp
 	"I_Controllable.h"
 
-1366907701 source:c:\code\firstpersonplatformer\game\src\inputmapping.cpp
+1367236587 source:c:\code\firstpersonplatformer\game\src\inputmapping.cpp
 	"InputMapping.h"
 	"ActionSet.h"
 
-1366922101 source:c:\code\firstpersonplatformer\game\src\jumpman.cpp
+1367236586 source:c:\code\firstpersonplatformer\game\src\jumpman.cpp
 	"Jumpman.h"
 	"OrientationCamera.h"
 	"CuboidShape.h"
@@ -4598,12 +4599,12 @@
 	"glm/gtx/rotate_vector.hpp"
 	<iostream>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\localhardwareinput.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\localhardwareinput.cpp
 	"LocalHardwareInput.h"
 	"ActionSet.h"
 	"InputMapping.h"
 
-1366888755 source:c:\code\firstpersonplatformer\game\src\mapmanager.cpp
+1367236585 source:c:\code\firstpersonplatformer\game\src\mapmanager.cpp
 	<iostream>
 	<fstream>
 	"MapManager.h"
@@ -4614,29 +4615,29 @@
 	"WayPoint.h"
 	"SceneGraph.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\mapproperties.h
+1367236576 c:\code\firstpersonplatformer\game\include\mapproperties.h
 	"Persistant.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\playerspawn.h
+1367236579 c:\code\firstpersonplatformer\game\include\playerspawn.h
 	"Persistant.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\waypoint.h
+1367236576 c:\code\firstpersonplatformer\game\include\waypoint.h
 	"Persistant.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\mapnode.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\mapnode.cpp
 	"MapNode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\mapnode.h
+1367236577 c:\code\firstpersonplatformer\game\include\mapnode.h
 	<PersistantNode.h>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\mapproperties.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\mapproperties.cpp
 	"MapProperties.h"
 	"MapNode.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\material.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\material.cpp
 	"Material.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\mesh.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\mesh.cpp
 	"Mesh.h"
 	"glm/gtc/type_ptr.hpp"
 	"VertexArrayObject.h"
@@ -4645,61 +4646,61 @@
 	"Material.h"
 	"Texture.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\meshnode.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\meshnode.cpp
 	"MeshNode.h"
 	"App.h"
 	"Renderer.h"
 	"ResourceManager.h"
 	"Mesh.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\orientation.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\orientation.cpp
 	"Orientation.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\orientationcamera.cpp
+1367236584 source:c:\code\firstpersonplatformer\game\src\orientationcamera.cpp
 	"OrientationCamera.h"
 	"glm/gtc/matrix_inverse.hpp"
 	"App.h"
 	"Renderer.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\persistant.cpp
+1367236588 source:c:\code\firstpersonplatformer\game\src\persistant.cpp
 	"Persistant.h"
 
-1366907701 source:c:\code\firstpersonplatformer\game\src\persistantnode.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\persistantnode.cpp
 	"PersistantNode.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\playerspawn.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\playerspawn.cpp
 	"PlayerSpawn.h"
 	"PlayerSpawnNode.h"
 
-1366907701 c:\code\firstpersonplatformer\game\include\playerspawnnode.h
+1367236575 c:\code\firstpersonplatformer\game\include\playerspawnnode.h
 	<PersistantNode.h>
 
-1366907701 source:c:\code\firstpersonplatformer\game\src\playerspawnnode.cpp
+1367236584 source:c:\code\firstpersonplatformer\game\src\playerspawnnode.cpp
 	"PlayerSpawnNode.h"
 	"App.h"
 	"SceneGraph.h"
 	"OrientationCamera.h"
 	"Jumpman.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\rayshape.cpp
+1367236587 source:c:\code\firstpersonplatformer\game\src\rayshape.cpp
 	"RayShape.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\renderer.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\renderer.cpp
 	"Renderer.h"
 	"Mesh.h"
 	"CameraNode.h"
 
-1366929365 source:c:\code\firstpersonplatformer\game\src\resourcemanager.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\resourcemanager.cpp
 	"ResourceManager.h"
 	"glm/gtc/type_ptr.hpp"
 	<iostream>
 	<fstream>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\scenegraph.cpp
+1367236590 source:c:\code\firstpersonplatformer\game\src\scenegraph.cpp
 	"SceneGraph.h"
 	"SceneNode.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\scenenode.cpp
+1367236588 source:c:\code\firstpersonplatformer\game\src\scenenode.cpp
 	"SceneNode.h"
 	"Renderer.h"
 	"Collider.h"
@@ -4707,50 +4708,52 @@
 	"CollisionSystem.h"
 	<iostream>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\shader.cpp
+1367236584 source:c:\code\firstpersonplatformer\game\src\shader.cpp
 	"Shader.h"
 	<iostream>
 	<fstream>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\shaderprogram.cpp
+1367236585 source:c:\code\firstpersonplatformer\game\src\shaderprogram.cpp
 	"ShaderProgram.h"
 	"Texture.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\texture.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\texture.cpp
 	"Texture.h"
 	"stb_image.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\stb_image.h
+1367236574 c:\code\firstpersonplatformer\game\include\stb_image.h
 	<stdio.h>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\uinode.cpp
+1367236585 source:c:\code\firstpersonplatformer\game\src\uinode.cpp
 	"UINode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\uinode.h
+1367236577 c:\code\firstpersonplatformer\game\include\uinode.h
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\uniformbuffer.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\uniformbuffer.cpp
 	"UniformBuffer.h"
 	"ShaderProgram.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\vertexarrayobject.cpp
+1367236589 source:c:\code\firstpersonplatformer\game\src\vertexarrayobject.cpp
 	"VertexArrayObject.h"
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\waypoint.cpp
+1367236587 source:c:\code\firstpersonplatformer\game\src\waypoint.cpp
 	"WayPoint.h"
 	"WayPointNode.h"
 
-1366887216 c:\code\firstpersonplatformer\game\include\waypointnode.h
+1367236576 c:\code\firstpersonplatformer\game\include\waypointnode.h
 	<PersistantNode.h>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\waypointnode.cpp
+1367236591 source:c:\code\firstpersonplatformer\game\src\waypointnode.cpp
 	"WayPointNode.h"
 	"App.h"
 	"ResourceManager.h"
 	"Mesh.h"
 	"Renderer.h"
+	"CuboidShape.h"
+	"Collider.h"
 	<glm/gtc/matrix_transform.hpp>
 
-1366887216 source:c:\code\firstpersonplatformer\game\src\thirdparty\stb_image.cpp
+1367236592 source:c:\code\firstpersonplatformer\game\src\thirdparty\stb_image.cpp
 	"stb_image.h"
 	<math.h>
 	<string.h>
