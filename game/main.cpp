@@ -46,12 +46,13 @@ int main()
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
 
-        if( !glfwOpenWindow(1920, 1080, 8, 8, 8, 8, 8, 0, GLFW_FULLSCREEN) )
+        if( !glfwOpenWindow(1920, 1080, 8, 8, 8, 8, 8, 0, GLFW_WINDOW) )
         {
             glfwTerminate();
             return 0;
         }
         glfwGetWindowSize(&width, &height);
+        glViewport(0,0,width,height);
 
         checkError();
 
@@ -227,7 +228,7 @@ int main()
 
                     theApp.waitForInput();
                     notStarted = true;
-                    while(notStarted || (safeGuard > 10000 && safeGuard < 100))
+                    while(notStarted || (safeGuard > 10000 && safeGuard < 750))
                     {
                         //Display Splash Screen
                         glClear(GL_COLOR_BUFFER_BIT);

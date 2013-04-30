@@ -16,7 +16,7 @@ float Jumpman::sGrabRange = 1.0f;
 float Jumpman::sLungeVelocity = 5.0f;
 double Jumpman::sMaxTimeAttemptingToClimb = 1.0;
 float Jumpman::sFallLimit = -100.0f;
-float Jumpman::sLeapAccel = 12.5f;
+float Jumpman::sLeapAccel = 9.5f;
 float Jumpman::sJumpAccel = 7.5f;
 
 float Jumpman::sGroundMaxSpeed = 10.0f;
@@ -541,7 +541,7 @@ void Jumpman::simulateSelf(double deltaTime)
         std::cout << distanceToClimbPoint << std::endl;
         if(distanceToClimbPoint <= sGrabRange)
         {
-            if(!(speedTowardsPoint < 0))
+            //if(!(speedTowardsPoint < 0))
             {
                 mVelocity = glm::vec3(0.0f); //Kill all movement
                 mAcceleration = glm::vec3(0.0f);

@@ -81,7 +81,7 @@ Beacons are specified with the <wp> tag (for waypoint)
 </bl>
 
 <bl>
-	<origin> {-24.0, -1.0, -24.0} </origin>
+	<origin> {-20.0, -1.0, -20.0} </origin>
 
 
 	<n_x> 4 </n_x>
